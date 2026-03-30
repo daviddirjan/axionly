@@ -1,0 +1,229 @@
+---
+import BaseLayout       from '../layouts/BaseLayout.astro';
+import Header           from '../components/Header.astro';
+import Footer           from '../components/Footer.astro';
+import PageHeader       from '../components/shared/PageHeader.astro';
+import ServiceTier      from '../components/services/ServiceTier.astro';
+import ComparisonTable  from '../components/services/ComparisonTable.astro';
+import CtaBanner        from '../components/shared/CtaBanner.astro';
+
+const standardIncludes = [
+  'AI System Inventory — complete register with EU AI Act risk classification',
+  'EU AI Act Gap Analysis — obligations mapped, gaps identified, applicable articles cited',
+  'Data Governance Review — how personal data is handled by AI systems against GDPR',
+  'Vendor Risk Assessment — contracts and data processing agreements reviewed',
+  'Internal Policy Review — whether an AI use policy exists and whether it is adequate',
+  'Prioritised Action Plan — immediate, 30-day, and 90-day actions ranked by risk',
+  'Executive Briefing Call — 30-minute walkthrough with key stakeholders',
+];
+
+const deepDiveIncludes = [
+  ...standardIncludes,
+  'Prompt Injection Testing — whether AI systems are vulnerable to prompt injection attacks',
+  'API & Access Control Review — how AI APIs are configured and who has access',
+  'Data Leakage Risk Assessment — whether sensitive data submitted to AI tools could be exposed',
+  'AI Incident Response Gap — whether the organisation can detect and respond to AI security incidents',
+];
+
+const addOns = [
+  { name: 'AI Use Policy Drafting',           desc: 'We write your internal AI governance policy based on assessment findings.' },
+  { name: 'Quarterly Governance Review',      desc: 'A lighter-touch quarterly check-in to track progress and flag regulatory changes. Retainer-based.' },
+  { name: 'Vendor Due Diligence',             desc: 'A one-off review of a specific AI product your organisation is considering purchasing.' },
+  { name: 'EU AI Act Technical Documentation', desc: 'Preparation of required technical documentation for high-risk AI systems. Scoped individually.' },
+];
+
+const whoItIsFor = [
+  'You are using AI tools but have no formal policy governing their use.',
+  'You are unsure whether your AI systems trigger obligations under the EU AI Act.',
+  'You process customer, employee, or financial data through AI platforms.',
+  'Legal, compliance, or leadership is asking about AI risk and you need a clear answer.',
+  'You have a customer-facing AI product and want compliance confidence before you scale.',
+  'You want to get ahead of regulatory scrutiny rather than react to it.',
+];
+---
+
+<BaseLayout
+  title="Services — Axionly"
+  description="Two fixed-scope AI audit tiers: AI Readiness Assessment (€1,200) and AI Readiness Assessment + Security Deep-Dive (€1,800). Delivered in five business days."
+>
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Services"
+      heading="Our Services"
+      subheading="Two service tiers. Fixed scope. Fixed price. No surprises."
+    />
+
+    <!-- Service tiers -->
+    <section id="service-tiers">
+      <div class="container tiers-grid">
+        <ServiceTier
+          name="AI Readiness Assessment"
+          description="A complete audit of your AI systems, EU AI Act obligations, data governance risks, and vendor exposure — delivered in five business days."
+          price="€1,200"
+          delivery="5 business days from scoping call"
+          includes={standardIncludes}
+        />
+        <ServiceTier
+          name="AI Readiness Assessment + Security Deep-Dive"
+          description="Everything in the standard assessment, plus a technical security review covering vulnerabilities, attack surfaces, and AI-specific threats."
+          price="€1,800"
+          delivery="5 business days from scoping call"
+          includes={deepDiveIncludes}
+          highlight={true}
+        />
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section id="comparison">
+      <div class="container">
+        <h2 class="section-heading">What's included in each tier</h2>
+        <ComparisonTable />
+      </div>
+    </section>
+
+    <!-- Add-ons -->
+    <section id="add-ons">
+      <div class="container">
+        <h2 class="section-heading">Optional follow-up services</h2>
+        <p class="section-intro">
+          After an initial assessment, clients may need further support. These are available
+          separately — not bundled into the primary offer.
+        </p>
+        <ul class="addons-grid">
+          {addOns.map(a => (
+            <li class="addon-card">
+              <h3>{a.name}</h3>
+              <p>{a.desc} Priced on request.</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section id="who-its-for">
+      <div class="container">
+        <h2 class="section-heading">This is right for your organisation if…</h2>
+        <ul class="who-list">
+          {whoItIsFor.map(item => (
+            <li>
+              <span class="who-check" aria-hidden="true">→</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <CtaBanner
+      heading="Not sure which tier is right?"
+      subtext="Book a free 20-minute discovery call. We'll confirm what's in scope and which tier fits your situation — at no cost and with no obligation."
+    />
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  #service-tiers {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  #comparison {
+    background-color: var(--color-container);
+    padding-block: var(--space-section);
+  }
+
+  #add-ons {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  #who-its-for {
+    background-color: var(--color-container);
+    padding-block: var(--space-section);
+  }
+
+  .section-heading {
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-intro {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    max-width: 620px;
+    line-height: 1.7;
+  }
+
+  /* Add-ons grid */
+  .addons-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .addon-card {
+    background-color: var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+  }
+
+  .addon-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+  }
+
+  .addon-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* Who it's for */
+  .who-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1.5rem;
+    max-width: 720px;
+  }
+
+  .who-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .who-check {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.1em;
+  }
+
+  @media (max-width: 768px) {
+    .tiers-grid { grid-template-columns: 1fr; }
+    .addons-grid { grid-template-columns: 1fr; }
+  }
+</style>

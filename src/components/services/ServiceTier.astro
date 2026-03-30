@@ -1,0 +1,148 @@
+---
+interface Props {
+  name: string;
+  description: string;
+  price: string;
+  delivery: string;
+  includes: string[];
+  highlight?: boolean;
+}
+
+const { name, description, price, delivery, includes, highlight = false } = Astro.props;
+---
+
+<div class:list={['tier', { 'tier--highlight': highlight }]}>
+  {highlight && <span class="tier-badge">Most comprehensive</span>}
+  <div class="tier-header">
+    <h3>{name}</h3>
+    <p class="tier-desc">{description}</p>
+  </div>
+  <div class="tier-price">
+    <span class="price">{price}</span>
+    <span class="price-note">fixed price, no additional fees</span>
+  </div>
+  <ul class="includes" aria-label={`Included in ${name}`}>
+    {includes.map(item => (
+      <li>
+        <span class="check" aria-hidden="true">✓</span>
+        <span>{item}</span>
+      </li>
+    ))}
+  </ul>
+  <div class="tier-footer">
+    <p class="delivery">Delivered in <strong>{delivery}</strong></p>
+    <a href="/contact" class:list={['btn', { 'btn-primary': highlight, 'btn-ghost': !highlight }]}>
+      Book a Free Discovery Call
+    </a>
+  </div>
+</div>
+
+<style>
+  .tier {
+    background-color: var(--color-bg);
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+  }
+
+  .tier--highlight {
+    border-color: var(--color-accent);
+    background-color: var(--color-white);
+    box-shadow: 0 4px 32px rgba(53, 147, 255, 0.12);
+  }
+
+  .tier-badge {
+    position: absolute;
+    top: -0.65rem;
+    left: 2rem;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.2rem 0.75rem;
+    border-radius: var(--radius-pill);
+    letter-spacing: 0.02em;
+  }
+
+  .tier-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .tier-desc {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .tier-price {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .price {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.02em;
+    font-family: var(--font-logo);
+  }
+
+  .price-note {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+  }
+
+  .includes {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    flex: 1;
+  }
+
+  .includes li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .check {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.05em;
+  }
+
+  .tier-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    border-top: 1px solid var(--color-container);
+    padding-top: 1.25rem;
+  }
+
+  .delivery {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+  }
+
+  .delivery strong {
+    color: var(--color-text);
+  }
+
+  .btn {
+    text-align: center;
+    justify-content: center;
+  }
+</style>

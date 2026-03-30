@@ -1,0 +1,127 @@
+---
+const pillars = [
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>`,
+    title: 'Legal clarity',
+    body: 'Know exactly which of your AI systems fall under the EU AI Act — and what you must do about each one.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+    title: 'Security depth',
+    body: 'AI-specific vulnerabilities assessed by a team with a cybersecurity background — not just governance theory.',
+  },
+  {
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+    title: 'Actionable output',
+    body: 'No abstract reports. Every finding is tied to a specific owner, a concrete action, and a recommended deadline.',
+  },
+];
+---
+
+<section id="solution">
+  <div class="container inner">
+
+    <div class="section-text">
+      <p class="section-label">The solution</p>
+      <h2>Axionly gives you the full picture.</h2>
+      <p class="body-text">
+        We are an AI governance and security consultancy. We assess your AI systems against
+        your legal obligations under the EU AI Act and GDPR, surface your real security
+        risks, and hand you a clear, prioritised action plan.
+      </p>
+      <p class="body-text">
+        Fixed scope. Fixed price. Delivered in five business days.
+      </p>
+      <a href="/services" class="btn-primary see-services">See our services</a>
+    </div>
+
+    <ul class="pillars" aria-label="Three value pillars">
+      {pillars.map(p => (
+        <li class="pillar">
+          <span class="pillar-icon" set:html={p.icon} />
+          <div>
+            <h3>{p.title}</h3>
+            <p>{p.body}</p>
+          </div>
+        </li>
+      ))}
+    </ul>
+
+  </div>
+</section>
+
+<style>
+  #solution {
+    background-color: var(--color-container);
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(3rem, 7vw, 6rem);
+    align-items: center;
+  }
+
+  .section-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .section-text h2 {
+    color: var(--color-text);
+  }
+
+  .body-text {
+    color: var(--color-text-muted);
+    line-height: 1.75;
+  }
+
+  .see-services {
+    margin-top: 0.5rem;
+    align-self: flex-start;
+  }
+
+  .pillars {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .pillar {
+    display: flex;
+    gap: 1.1rem;
+    align-items: flex-start;
+  }
+
+  .pillar-icon {
+    width: 28px;
+    height: 28px;
+    flex-shrink: 0;
+    color: var(--color-accent);
+    margin-top: 0.1em;
+  }
+
+  .pillar-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .pillar h3 {
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.3rem;
+  }
+
+  .pillar p {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  @media (max-width: 768px) {
+    .inner { grid-template-columns: 1fr; }
+  }
+</style>

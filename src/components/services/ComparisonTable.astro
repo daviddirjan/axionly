@@ -1,0 +1,142 @@
+---
+const rows = [
+  { feature: 'AI System Inventory',          standard: true,  deepDive: true  },
+  { feature: 'EU AI Act Gap Analysis',        standard: true,  deepDive: true  },
+  { feature: 'Data Governance Review',        standard: true,  deepDive: true  },
+  { feature: 'Vendor Risk Assessment',        standard: true,  deepDive: true  },
+  { feature: 'Internal Policy Review',        standard: true,  deepDive: true  },
+  { feature: 'Prioritised Action Plan',       standard: true,  deepDive: true  },
+  { feature: 'Executive Briefing Call',       standard: true,  deepDive: true  },
+  { feature: 'Prompt Injection Testing',      standard: false, deepDive: true  },
+  { feature: 'API & Access Control Review',   standard: false, deepDive: true  },
+  { feature: 'Data Leakage Risk Assessment',  standard: false, deepDive: true  },
+  { feature: 'AI Incident Response Review',   standard: false, deepDive: true  },
+];
+---
+
+<div class="table-wrap">
+  <table aria-label="Service tier comparison">
+    <thead>
+      <tr>
+        <th scope="col">What's included</th>
+        <th scope="col">
+          <span class="tier-name">Standard</span>
+          <span class="tier-price">€1,200</span>
+        </th>
+        <th scope="col" class="col-highlight">
+          <span class="tier-name">Deep-Dive</span>
+          <span class="tier-price">€1,800</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      {rows.map(row => (
+        <tr class:list={[{ 'row-deep': !row.standard }]}>
+          <td>{row.feature}</td>
+          <td class="cell-check">
+            {row.standard
+              ? <span class="yes" aria-label="Included">✓</span>
+              : <span class="no"  aria-label="Not included">—</span>
+            }
+          </td>
+          <td class="cell-check col-highlight">
+            <span class="yes" aria-label="Included">✓</span>
+          </td>
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-card);
+    border: 1.5px solid var(--color-container);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9375rem;
+  }
+
+  thead tr {
+    background-color: var(--color-container);
+  }
+
+  th {
+    padding: 1rem 1.25rem;
+    text-align: left;
+    font-size: 0.875rem;
+  }
+
+  th:not(:first-child) {
+    text-align: center;
+    min-width: 130px;
+  }
+
+  .tier-name {
+    display: block;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .tier-price {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    margin-top: 0.15rem;
+  }
+
+  tbody tr {
+    border-top: 1px solid var(--color-container);
+    background-color: var(--color-white);
+    transition: background-color var(--transition);
+  }
+
+  tbody tr:hover {
+    background-color: var(--color-bg);
+  }
+
+  /* Rows that are Deep-Dive only — subtle accent */
+  .row-deep td:first-child {
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  td {
+    padding: 0.9rem 1.25rem;
+    color: var(--color-text-muted);
+  }
+
+  .cell-check {
+    text-align: center;
+  }
+
+  .yes {
+    color: var(--color-accent);
+    font-weight: 700;
+    font-size: 1.1rem;
+  }
+
+  .no {
+    color: #c8d8e8;
+    font-size: 1rem;
+  }
+
+  .col-highlight {
+    background-color: rgba(53, 147, 255, 0.04);
+  }
+
+  thead .col-highlight {
+    background-color: rgba(53, 147, 255, 0.08);
+    border-left: 2px solid var(--color-accent);
+  }
+
+  tbody .col-highlight {
+    border-left: 2px solid rgba(53, 147, 255, 0.2);
+  }
+</style>

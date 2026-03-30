@@ -1,0 +1,98 @@
+---
+---
+
+<section id="contact">
+  <div class="container cta-inner">
+    <p class="cta-eyebrow">Ready to get started?</p>
+    <h2>Get clarity before it becomes a crisis.</h2>
+    <p class="cta-sub">
+      Book a 30-minute discovery call. We'll tell you whether you need an audit
+      and exactly what it would cover.
+    </p>
+    <div class="cta-actions">
+      <a href="mailto:hello@axionly.io" class="btn-cta-primary">Book your audit</a>
+      <p class="cta-email">
+        Or email us directly at <a href="mailto:hello@axionly.io">hello@axionly.io</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  #contact {
+    background-color: var(--color-accent);
+    padding-block: var(--space-section);
+  }
+
+  .cta-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1.25rem;
+    max-width: 640px;
+  }
+
+  .cta-eyebrow {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  #contact h2 {
+    color: var(--color-white);
+    font-size: clamp(1.75rem, 4vw, 2.75rem);
+  }
+
+  .cta-sub {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    max-width: 500px;
+  }
+
+  .cta-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .btn-cta-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 2rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-white);
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    transition: background-color var(--transition), transform var(--transition);
+  }
+
+  .btn-cta-primary:hover {
+    background-color: var(--color-bg);
+    transform: translateY(-1px);
+  }
+
+  .cta-email {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  .cta-email a {
+    color: var(--color-white);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+
+  .cta-email a:hover {
+    color: rgba(255, 255, 255, 0.85);
+  }
+</style>

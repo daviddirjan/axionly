@@ -1,0 +1,230 @@
+---
+const { pathname } = Astro.url;
+
+const navLinks = [
+  { label: 'Home',         href: '/' },
+  { label: 'Services',     href: '/services' },
+  { label: 'How It Works', href: '/how-it-works' },
+  { label: 'About',        href: '/about' },
+  { label: 'Resources',    href: '/resources' },
+  { label: 'Contact',      href: '/contact' },
+];
+
+const isActive = (href: string) =>
+  href === '/' ? pathname === '/' : pathname.startsWith(href);
+---
+
+<header>
+  <div class="container header-inner">
+    <a href="/" class="logo" aria-label="Axionly home">
+      Axionly<span class="logo-dot">.</span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav aria-label="Main navigation">
+      <ul>
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class:list={['nav-link', { active: isActive(link.href) }]}
+              aria-current={isActive(link.href) ? 'page' : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a href="/contact" class="btn-primary header-cta">Book a Call</a>
+
+    <!-- Mobile nav -->
+    <details class="mobile-nav">
+      <summary aria-label="Open navigation menu">
+        <span class="burger"></span>
+        <span class="burger"></span>
+        <span class="burger"></span>
+      </summary>
+      <nav aria-label="Mobile navigation">
+        <ul>
+          {navLinks.map(link => (
+            <li>
+              <a
+                href={link.href}
+                class:list={['nav-link', { active: isActive(link.href) }]}
+                aria-current={isActive(link.href) ? 'page' : undefined}
+              >
+                {link.label}
+              </a>
+            </li>
+          ))}
+          <li><a href="/contact" class="btn-primary mobile-cta">Book a Call</a></li>
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: var(--color-bg);
+    border-bottom: 1px solid var(--color-container);
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  /* ── Logo ── */
+  .logo {
+    font-family: var(--font-logo);
+    font-weight: 700;
+    font-size: 2.75rem;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .logo-dot {
+    color: var(--color-accent);
+  }
+
+  /* ── Desktop nav — centred ── */
+  .header-inner > nav {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+
+  nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0.125rem;
+  }
+
+  .nav-link {
+    display: block;
+    padding: 0.4rem 0.75rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text-muted);
+    position: relative;
+  }
+
+  /* Left-to-right underline on hover */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 0.75rem;
+    right: 0.75rem;
+    height: 1.5px;
+    background-color: var(--color-text);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.35s ease;
+  }
+
+  .nav-link:hover {
+    color: var(--color-text);
+  }
+
+  .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* Active page */
+  .nav-link.active {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  .nav-link.active::after {
+    transform: scaleX(1);
+    background-color: var(--color-accent);
+  }
+
+  /* ── CTA button ── */
+  .header-cta {
+    white-space: nowrap;
+    font-size: 0.875rem;
+    padding: 0.55rem 1.25rem;
+    flex-shrink: 0;
+  }
+
+  /* ── Mobile nav ── */
+  .mobile-nav {
+    display: none;
+    margin-left: auto;
+    position: relative;
+  }
+
+  .mobile-nav summary {
+    list-style: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px;
+  }
+
+  .mobile-nav summary::-webkit-details-marker { display: none; }
+
+  .burger {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background-color: var(--color-text);
+    border-radius: 2px;
+  }
+
+  .mobile-nav nav {
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    width: 240px;
+    background-color: var(--color-bg);
+    border: 1px solid var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 0.75rem;
+    box-shadow: 0 8px 32px rgba(0, 28, 59, 0.1);
+  }
+
+  .mobile-nav nav ul {
+    flex-direction: column;
+    gap: 0.125rem;
+  }
+
+  .mobile-nav .nav-link {
+    font-size: 0.95rem;
+    padding: 0.6rem 0.75rem;
+  }
+
+  .mobile-cta {
+    margin-top: 0.5rem;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .header-inner > nav,
+    .header-cta {
+      display: none;
+    }
+    .mobile-nav {
+      display: block;
+    }
+  }
+</style>

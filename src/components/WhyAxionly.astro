@@ -1,0 +1,138 @@
+---
+const differentiators = [
+  {
+    title: 'Governance + Cybersecurity',
+    description: 'We don\'t just tell you which systems trigger the EU AI Act — we also tell you which ones are vulnerable to attack.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>`,
+  },
+  {
+    title: 'Fixed Scope, Fixed Timeline',
+    description: 'Five business days. A defined deliverable. No open-ended retainers or vague consulting engagements.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>`,
+  },
+  {
+    title: 'EU AI Act Specialists',
+    description: 'We work specifically with the EU regulatory environment — Romania and EU organisations preparing for enforcement.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  },
+  {
+    title: 'Actionable Report',
+    description: 'Not a list of obligations. A prioritised remediation roadmap that tells you exactly what to fix, and in what order.',
+    icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>`,
+  },
+];
+---
+
+<section id="why-axionly">
+  <div class="container section-inner">
+    <div class="section-text">
+      <p class="section-label">Why Axionly</p>
+      <h2>Legal expertise alone isn't enough anymore.</h2>
+      <p class="body-text">
+        Most AI auditors come from a legal or compliance background. We come from
+        both governance and cybersecurity. That means we don't just review
+        documentation — we probe your systems.
+      </p>
+      <p class="body-text">
+        We find what's actually vulnerable, not just what looks compliant on paper.
+        We identify which vendor contracts expose your data, and which internal
+        practices would fail a technical audit today.
+      </p>
+    </div>
+
+    <div class="diff-grid">
+      {differentiators.map(d => (
+        <div class="diff-card">
+          <span class="diff-icon" set:html={d.icon} />
+          <h3>{d.title}</h3>
+          <p>{d.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  #why-axionly {
+    background-color: var(--color-container);
+  }
+
+  .section-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: start;
+  }
+
+  .section-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+  }
+
+  .section-text h2 {
+    color: var(--color-text);
+  }
+
+  .body-text {
+    color: var(--color-text-muted);
+    line-height: 1.75;
+  }
+
+  .diff-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .diff-card {
+    background-color: var(--color-white);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .diff-icon {
+    width: 28px;
+    height: 28px;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .diff-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .diff-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .diff-card p {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .section-inner {
+      grid-template-columns: 1fr;
+    }
+
+    .section-text {
+      position: static;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .diff-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

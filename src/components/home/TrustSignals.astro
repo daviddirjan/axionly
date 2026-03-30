@@ -1,0 +1,91 @@
+---
+const badges = [
+  { label: 'EU AI Act', sub: 'Reg. 2024/1689' },
+  { label: 'GDPR',     sub: 'Compliant practice' },
+  { label: 'ISO 42001', sub: 'Aligned' },
+];
+---
+
+<div class="trust-bar">
+  <div class="container inner">
+    <p class="trust-label">Assessment aligned with</p>
+    <ul class="badges" aria-label="Regulatory frameworks">
+      {badges.map(b => (
+        <li class="badge">
+          <span class="badge-name">{b.label}</span>
+          <span class="badge-sub">{b.sub}</span>
+        </li>
+      ))}
+    </ul>
+    <p class="trust-statement">
+      Trusted by organisations in Romania and across the European Union
+    </p>
+  </div>
+</div>
+
+<style>
+  .trust-bar {
+    background-color: var(--color-bg);
+    border-top: 1px solid var(--color-container);
+    border-bottom: 1px solid var(--color-container);
+    padding-block: 1.75rem;
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .trust-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .badges {
+    list-style: none;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  .badge {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0.4rem 0.9rem;
+    border-radius: var(--radius-pill);
+    border: 1.5px solid var(--color-container);
+    background-color: var(--color-white);
+    gap: 0.1rem;
+  }
+
+  .badge-name {
+    font-size: 0.8125rem;
+    font-weight: 700;
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  .badge-sub {
+    font-size: 0.7rem;
+    color: var(--color-text-muted);
+    white-space: nowrap;
+  }
+
+  .trust-statement {
+    margin-left: auto;
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  @media (max-width: 640px) {
+    .trust-statement { margin-left: 0; }
+  }
+</style>

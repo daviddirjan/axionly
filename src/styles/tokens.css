@@ -1,0 +1,33 @@
+/* ============================================================
+   DESIGN TOKENS — all CSS custom properties for Axionly
+   ============================================================ */
+:root {
+  /* Colors */
+  --color-bg: #f2f8ff;
+  --color-container: #cce3ff;
+  --color-accent: #3593ff;
+  --color-accent-dark: #1a74e0;
+  --color-text: #001c3b;
+  --color-text-muted: #3a5a80;
+  --color-white: #ffffff;
+
+  /* Typography */
+  --font-logo: 'Afacad', sans-serif;
+  --font-body: 'Inter', sans-serif;
+
+  /* Border radius */
+  --radius-pill: 999px;
+  --radius-card: 12px;
+  --radius-sm: 6px;
+
+  /* Spacing */
+  --space-section: clamp(4rem, 8vw, 8rem);
+  --space-gap: clamp(1.5rem, 3vw, 2.5rem);
+
+  /* Layout */
+  --max-width: 1160px;
+  --header-height: 88px;
+
+  /* Transitions */
+  --transition: 200ms ease;
+}

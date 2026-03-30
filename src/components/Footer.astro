@@ -1,0 +1,222 @@
+---
+const navLinks = [
+  { label: 'Home',         href: '/' },
+  { label: 'Services',     href: '/services' },
+  { label: 'How It Works', href: '/how-it-works' },
+  { label: 'About',        href: '/about' },
+  { label: 'Resources',    href: '/resources' },
+  { label: 'Contact',      href: '/contact' },
+];
+---
+
+<footer>
+  <div class="container footer-inner">
+
+    <!-- Col 1 — Brand -->
+    <div class="col col-brand">
+      <a href="/" class="logo" aria-label="Axionly home">
+        Axionly<span class="logo-dot">.</span>
+      </a>
+      <p class="tagline">AI Governance &amp; Security Consulting</p>
+      <a href="https://axiontic.com" class="axiontic-link" target="_blank" rel="noopener">
+        A division of Axiontic →
+      </a>
+    </div>
+
+    <!-- Col 2 — Navigation -->
+    <div class="col">
+      <p class="col-heading">Navigation</p>
+      <nav aria-label="Footer navigation">
+        <ul>
+          {navLinks.map(link => (
+            <li><a href={link.href}>{link.label}</a></li>
+          ))}
+        </ul>
+      </nav>
+    </div>
+
+    <!-- Col 3 — Contact -->
+    <div class="col">
+      <p class="col-heading">Contact</p>
+      <ul class="contact-list">
+        <li>
+          <a href="mailto:hello@axionly.io">hello@axionly.io</a>
+        </li>
+        <li>
+          <a href="https://linkedin.com" target="_blank" rel="noopener">LinkedIn</a>
+        </li>
+        <li>Romania, European Union</li>
+      </ul>
+    </div>
+
+    <!-- Col 4 — Compliance badges -->
+    <div class="col">
+      <p class="col-heading">Assessment aligned with</p>
+      <ul class="badges">
+        <li class="badge">EU AI Act</li>
+        <li class="badge">GDPR</li>
+        <li class="badge">ISO 42001</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>© {new Date().getFullYear()} Axionly — a division of Axiontic. All rights reserved.</p>
+      <div class="legal-links">
+        <a href="#">Privacy Policy</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<style>
+  footer {
+    background-color: var(--color-text);
+    color: var(--color-white);
+    padding-top: 4rem;
+  }
+
+  .footer-inner {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr 1fr 1fr;
+    gap: 2.5rem;
+    padding-bottom: 3.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* ── Brand col ── */
+  .col-brand {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .logo {
+    font-family: var(--font-logo);
+    font-weight: 700;
+    font-size: 1.5rem;
+    letter-spacing: -0.04em;
+    color: var(--color-white);
+  }
+
+  .logo-dot { color: var(--color-accent); }
+
+  .tagline {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.5);
+    max-width: 200px;
+    line-height: 1.5;
+  }
+
+  .axiontic-link {
+    font-size: 0.8125rem;
+    color: var(--color-accent);
+    transition: opacity var(--transition);
+    margin-top: 0.25rem;
+  }
+
+  .axiontic-link:hover { opacity: 0.8; }
+
+  /* ── Column headings ── */
+  .col-heading {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 1rem;
+  }
+
+  /* ── Nav links ── */
+  nav ul, .contact-list, .badges {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  nav a, .contact-list a {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color var(--transition);
+  }
+
+  nav a:hover, .contact-list a:hover {
+    color: var(--color-white);
+  }
+
+  .contact-list li {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.65);
+  }
+
+  /* ── Compliance badges ── */
+  .badges {
+    gap: 0.5rem;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-pill);
+    border: 1px solid rgba(53, 147, 255, 0.4);
+    color: var(--color-accent);
+    font-size: 0.8rem;
+    font-weight: 600;
+    width: fit-content;
+  }
+
+  /* ── Bottom strip ── */
+  .footer-bottom {
+    padding-block: 1.25rem;
+  }
+
+  .footer-bottom-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .footer-bottom p {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .legal-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .legal-links a {
+    font-size: 0.8125rem;
+    color: rgba(255, 255, 255, 0.3);
+    transition: color var(--transition);
+  }
+
+  .legal-links a:hover {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .footer-inner {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  @media (max-width: 540px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+    }
+    .footer-bottom-inner {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>

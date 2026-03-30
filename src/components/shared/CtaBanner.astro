@@ -1,0 +1,88 @@
+---
+interface Props {
+  heading?: string;
+  subtext?: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+}
+
+const {
+  heading   = 'Ready to understand your AI risk?',
+  subtext   = 'Book a free 20-minute discovery call. No commitment, no jargon. We will tell you honestly whether an assessment makes sense for your organisation.',
+  ctaLabel  = 'Book a Free Discovery Call',
+  ctaHref   = '/contact',
+} = Astro.props;
+---
+
+<section class="cta-banner">
+  <div class="container inner">
+    <div class="text">
+      <h2>{heading}</h2>
+      <p>{subtext}</p>
+    </div>
+    <a href={ctaHref} class="btn-cta">{ctaLabel}</a>
+  </div>
+</section>
+
+<style>
+  .cta-banner {
+    background-color: var(--color-accent);
+    padding-block: clamp(3rem, 6vw, 5rem);
+  }
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+    flex-wrap: wrap;
+  }
+
+  .text {
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .text h2 {
+    color: var(--color-white);
+    font-size: clamp(1.4rem, 2.5vw, 2rem);
+    margin-bottom: 0.6rem;
+  }
+
+  .text p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 0.9375rem;
+    line-height: 1.7;
+    max-width: 520px;
+  }
+
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.9rem 2rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-white);
+    color: var(--color-accent);
+    font-family: var(--font-body);
+    font-size: 1rem;
+    font-weight: 700;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: background-color var(--transition), transform var(--transition);
+  }
+
+  .btn-cta:hover {
+    background-color: var(--color-bg);
+    transform: translateY(-1px);
+  }
+
+  @media (max-width: 640px) {
+    .inner {
+      flex-direction: column;
+      text-align: center;
+    }
+    .text p { max-width: 100%; }
+    .btn-cta { width: 100%; }
+  }
+</style>

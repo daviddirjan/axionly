@@ -1,0 +1,114 @@
+---
+import BaseLayout          from '../../layouts/BaseLayout.astro';
+import Header              from '../../components/Header.astro';
+import Footer              from '../../components/Footer.astro';
+import Hero                from '../../components/Hero.astro';
+import UrgencyBar          from '../../components/home/UrgencyBar.astro';
+import Problem             from '../../components/Problem.astro';
+import Solution            from '../../components/home/Solution.astro';
+import TrustSignals        from '../../components/home/TrustSignals.astro';
+import HowItWorksPreview   from '../../components/home/HowItWorksPreview.astro';
+import CtaBanner           from '../../components/shared/CtaBanner.astro';
+
+// ── Hero ──────────────────────────────────────────────────────────────────────
+const hero = {
+  pill:     'Regulament UE privind IA · GDPR · Securitate AI',
+  h1:       'Compania dumneavoastră folosește inteligență artificială.',
+  h1Accent: 'Știți ce obligații legale implică asta?',
+  sub:      'Regulamentul UE privind IA este în vigoare. Axionly ajută organizațiile să înțeleagă sistemele lor AI, obligațiile legale și riscurile de securitate — înainte ca un regulator s-o facă.',
+  cta1:     'Rezervați un Apel de Descoperire Gratuit',
+  cta2:     'Vedeți ce acoperă un audit',
+  cta1Href: '/ro/contact',
+  cta2Href: '/ro/services',
+  card: {
+    title:  'Evaluare Risc AI',
+    tag:    '5 zile lucrătoare',
+    domains: [
+      { label: 'Clasificare Regulament UE privind IA', status: 'Cartografiat',  type: 'ok'   as const },
+      { label: 'Procesare date GDPR',                  status: 'Revizuit',      type: 'ok'   as const },
+      { label: 'Risc injecție de prompt',              status: '2 constatări',  type: 'warn' as const },
+      { label: 'Expunere date furnizori',              status: '1 constatare',  type: 'warn' as const },
+      { label: 'Politică internă AI',                  status: 'Evaluat',       type: 'ok'   as const },
+    ],
+    footer: 'Plan de acțiune prioritizat inclus',
+    pages:  '28 pagini',
+  },
+};
+
+// ── Urgency bar ───────────────────────────────────────────────────────────────
+const urgency = {
+  label:    'Actualizare reglementară',
+  text:     'Prevederile cu risc ridicat ale Regulamentului UE privind IA sunt deja aplicabile. Organizațiile care utilizează IA în HR, creditare, sănătate sau sisteme orientate către clienți pot fi deja în neconformitate.',
+  linkText: 'Știe organizația dumneavoastră în ce categorie se încadrează?',
+  linkHref: '/ro/services',
+};
+
+// ── Problem ───────────────────────────────────────────────────────────────────
+const problem = {
+  eyebrow: 'Problema',
+  heading: 'Majoritatea companiilor folosesc AI.\nFoarte puține îl gestionează.',
+  cards: [
+    { title: 'Fără inventar',    body: 'Majoritatea organizațiilor nu au o listă completă a instrumentelor AI utilizate în echipele lor. Shadow AI este răspândit — instrumente adoptate fără nicio revizuire IT sau juridică.' },
+    { title: 'Fără conformitate', body: 'Regulamentul UE privind IA creează obligații legale specifice în funcție de tipul de sistem AI utilizat. Majoritatea organizațiilor nu și-au evaluat expunerea sau nu au identificat care sisteme intră în domeniu.' },
+    { title: 'Fără securitate',  body: 'Sistemele AI introduc noi suprafețe de atac: injecție de prompt, scurgeri de date prin API-uri terțe și acces necontrolat la modele. Auditurile standard de securitate IT nu acoperă aceste riscuri.' },
+  ],
+};
+
+// ── Solution ──────────────────────────────────────────────────────────────────
+const solution = {
+  eyebrow: 'Soluția',
+  heading: 'Axionly vă oferă imaginea completă.',
+  body1:   'Suntem o firmă de consultanță specializată în guvernanță AI și securitate. Evaluăm sistemele dumneavoastră AI față de obligațiile legale din Regulamentul UE privind IA și GDPR, identificăm riscurile reale de securitate și vă oferim un plan de acțiune clar și prioritizat.',
+  body2:   'Domeniu fix. Preț fix. Livrat în cinci zile lucrătoare.',
+  cta:     'Vedeți serviciile noastre',
+  ctaHref: '/ro/services',
+  pillars: [
+    { title: 'Claritate juridică',      body: 'Știți exact care dintre sistemele dumneavoastră AI intră sub incidența Regulamentului UE privind IA — și ce trebuie să faceți pentru fiecare.' },
+    { title: 'Profunzime în securitate', body: 'Vulnerabilități specifice AI evaluate de o echipă cu expertiză în securitate cibernetică — nu doar teoria guvernanței.' },
+    { title: 'Rezultate acționabile',   body: 'Niciun raport abstract. Fiecare constatare este legată de un responsabil specific, o acțiune concretă și un termen recomandat.' },
+  ],
+};
+
+// ── Trust signals ─────────────────────────────────────────────────────────────
+const trust = {
+  label:     'Evaluare aliniată cu',
+  statement: 'De încredere pentru organizații din România și din Uniunea Europeană',
+};
+
+// ── How It Works preview ──────────────────────────────────────────────────────
+const hiw = {
+  eyebrow: 'Cum funcționează',
+  heading: 'Cinci zile. Un răspuns clar.',
+  steps: [
+    { number: '01', name: 'Apel de Delimitare', time: 'Ziua 0 · Gratuit', description: 'O conversație de 20 de minute pentru a confirma domeniul și dacă un audit este potrivit.' },
+    { number: '02', name: 'Revizuire',          time: 'Ziua 1',           description: 'Analizăm sistemele dumneavoastră AI, contractele cu furnizorii și orice politici de guvernanță existente.' },
+    { number: '03', name: 'Evaluare',           time: 'Zilele 2–4',       description: 'Cartografiem obligațiile legale și postura de securitate — în mod independent, cu timp minim din partea echipei dumneavoastră.' },
+    { number: '04', name: 'Raport și Prezentare', time: 'Ziua 5',         description: 'Raport complet livrat, urmat de o prezentare executivă de 30 de minute.' },
+  ],
+  cta:     'Aflați mai multe despre proces →',
+  ctaHref: '/ro/how-it-works',
+};
+---
+
+<BaseLayout
+  title="Axionly — Guvernanță AI și Securitate | Conformitate Regulament UE privind IA"
+  description="Axionly ajută organizațiile să înțeleagă sistemele lor AI, obligațiile legale din Regulamentul UE privind IA și riscurile de securitate — livrat în cinci zile lucrătoare."
+  htmlLang="ro"
+>
+  <Header />
+  <main>
+    <Hero          {...hero} />
+    <UrgencyBar    {...urgency} />
+    <Problem       {...problem} />
+    <Solution      {...solution} />
+    <TrustSignals  {...trust} />
+    <HowItWorksPreview {...hiw} />
+    <CtaBanner
+      heading="Gata să vă înțelegeți riscul AI?"
+      subtext="Rezervați un apel de descoperire gratuit de 20 de minute. Fără angajament, fără jargon. Vă vom spune sincer dacă un audit are sens pentru organizația dumneavoastră."
+      ctaLabel="Rezervați un Apel de Descoperire Gratuit"
+      ctaHref="/ro/contact"
+    />
+  </main>
+  <Footer />
+</BaseLayout>

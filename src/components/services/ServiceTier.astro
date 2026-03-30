@@ -4,15 +4,25 @@ interface Props {
   description: string;
   price: string;
   delivery: string;
+  deliveryLabel?: string;
   includes: string[];
   highlight?: boolean;
+  ctaLabel?: string;
+  ctaHref?: string;
+  highlightLabel?: string;
 }
 
-const { name, description, price, delivery, includes, highlight = false } = Astro.props;
+const {
+  name, description, price, delivery, includes, highlight = false,
+  deliveryLabel = 'Delivered in',
+  ctaLabel   = 'Book a Free Discovery Call',
+  ctaHref    = '/contact',
+  highlightLabel = 'Most comprehensive',
+} = Astro.props;
 ---
 
 <div class:list={['tier', { 'tier--highlight': highlight }]}>
-  {highlight && <span class="tier-badge">Most comprehensive</span>}
+  {highlight && <span class="tier-badge">{highlightLabel}</span>}
   <div class="tier-header">
     <h3>{name}</h3>
     <p class="tier-desc">{description}</p>
@@ -30,9 +40,9 @@ const { name, description, price, delivery, includes, highlight = false } = Astr
     ))}
   </ul>
   <div class="tier-footer">
-    <p class="delivery">Delivered in <strong>{delivery}</strong></p>
-    <a href="/contact" class:list={['btn', { 'btn-primary': highlight, 'btn-ghost': !highlight }]}>
-      Book a Free Discovery Call
+    <p class="delivery">{deliveryLabel} <strong>{delivery}</strong></p>
+    <a href={ctaHref} class:list={['btn', { 'btn-primary': highlight, 'btn-ghost': !highlight }]}>
+      {ctaLabel}
     </a>
   </div>
 </div>

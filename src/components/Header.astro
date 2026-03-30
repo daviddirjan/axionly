@@ -1,22 +1,46 @@
 ---
 const { pathname } = Astro.url;
+const isRo  = pathname.startsWith('/ro');
+const lang  = isRo ? 'ro' : 'en';
+const pfx   = isRo ? '/ro' : '';           // URL prefix for nav links
 
-const navLinks = [
-  { label: 'Home',         href: '/' },
-  { label: 'Services',     href: '/services' },
-  { label: 'How It Works', href: '/how-it-works' },
-  { label: 'About',        href: '/about' },
-  { label: 'Resources',    href: '/resources' },
-  { label: 'Contact',      href: '/contact' },
-];
+// ── Alternate URL for language switcher ──────────────────────────────────────
+const enUrl = isRo
+  ? (pathname === '/ro' || pathname === '/ro/' ? '/' : pathname.replace(/^\/ro/, ''))
+  : pathname;
+const roUrl = isRo
+  ? pathname
+  : (pathname === '/' ? '/ro' : '/ro' + pathname);
 
-const isActive = (href: string) =>
-  href === '/' ? pathname === '/' : pathname.startsWith(href);
+// ── Translations ─────────────────────────────────────────────────────────────
+const t = {
+  en: {
+    nav: ['Home', 'Services', 'How It Works', 'About', 'Resources', 'Contact'],
+    cta: 'Book a Call',
+  },
+  ro: {
+    nav: ['Acasă', 'Servicii', 'Cum Funcționează', 'Despre Noi', 'Resurse', 'Contact'],
+    cta: 'Rezervă un Apel',
+  },
+}[lang];
+
+const navSlugs = ['/', '/services', '/how-it-works', '/about', '/resources', '/contact'];
+
+const navLinks = t.nav.map((label, i) => ({
+  label,
+  href: i === 0 ? (isRo ? '/ro' : '/') : pfx + navSlugs[i],
+}));
+
+// Active: for home compare exactly; for others use startsWith
+const isActive = (href: string) => {
+  if (href === '/' || href === '/ro') return pathname === href || pathname === href + '/';
+  return pathname.startsWith(href);
+};
 ---
 
 <header>
   <div class="container header-inner">
-    <a href="/" class="logo" aria-label="Axionly home">
+    <a href={isRo ? '/ro' : '/'} class="logo" aria-label="Axionly home">
       Axionly<span class="logo-dot">.</span>
     </a>
 
@@ -37,7 +61,15 @@ const isActive = (href: string) =>
       </ul>
     </nav>
 
-    <a href="/contact" class="btn-primary header-cta">Book a Call</a>
+    <div class="header-right">
+      <!-- Language switcher -->
+      <div class="lang-switch" aria-label="Language switcher">
+        <a href={enUrl} class:list={['lang-btn', { 'lang-btn--active': !isRo }]} lang="en" hreflang="en">EN</a>
+        <span aria-hidden="true">/</span>
+        <a href={roUrl} class:list={['lang-btn', { 'lang-btn--active': isRo  }]} lang="ro" hreflang="ro">RO</a>
+      </div>
+      <a href={pfx + '/contact'} class="btn-primary header-cta">{t.cta}</a>
+    </div>
 
     <!-- Mobile nav -->
     <details class="mobile-nav">
@@ -59,7 +91,12 @@ const isActive = (href: string) =>
               </a>
             </li>
           ))}
-          <li><a href="/contact" class="btn-primary mobile-cta">Book a Call</a></li>
+          <li class="mobile-lang">
+            <a href={enUrl} class:list={['lang-btn', { 'lang-btn--active': !isRo }]}>EN</a>
+            <span aria-hidden="true">/</span>
+            <a href={roUrl} class:list={['lang-btn', { 'lang-btn--active': isRo  }]}>RO</a>
+          </li>
+          <li><a href={pfx + '/contact'} class="btn-primary mobile-cta">{t.cta}</a></li>
         </ul>
       </nav>
     </details>
@@ -81,7 +118,7 @@ const isActive = (href: string) =>
   .header-inner {
     display: flex;
     align-items: center;
-    gap: 2rem;
+    gap: 1.5rem;
   }
 
   /* ── Logo ── */
@@ -95,9 +132,7 @@ const isActive = (href: string) =>
     line-height: 1;
   }
 
-  .logo-dot {
-    color: var(--color-accent);
-  }
+  .logo-dot { color: var(--color-accent); }
 
   /* ── Desktop nav — centred ── */
   .header-inner > nav {
@@ -121,7 +156,6 @@ const isActive = (href: string) =>
     position: relative;
   }
 
-  /* Left-to-right underline on hover */
   .nav-link::after {
     content: '';
     position: absolute;
@@ -135,31 +169,46 @@ const isActive = (href: string) =>
     transition: transform 0.35s ease;
   }
 
-  .nav-link:hover {
-    color: var(--color-text);
+  .nav-link:hover            { color: var(--color-text); }
+  .nav-link:hover::after     { transform: scaleX(1); }
+
+  .nav-link.active           { color: var(--color-text); font-weight: 600; }
+  .nav-link.active::after    { transform: scaleX(1); background-color: var(--color-accent); }
+
+  /* ── Right cluster ── */
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
   }
 
-  .nav-link:hover::after {
-    transform: scaleX(1);
-  }
-
-  /* Active page */
-  .nav-link.active {
-    color: var(--color-text);
+  /* ── Language switcher ── */
+  .lang-switch {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.8rem;
     font-weight: 600;
+    color: var(--color-text-muted);
   }
 
-  .nav-link.active::after {
-    transform: scaleX(1);
-    background-color: var(--color-accent);
+  .lang-btn {
+    color: var(--color-text-muted);
+    padding: 0.15rem 0.25rem;
+    border-radius: var(--radius-sm);
+    transition: color var(--transition);
+    letter-spacing: 0.03em;
   }
 
-  /* ── CTA button ── */
+  .lang-btn:hover            { color: var(--color-text); }
+  .lang-btn--active          { color: var(--color-accent); font-weight: 700; }
+
+  /* ── CTA ── */
   .header-cta {
     white-space: nowrap;
     font-size: 0.875rem;
     padding: 0.55rem 1.25rem;
-    flex-shrink: 0;
   }
 
   /* ── Mobile nav ── */
@@ -205,9 +254,16 @@ const isActive = (href: string) =>
     gap: 0.125rem;
   }
 
-  .mobile-nav .nav-link {
-    font-size: 0.95rem;
-    padding: 0.6rem 0.75rem;
+  .mobile-nav .nav-link { font-size: 0.95rem; padding: 0.6rem 0.75rem; }
+
+  .mobile-lang {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.75rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
   }
 
   .mobile-cta {
@@ -220,11 +276,7 @@ const isActive = (href: string) =>
 
   @media (max-width: 900px) {
     .header-inner > nav,
-    .header-cta {
-      display: none;
-    }
-    .mobile-nav {
-      display: block;
-    }
+    .header-right { display: none; }
+    .mobile-nav   { display: block; }
   }
 </style>

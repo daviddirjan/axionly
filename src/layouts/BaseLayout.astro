@@ -2,13 +2,14 @@
 interface Props {
   title: string;
   description: string;
+  htmlLang?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, htmlLang = 'en' } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={htmlLang}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />

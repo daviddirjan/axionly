@@ -1,8 +1,7 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-
+import BaseLayout          from '../layouts/BaseLayout.astro';
+import Header              from '../components/Header.astro';
+import Footer              from '../components/Footer.astro';
 import Hero                from '../components/Hero.astro';
 import UrgencyBar          from '../components/home/UrgencyBar.astro';
 import Problem             from '../components/Problem.astro';
@@ -10,6 +9,85 @@ import Solution            from '../components/home/Solution.astro';
 import TrustSignals        from '../components/home/TrustSignals.astro';
 import HowItWorksPreview   from '../components/home/HowItWorksPreview.astro';
 import CtaBanner           from '../components/shared/CtaBanner.astro';
+
+// ── Hero content ─────────────────────────────────────────────────────────────
+const hero = {
+  pill:     'EU AI Act · GDPR · AI Security',
+  h1:       'Your company is using AI.',
+  h1Accent: 'Do you know what that legally means?',
+  sub:      'The EU AI Act is in force. Axionly helps organisations understand their AI systems, their legal obligations, and their security risks — before a regulator does.',
+  cta1:     'Book a Free Discovery Call',
+  cta2:     'See what an assessment covers',
+  cta1Href: '/contact',
+  cta2Href: '/services',
+  card: {
+    title:  'AI Risk Assessment',
+    tag:    '5 business days',
+    domains: [
+      { label: 'EU AI Act classification', status: 'Mapped',      type: 'ok'   as const },
+      { label: 'GDPR data processing',     status: 'Reviewed',    type: 'ok'   as const },
+      { label: 'Prompt injection risk',    status: '2 findings',  type: 'warn' as const },
+      { label: 'Vendor data exposure',     status: '1 finding',   type: 'warn' as const },
+      { label: 'Internal AI policy',       status: 'Assessed',    type: 'ok'   as const },
+    ],
+    footer: 'Prioritised action plan included',
+    pages:  '28 pages',
+  },
+};
+
+// ── Urgency bar ───────────────────────────────────────────────────────────────
+const urgency = {
+  label:    'Regulatory update',
+  text:     "The EU AI Act's high-risk provisions are already enforceable. Organisations using AI in HR, credit, healthcare, or customer-facing systems may already be in breach.",
+  linkText: 'Does your organisation know which category it falls into?',
+  linkHref: '/services',
+};
+
+// ── Problem ───────────────────────────────────────────────────────────────────
+const problem = {
+  eyebrow: 'The problem',
+  heading: 'Most companies are using AI.\nVery few are managing it.',
+  cards: [
+    { title: 'No inventory',   body: 'Most organisations do not have a complete list of the AI tools in use across their teams. Shadow AI is widespread — tools adopted without IT or legal review.' },
+    { title: 'No compliance',  body: 'The EU AI Act creates specific legal obligations depending on the type of AI system in use. Most organisations have not assessed their exposure or identified which systems are in scope.' },
+    { title: 'No security',    body: 'AI systems introduce new attack surfaces: prompt injection, data leakage through third-party APIs, and uncontrolled model access. Standard IT security reviews do not cover these.' },
+  ],
+};
+
+// ── Solution ──────────────────────────────────────────────────────────────────
+const solution = {
+  eyebrow: 'The solution',
+  heading: 'Axionly gives you the full picture.',
+  body1:   'We are an AI governance and security consultancy. We assess your AI systems against your legal obligations under the EU AI Act and GDPR, surface your real security risks, and hand you a clear, prioritised action plan.',
+  body2:   'Fixed scope. Fixed price. Delivered in five business days.',
+  cta:     'See our services',
+  ctaHref: '/services',
+  pillars: [
+    { title: 'Legal clarity',       body: 'Know exactly which of your AI systems fall under the EU AI Act — and what you must do about each one.' },
+    { title: 'Security depth',      body: 'AI-specific vulnerabilities assessed by a team with a cybersecurity background — not just governance theory.' },
+    { title: 'Actionable output',   body: 'No abstract reports. Every finding is tied to a specific owner, a concrete action, and a recommended deadline.' },
+  ],
+};
+
+// ── Trust signals ─────────────────────────────────────────────────────────────
+const trust = {
+  label:     'Assessment aligned with',
+  statement: 'Trusted by organisations in Romania and across the European Union',
+};
+
+// ── How It Works preview ──────────────────────────────────────────────────────
+const hiw = {
+  eyebrow: 'How it works',
+  heading: 'Five days. One clear answer.',
+  steps: [
+    { number: '01', name: 'Scoping Call',      time: 'Day 0 · Free',  description: 'A 20-minute conversation to confirm scope and whether an assessment is the right fit.' },
+    { number: '02', name: 'Review',            time: 'Day 1',         description: 'We analyse your AI systems, vendor contracts, and any existing governance policies.' },
+    { number: '03', name: 'Assessment',        time: 'Days 2–4',      description: 'We map your legal obligations and security posture — independently, with minimal time from your team.' },
+    { number: '04', name: 'Report & Briefing', time: 'Day 5',         description: 'Full written report delivered, followed by a 30-minute executive walkthrough call.' },
+  ],
+  cta:     'Learn more about the process →',
+  ctaHref: '/how-it-works',
+};
 ---
 
 <BaseLayout
@@ -18,16 +96,17 @@ import CtaBanner           from '../components/shared/CtaBanner.astro';
 >
   <Header />
   <main>
-    <Hero />
-    <UrgencyBar />
-    <Problem />
-    <Solution />
-    <TrustSignals />
-    <HowItWorksPreview />
+    <Hero          {...hero} />
+    <UrgencyBar    {...urgency} />
+    <Problem       {...problem} />
+    <Solution      {...solution} />
+    <TrustSignals  {...trust} />
+    <HowItWorksPreview {...hiw} />
     <CtaBanner
       heading="Ready to understand your AI risk?"
       subtext="Book a free 20-minute discovery call. No commitment, no jargon. We will tell you honestly whether an assessment makes sense for your organisation."
       ctaLabel="Book a Free Discovery Call"
+      ctaHref="/contact"
     />
   </main>
   <Footer />

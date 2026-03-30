@@ -1,0 +1,201 @@
+---
+import BaseLayout  from '../../layouts/BaseLayout.astro';
+import Header      from '../../components/Header.astro';
+import Footer      from '../../components/Footer.astro';
+import PageHeader  from '../../components/shared/PageHeader.astro';
+import CtaBanner   from '../../components/shared/CtaBanner.astro';
+
+const credentials = [
+  { label: 'Guvernanță AI',     detail: 'Formare certificată în cadre de guvernanță AI' },
+  { label: 'Securitate Cibernetică', detail: 'Experiență practică în securizarea produselor digitale' },
+  { label: 'Regulament UE privind IA', detail: 'Cunoștințe specializate în Regulamentul 2024/1689' },
+  { label: 'ISO 42001',         detail: 'Aliniat — certificare în curs' },
+];
+
+const values = [
+  {
+    title: 'Constatări oneste',
+    body: 'Raportăm ce găsim, chiar și atunci când este inconfortabil. Un raport care atenuează veștile proaste nu vă protejează — doar amână problema.',
+  },
+  {
+    title: 'Fără complexitate inutilă',
+    body: 'Traducem limbajul reglementar și tehnic în constatări și acțiuni clare, în limbaj simplu. Clienții noștri sunt ocupați. Respectăm asta.',
+  },
+  {
+    title: 'Domeniu fix, preț fix',
+    body: 'Nu facturăm pe oră și nu extindem domeniul pe parcursul angajamentului fără acord. Știți exact ce cumpărați înainte de a vă angaja.',
+  },
+  {
+    title: 'Confidențialitate',
+    body: 'Toate auditurile sunt strict confidențiale. Nu împărtășim informații despre clienți și nu folosim numele clienților în marketing fără permisiune explicită.',
+  },
+];
+---
+
+<BaseLayout
+  title="Despre Noi — Axionly"
+  description="Axionly este o firmă de consultanță specializată în guvernanță AI și securitate — o divizie a Axiontic. Combinăm expertiza juridică și cea în securitate cibernetică într-un singur angajament structurat."
+  htmlLang="ro"
+>
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Despre Noi"
+      heading="Guvernanță AI care vorbește ambele limbi — juridic și tehnic."
+    />
+
+    <section id="identity">
+      <div class="container identity-inner">
+        <div class="identity-text">
+          <p class="section-label">Cine suntem</p>
+          <p>Axionly este o firmă de consultanță specializată în guvernanță AI și securitate, operând ca o divizie a Axiontic — o companie de web și soluții digitale cu un portofoliu solid de sisteme construite pentru afaceri din România și Europa.</p>
+          <p>Am creat Axionly pentru că am văzut în mod repetat același decalaj. Companiile adoptau instrumente AI rapid — adesea fără nicio revizuire formală a riscurilor juridice, de securitate sau operaționale implicate. Când căutau ajutor, găseau consultanți care erau fie avocați fără expertiză tehnică, fie specialiști în securitate fără cunoștințe despre peisajul reglementar.</p>
+          <p>Axionly le reunește pe ambele într-un singur angajament structurat.</p>
+        </div>
+        <div class="identity-stat-block">
+          <div class="stat">
+            <span class="stat-number">5</span>
+            <span class="stat-label">zile lucrătoare</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">2</span>
+            <span class="stat-label">discipline combinate</span>
+          </div>
+          <div class="stat">
+            <span class="stat-number">1</span>
+            <span class="stat-label">raport clar</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="founder">
+      <div class="container founder-inner">
+        <div class="founder-photo-col">
+          <div class="photo-placeholder" aria-label="Fotografie fondator">
+            <span>Fotografie</span>
+            <span class="photo-note">În curând</span>
+          </div>
+          <ul class="credentials" aria-label="Credențiale">
+            {credentials.map(c => (
+              <li class="credential">
+                <span class="cred-label">{c.label}</span>
+                <span class="cred-detail">{c.detail}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="founder-text">
+          <p class="section-label">Fondatorul</p>
+          <h2>Fiecare audit este condus și revizuit personal.</h2>
+          <p>[Numele fondatorului] este fondatorul Axionly și consultantul principal pentru toate auditurile. Cu o expertiză în dezvoltare web, securitate cibernetică și guvernanță AI, Axionly a fost fondată pentru a ajuta organizațiile să navigheze intersecția dintre adoptarea IA și conformitatea reglementară.</p>
+          <p>Cu formare specializată în guvernanță AI și cunoștințe practice în securitate cibernetică dobândite din ani de construire și securizare a produselor digitale pentru clienți din România și Uniunea Europeană, fiecare audit este condus și revizuit personal. Axionly nu externalizează munca sa.</p>
+          <a href="https://linkedin.com" target="_blank" rel="noopener" class="linkedin-link" aria-label="Conectați-vă pe LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            Conectați-vă pe LinkedIn
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="axiontic">
+      <div class="container axiontic-inner">
+        <div class="axiontic-text">
+          <p class="section-label">Fundația noastră</p>
+          <h2>Înrădăcinați în tehnologie reală, nu doar în teoria conformității.</h2>
+          <p>Axionly este o divizie a Axiontic, o companie de web și dezvoltare digitală care construiește aplicații de nivel producție pentru afaceri. Această fundație tehnică contează. Înțelegerea noastră a riscului AI este bazată pe modul în care aceste sisteme sunt efectiv construite, integrate și expuse — nu doar pe ce spune textul reglementar despre ele.</p>
+          <a href="https://axiontic.com" target="_blank" rel="noopener" class="btn-ghost axiontic-btn">
+            Aflați mai multe despre Axiontic →
+          </a>
+        </div>
+        <div class="axiontic-card" aria-hidden="true">
+          <div class="ac-logo">Axiontic</div>
+          <div class="ac-divider"></div>
+          <div class="ac-division">
+            <span class="ac-div-label">Divizie</span>
+            <span class="ac-div-name">Axionly<span class="dot">.</span></span>
+          </div>
+          <p class="ac-desc">Consultanță în Guvernanță AI și Securitate</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="values">
+      <div class="container">
+        <div class="values-header">
+          <p class="section-label">Cum lucrăm</p>
+          <h2>Patru principii de la care nu facem compromisuri.</h2>
+        </div>
+        <ul class="values-grid" aria-label="Principii de lucru">
+          {values.map(v => (
+            <li class="value-card">
+              <h3>{v.title}</h3>
+              <p>{v.body}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <CtaBanner
+      heading="Lucrați cu o echipă care înțelege ambele aspecte."
+      subtext="Rezervați un apel de descoperire gratuit de 20 de minute. Vom asculta, vom pune întrebările corecte și vă vom spune sincer ce ar descoperi un audit."
+      ctaLabel="Rezervați un Apel de Descoperire Gratuit"
+      ctaHref="/ro/contact"
+    />
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  #identity { background-color: var(--color-bg); padding-block: var(--space-section); }
+  .identity-inner { display: grid; grid-template-columns: 1fr auto; gap: clamp(3rem, 6vw, 6rem); align-items: start; }
+  .identity-text { display: flex; flex-direction: column; gap: 1.1rem; max-width: 640px; }
+  .identity-text p { color: var(--color-text-muted); line-height: 1.75; font-size: clamp(1rem, 1.2vw, 1.0625rem); }
+  .identity-stat-block { display: flex; flex-direction: column; gap: 1.5rem; background-color: var(--color-container); border-radius: var(--radius-card); padding: 2rem; min-width: 180px; text-align: center; }
+  .stat { display: flex; flex-direction: column; gap: 0.2rem; }
+  .stat-number { font-family: var(--font-logo); font-size: 3rem; font-weight: 700; color: var(--color-accent); line-height: 1; letter-spacing: -0.03em; }
+  .stat-label  { font-size: 0.8rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-text-muted); }
+  #founder { background-color: var(--color-container); padding-block: var(--space-section); }
+  .founder-inner { display: grid; grid-template-columns: 280px 1fr; gap: clamp(2.5rem, 5vw, 5rem); align-items: start; }
+  .founder-photo-col { display: flex; flex-direction: column; gap: 1.25rem; }
+  .photo-placeholder { width: 100%; aspect-ratio: 3/4; background-color: var(--color-bg); border: 2px dashed var(--color-accent); border-radius: var(--radius-card); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; color: var(--color-text-muted); font-size: 0.875rem; font-weight: 600; }
+  .photo-note { font-size: 0.75rem; font-weight: 400; color: var(--color-accent); }
+  .credentials { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .credential { background-color: var(--color-white); border-radius: var(--radius-sm); padding: 0.65rem 0.9rem; display: flex; flex-direction: column; gap: 0.15rem; }
+  .cred-label  { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-accent); }
+  .cred-detail { font-size: 0.825rem; color: var(--color-text-muted); }
+  .founder-text { display: flex; flex-direction: column; gap: 1.1rem; padding-top: 0.25rem; }
+  .founder-text h2 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); color: var(--color-text); }
+  .founder-text p { color: var(--color-text-muted); line-height: 1.75; }
+  .linkedin-link { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--color-accent); font-weight: 600; font-size: 0.9375rem; margin-top: 0.5rem; transition: opacity var(--transition); }
+  .linkedin-link svg { width: 20px; height: 20px; }
+  .linkedin-link:hover { opacity: 0.75; }
+  #axiontic { background-color: var(--color-bg); padding-block: var(--space-section); }
+  .axiontic-inner { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2.5rem, 6vw, 5rem); align-items: center; }
+  .axiontic-text { display: flex; flex-direction: column; gap: 1.1rem; }
+  .axiontic-text h2 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); color: var(--color-text); }
+  .axiontic-text p { color: var(--color-text-muted); line-height: 1.75; }
+  .axiontic-btn { align-self: flex-start; margin-top: 0.5rem; }
+  .axiontic-card { background-color: var(--color-container); border-radius: var(--radius-card); padding: 2rem; display: flex; flex-direction: column; gap: 1rem; }
+  .ac-logo { font-family: var(--font-logo); font-weight: 700; font-size: 1.5rem; color: var(--color-text); letter-spacing: -0.03em; }
+  .ac-divider { height: 1px; background-color: rgba(0,28,59,0.12); }
+  .ac-division { display: flex; flex-direction: column; gap: 0.2rem; }
+  .ac-div-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--color-text-muted); }
+  .ac-div-name  { font-family: var(--font-logo); font-size: 1.75rem; font-weight: 700; color: var(--color-text); letter-spacing: -0.04em; }
+  .dot { color: var(--color-accent); }
+  .ac-desc { font-size: 0.875rem; color: var(--color-text-muted); }
+  #values { background-color: var(--color-container); padding-block: var(--space-section); }
+  .values-header { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; max-width: 500px; }
+  .values-header h2 { font-size: clamp(1.3rem, 2.5vw, 1.9rem); color: var(--color-text); }
+  .values-grid { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.25rem; }
+  .value-card { background-color: var(--color-white); border-radius: var(--radius-card); padding: 1.75rem; display: flex; flex-direction: column; gap: 0.65rem; }
+  .value-card h3 { font-size: 1.0625rem; font-weight: 700; color: var(--color-text); }
+  .value-card p  { font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; }
+  @media (max-width: 900px) { .identity-inner { grid-template-columns: 1fr; } .founder-inner { grid-template-columns: 1fr; } .axiontic-inner { grid-template-columns: 1fr; } .identity-stat-block { flex-direction: row; justify-content: space-around; } .founder-photo-col { max-width: 280px; } }
+  @media (max-width: 540px) { .values-grid { grid-template-columns: 1fr; } }
+</style>

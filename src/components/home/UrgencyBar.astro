@@ -1,56 +1,28 @@
 ---
+interface Props {
+  label:    string;
+  text:     string;
+  linkText: string;
+  linkHref: string;
+}
+const { label, text, linkText, linkHref } = Astro.props;
 ---
 
 <div class="urgency-bar">
   <div class="container inner">
-    <span class="label">Regulatory update</span>
+    <span class="label">{label}</span>
     <p>
-      The EU AI Act's high-risk provisions are already enforceable. Organisations using AI in HR,
-      credit, healthcare, or customer-facing systems may already be in breach.
-      <a href="/services">Does your organisation know which category it falls into?</a>
+      {text}
+      {' '}<a href={linkHref}>{linkText}</a>
     </p>
   </div>
 </div>
 
 <style>
-  .urgency-bar {
-    background-color: rgba(0, 28, 59, 0.96);
-    border-bottom: 1px solid rgba(53, 147, 255, 0.25);
-    padding-block: 0.85rem;
-  }
-
-  .inner {
-    display: flex;
-    align-items: baseline;
-    gap: 1rem;
-    flex-wrap: wrap;
-  }
-
-  .label {
-    font-size: 0.75rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--color-accent);
-    white-space: nowrap;
-    flex-shrink: 0;
-  }
-
-  p {
-    font-size: 0.875rem;
-    color: rgba(255, 255, 255, 0.65);
-    line-height: 1.6;
-  }
-
-  p a {
-    color: rgba(255, 255, 255, 0.9);
-    font-weight: 600;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    transition: color var(--transition);
-  }
-
-  p a:hover {
-    color: var(--color-accent);
-  }
+  .urgency-bar { background-color: rgba(0,28,59,0.96); border-bottom: 1px solid rgba(53,147,255,0.25); padding-block: 0.85rem; }
+  .inner { display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+  .label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--color-accent); white-space: nowrap; flex-shrink: 0; }
+  p { font-size: 0.875rem; color: rgba(255,255,255,0.65); line-height: 1.6; }
+  p a { color: rgba(255,255,255,0.9); font-weight: 600; text-decoration: underline; text-underline-offset: 3px; transition: color var(--transition); }
+  p a:hover { color: var(--color-accent); }
 </style>

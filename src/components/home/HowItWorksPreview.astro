@@ -1,39 +1,21 @@
 ---
-const steps = [
-  {
-    number: '01',
-    name: 'Scoping Call',
-    time: 'Day 0 · Free',
-    description: 'A 20-minute conversation to confirm scope and whether an assessment is the right fit.',
-  },
-  {
-    number: '02',
-    name: 'Review',
-    time: 'Day 1',
-    description: 'We analyse your AI systems, vendor contracts, and any existing governance policies.',
-  },
-  {
-    number: '03',
-    name: 'Assessment',
-    time: 'Days 2–4',
-    description: 'We map your legal obligations and security posture — independently, with minimal time from your team.',
-  },
-  {
-    number: '04',
-    name: 'Report & Briefing',
-    time: 'Day 5',
-    description: 'Full written report delivered, followed by a 30-minute executive walkthrough call.',
-  },
-];
+interface Step { number: string; name: string; time: string; description: string; }
+interface Props {
+  eyebrow: string;
+  heading: string;
+  steps:   Step[];
+  cta:     string;
+  ctaHref: string;
+}
+const { eyebrow, heading, steps, cta, ctaHref } = Astro.props;
 ---
 
 <section id="how-it-works-preview">
   <div class="container">
     <div class="section-header">
-      <p class="section-label">How it works</p>
-      <h2>Five days. One clear answer.</h2>
+      <p class="section-label">{eyebrow}</p>
+      <h2>{heading}</h2>
     </div>
-
     <ol class="steps" aria-label="Process overview">
       {steps.map(step => (
         <li class="step">
@@ -46,107 +28,24 @@ const steps = [
         </li>
       ))}
     </ol>
-
     <div class="section-cta">
-      <a href="/how-it-works" class="btn-ghost">Learn more about the process →</a>
+      <a href={ctaHref} class="btn-ghost">{cta}</a>
     </div>
   </div>
 </section>
 
 <style>
-  #how-it-works-preview {
-    background-color: var(--color-bg);
-  }
-
-  .section-header {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-    margin-bottom: clamp(2.5rem, 5vw, 4rem);
-    max-width: 520px;
-  }
-
-  .steps {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.25rem;
-    position: relative;
-  }
-
-  /* Connecting line */
-  .steps::before {
-    content: '';
-    position: absolute;
-    top: 1.4rem;
-    left: calc(12.5% + 1.5rem);
-    right: calc(12.5% + 1.5rem);
-    height: 1px;
-    background: linear-gradient(90deg, var(--color-accent), var(--color-container));
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .step {
-    position: relative;
-    z-index: 1;
-    background-color: var(--color-container);
-    border-radius: var(--radius-card);
-    padding: 1.5rem;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .step-top {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .step-name {
-    font-size: 1.0625rem;
-    font-weight: 700;
-    color: var(--color-text);
-  }
-
-  .step-number {
-    font-family: var(--font-logo);
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--color-accent);
-    line-height: 1;
-    letter-spacing: -0.03em;
-    flex-shrink: 0;
-  }
-
-  .step-time {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--color-accent);
-    letter-spacing: 0.02em;
-  }
-
-  .step-desc {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-    margin-top: 0.25rem;
-  }
-
-  .section-cta {
-    margin-top: 2rem;
-  }
-
-  @media (max-width: 900px) {
-    .steps {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .steps::before { display: none; }
-  }
-
-  @media (max-width: 540px) {
-    .steps { grid-template-columns: 1fr; }
-  }
+  #how-it-works-preview { background-color: var(--color-bg); }
+  .section-header { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: clamp(2.5rem, 5vw, 4rem); max-width: 520px; }
+  .steps { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; position: relative; }
+  .steps::before { content: ''; position: absolute; top: 1.4rem; left: calc(12.5% + 1.5rem); right: calc(12.5% + 1.5rem); height: 1px; background: linear-gradient(90deg, var(--color-accent), var(--color-container)); pointer-events: none; z-index: 0; }
+  .step { position: relative; z-index: 1; background-color: var(--color-container); border-radius: var(--radius-card); padding: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem; }
+  .step-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.5rem; }
+  .step-name   { font-size: 1.0625rem; font-weight: 700; color: var(--color-text); }
+  .step-number { font-family: var(--font-logo); font-size: 1.75rem; font-weight: 700; color: var(--color-accent); line-height: 1; letter-spacing: -0.03em; flex-shrink: 0; }
+  .step-time   { font-size: 0.8rem; font-weight: 600; color: var(--color-accent); letter-spacing: 0.02em; }
+  .step-desc   { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6; margin-top: 0.25rem; }
+  .section-cta { margin-top: 2rem; }
+  @media (max-width: 900px) { .steps { grid-template-columns: repeat(2, 1fr); } .steps::before { display: none; } }
+  @media (max-width: 540px) { .steps { grid-template-columns: 1fr; } }
 </style>

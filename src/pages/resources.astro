@@ -1,0 +1,455 @@
+---
+import BaseLayout  from '../layouts/BaseLayout.astro';
+import Header      from '../components/Header.astro';
+import Footer      from '../components/Footer.astro';
+import PageHeader  from '../components/shared/PageHeader.astro';
+
+const articles = [
+  {
+    title: 'The EU AI Act is in force — what does that mean for your company?',
+    description: 'An accessible overview of Regulation 2024/1689, who it affects, and what organisations need to do now.',
+    date: 'March 2026',
+    readTime: '6 min read',
+    tag: 'Regulation',
+    href: '#',
+    available: false,
+  },
+  {
+    title: 'High-risk AI systems under the EU AI Act: a plain-language guide',
+    description: 'Explaining Annex III risk categories with real examples from HR, healthcare, credit, and customer-facing AI.',
+    date: 'March 2026',
+    readTime: '8 min read',
+    tag: 'Regulation',
+    href: '#',
+    available: false,
+  },
+  {
+    title: 'What is an AI readiness assessment and do you need one?',
+    description: 'A clear explanation of what the assessment covers, who it is for, and what you receive at the end.',
+    date: 'March 2026',
+    readTime: '5 min read',
+    tag: 'Services',
+    href: '#',
+    available: false,
+  },
+  {
+    title: 'Why your AI chatbot might be a security risk',
+    description: 'An accessible introduction to prompt injection for a non-technical audience — and how to reduce your exposure.',
+    date: 'Coming soon',
+    readTime: '5 min read',
+    tag: 'Security',
+    href: '#',
+    available: false,
+  },
+  {
+    title: '5 things your company should do about AI before the end of this year',
+    description: 'A practical checklist for organisations that want to get ahead of regulatory scrutiny without overcomplicating it.',
+    date: 'Coming soon',
+    readTime: '4 min read',
+    tag: 'Checklist',
+    href: '#',
+    available: false,
+  },
+];
+
+const downloads = [
+  {
+    title: 'EU AI Act Quick Reference Card',
+    description: 'A one-page PDF summarising the risk categories and key obligations under Regulation 2024/1689.',
+    format: 'PDF · 1 page',
+    available: false,
+  },
+  {
+    title: 'AI Governance Checklist',
+    description: 'A self-assessment checklist your organisation can complete before booking an assessment.',
+    format: 'PDF · 3 pages',
+    available: false,
+  },
+  {
+    title: 'Sample Assessment Report',
+    description: 'An anonymised extract of a real report showing the quality and depth of findings.',
+    format: 'PDF · 8 pages',
+    available: false,
+  },
+];
+---
+
+<BaseLayout
+  title="Resources — Axionly"
+  description="Practical guidance on the EU AI Act, AI security, and what it means for organisations operating in Europe."
+>
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Resources"
+      heading="AI Governance Insights"
+      subheading="Practical guidance on the EU AI Act, AI security, and what it means for organisations operating in Europe."
+    />
+
+    <!-- Articles -->
+    <section id="articles">
+      <div class="container">
+        <h2 class="section-heading">Articles</h2>
+        <ul class="articles-grid" aria-label="Articles">
+          {articles.map(a => (
+            <li class:list={['article-card', { 'article-card--soon': !a.available }]}>
+              <div class="article-top">
+                <span class="article-tag">{a.tag}</span>
+                {!a.available && <span class="soon-badge">Coming soon</span>}
+              </div>
+              <h3>
+                {a.available
+                  ? <a href={a.href}>{a.title}</a>
+                  : a.title
+                }
+              </h3>
+              <p class="article-desc">{a.description}</p>
+              <div class="article-meta">
+                <span>{a.date}</span>
+                <span class="sep" aria-hidden="true">·</span>
+                <span>{a.readTime}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Downloads -->
+    <section id="downloads">
+      <div class="container">
+        <h2 class="section-heading">Downloadable resources</h2>
+        <p class="section-intro">
+          Free guides and reference documents — available once launched.
+          Register your email below to be notified when each resource is published.
+        </p>
+        <ul class="downloads-grid" aria-label="Downloadable resources">
+          {downloads.map(d => (
+            <li class="download-card">
+              <div class="dl-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="12" y1="18" x2="12" y2="12"/>
+                  <polyline points="9 15 12 18 15 15"/>
+                </svg>
+              </div>
+              <div class="dl-content">
+                <h3>{d.title}</h3>
+                <p>{d.description}</p>
+                <span class="dl-format">{d.format}</span>
+              </div>
+              <button class="dl-btn" disabled aria-disabled="true">
+                Coming soon
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section id="newsletter">
+      <div class="container newsletter-inner">
+        <div class="nl-text">
+          <p class="section-label">Stay informed</p>
+          <h2>Stay ahead of AI regulation.</h2>
+          <p>
+            Monthly updates on EU AI Act developments, AI security risks, and governance
+            best practice. No spam. Unsubscribe anytime.
+          </p>
+        </div>
+        <form class="nl-form" aria-label="Newsletter sign-up">
+          <div class="nl-fields">
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First name"
+              autocomplete="given-name"
+              required
+              aria-label="First name"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Work email address"
+              autocomplete="email"
+              required
+              aria-label="Work email address"
+            />
+          </div>
+          <button type="submit" class="btn-primary">Subscribe</button>
+          <p class="nl-note">
+            By subscribing you agree to receive occasional emails from Axionly.
+            You can unsubscribe at any time.
+          </p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ── Articles ── */
+  #articles {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  .section-heading {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .section-intro {
+    color: var(--color-text-muted);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .articles-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .article-card {
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+
+  .article-card:not(.article-card--soon):hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 20px rgba(53, 147, 255, 0.1);
+  }
+
+  .article-card--soon {
+    opacity: 0.7;
+  }
+
+  .article-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .article-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    background-color: var(--color-container);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-pill);
+  }
+
+  .soon-badge {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .article-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .article-card h3 a {
+    color: inherit;
+    transition: color var(--transition);
+  }
+
+  .article-card h3 a:hover { color: var(--color-accent); }
+
+  .article-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: auto;
+  }
+
+  .sep { opacity: 0.4; }
+
+  /* ── Downloads ── */
+  #downloads {
+    background-color: var(--color-container);
+    padding-block: var(--space-section);
+  }
+
+  .downloads-grid {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .download-card {
+    background-color: var(--color-white);
+    border: 1.5px solid rgba(0, 28, 59, 0.08);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .dl-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .dl-icon svg { width: 100%; height: 100%; }
+
+  .dl-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .dl-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .dl-content p {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .dl-format {
+    font-size: 0.775rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-top: 0.2rem;
+  }
+
+  .dl-btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-container);
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: not-allowed;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Newsletter ── */
+  #newsletter {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  .newsletter-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .nl-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .nl-text h2 {
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    color: var(--color-text);
+  }
+
+  .nl-text p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .nl-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .nl-fields {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .nl-fields input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    background-color: var(--color-white);
+    transition: border-color var(--transition);
+    outline: none;
+  }
+
+  .nl-fields input:focus {
+    border-color: var(--color-accent);
+  }
+
+  .nl-fields input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.7;
+  }
+
+  .nl-form .btn-primary {
+    align-self: flex-start;
+  }
+
+  .nl-note {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .articles-grid { grid-template-columns: repeat(2, 1fr); }
+    .newsletter-inner { grid-template-columns: 1fr; }
+    .nl-text { max-width: 520px; }
+  }
+
+  @media (max-width: 540px) {
+    .articles-grid { grid-template-columns: 1fr; }
+    .nl-fields { flex-direction: column; }
+    .download-card { flex-wrap: wrap; }
+    .dl-btn { width: 100%; text-align: center; }
+  }
+</style>

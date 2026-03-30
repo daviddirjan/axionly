@@ -1,0 +1,152 @@
+---
+import BaseLayout       from '../../layouts/BaseLayout.astro';
+import Header           from '../../components/Header.astro';
+import Footer           from '../../components/Footer.astro';
+import PageHeader       from '../../components/shared/PageHeader.astro';
+import ServiceTier      from '../../components/services/ServiceTier.astro';
+import ComparisonTable  from '../../components/services/ComparisonTable.astro';
+import CtaBanner        from '../../components/shared/CtaBanner.astro';
+
+const standardIncludes = [
+  'Inventar Sisteme AI — registru complet cu clasificare de risc conform Regulamentului UE privind IA',
+  'Analiză Lacune Regulament UE privind IA — obligații cartografiate, lacune identificate, articole aplicabile citate',
+  'Revizuire Guvernanță Date — modul în care datele cu caracter personal sunt gestionate de sistemele AI față de cerințele GDPR',
+  'Evaluare Risc Furnizori — contracte și acorduri de procesare a datelor revizuite',
+  'Revizuire Politică Internă — dacă o politică de utilizare AI există și dacă este adecvată',
+  'Plan de Acțiune Prioritizat — acțiuni imediate, la 30 de zile și la 90 de zile, clasificate după risc',
+  'Apel de Prezentare Executivă — prezentare de 30 de minute cu principalii factori de decizie',
+];
+
+const deepDiveIncludes = [
+  ...standardIncludes,
+  'Testare Injecție Prompt — dacă sistemele AI sunt vulnerabile la atacuri de injecție de prompt',
+  'Revizuire API și Control Acces — configurarea API-urilor AI, drepturile de acces și gestionarea cheilor',
+  'Evaluare Risc Scurgeri de Date — dacă datele sensibile transmise instrumentelor AI pot fi expuse',
+  'Revizuire Răspuns la Incidente AI — dacă organizația poate detecta și răspunde la incidente de securitate AI',
+];
+
+const addOns = [
+  { name: 'Redactare Politică de Utilizare AI',           desc: 'Redactăm politica internă de guvernanță AI pe baza constatărilor din audit.' },
+  { name: 'Revizuire Trimestrială de Guvernanță',         desc: 'Un control trimestrial mai ușor pentru a urmări progresul și a semnala modificările reglementare. Pe bază de abonament.' },
+  { name: 'Due Diligence Furnizori',                      desc: 'O analiză unică a unui produs AI specific pe care organizația dumneavoastră ia în considerare să îl achiziționeze.' },
+  { name: 'Documentație Tehnică Regulament UE privind IA', desc: 'Pregătirea documentației tehnice necesare pentru sistemele AI cu risc ridicat. Prețul se stabilește în funcție de scopul proiectului.' },
+];
+
+const whoItIsFor = [
+  'Utilizați instrumente AI, dar nu aveți o politică formală care să le reglementeze.',
+  'Nu știți dacă sistemele dumneavoastră AI declanșează obligații conform Regulamentului UE privind IA.',
+  'Procesați date ale clienților, angajaților sau date financiare prin platforme AI.',
+  'Departamentul juridic, de conformitate sau conducerea pune întrebări despre riscul AI și aveți nevoie de un răspuns clar.',
+  'Aveți un produs AI orientat către clienți și doriți conformitate înainte de a scala.',
+  'Doriți să vă pregătiți pentru supravegherea reglementară înainte ca aceasta să vă fie impusă.',
+];
+---
+
+<BaseLayout
+  title="Servicii — Axionly"
+  description="Două niveluri de audit AI cu domeniu fix: Evaluare de Pregătire AI (€1.200) și Evaluare de Pregătire AI + Analiză Aprofundată de Securitate (€1.800). Livrat în cinci zile lucrătoare."
+  htmlLang="ro"
+>
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Servicii"
+      heading="Serviciile Noastre"
+      subheading="Două niveluri de servicii. Domeniu fix. Preț fix. Fără surprize."
+    />
+
+    <section id="service-tiers">
+      <div class="container tiers-grid">
+        <ServiceTier
+          name="Evaluare de Pregătire AI"
+          description="Un audit complet al sistemelor dumneavoastră AI, obligațiilor din Regulamentul UE privind IA, riscurilor de guvernanță a datelor și expunerii față de furnizori — livrat în cinci zile lucrătoare."
+          price="€1.200"
+          delivery="5 zile lucrătoare de la apelul de delimitare"
+          deliveryLabel="Livrat în"
+          includes={standardIncludes}
+          ctaLabel="Rezervați un Apel de Descoperire Gratuit"
+          ctaHref="/ro/contact"
+        />
+        <ServiceTier
+          name="Evaluare de Pregătire AI + Analiză Aprofundată de Securitate"
+          description="Tot ce include evaluarea standard, plus o revizuire tehnică de securitate a sistemelor dumneavoastră AI — acoperind vulnerabilități, suprafețe de atac și amenințări specifice AI."
+          price="€1.800"
+          delivery="5 zile lucrătoare de la apelul de delimitare"
+          deliveryLabel="Livrat în"
+          includes={deepDiveIncludes}
+          highlight={true}
+          highlightLabel="Cel mai complet"
+          ctaLabel="Rezervați un Apel de Descoperire Gratuit"
+          ctaHref="/ro/contact"
+        />
+      </div>
+    </section>
+
+    <section id="comparison">
+      <div class="container">
+        <h2 class="section-heading">Ce este inclus în fiecare nivel</h2>
+        <ComparisonTable lang="ro" />
+      </div>
+    </section>
+
+    <section id="add-ons">
+      <div class="container">
+        <h2 class="section-heading">Servicii opționale suplimentare</h2>
+        <p class="section-intro">
+          După un audit inițial, clienții pot necesita asistență suplimentară. Acestea sunt disponibile
+          separat — nu incluse în oferta principală.
+        </p>
+        <ul class="addons-grid">
+          {addOns.map(a => (
+            <li class="addon-card">
+              <h3>{a.name}</h3>
+              <p>{a.desc} Preț la cerere.</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section id="who-its-for">
+      <div class="container">
+        <h2 class="section-heading">Acest serviciu este potrivit pentru organizația dumneavoastră dacă…</h2>
+        <ul class="who-list">
+          {whoItIsFor.map(item => (
+            <li>
+              <span class="who-check" aria-hidden="true">→</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <CtaBanner
+      heading="Nu știți sigur care nivel vi se potrivește?"
+      subtext="Rezervați un apel de descoperire gratuit de 20 de minute. Vom confirma ce intră în domeniu și care nivel se potrivește situației dumneavoastră — fără costuri și fără obligații."
+      ctaLabel="Rezervați un Apel de Descoperire Gratuit"
+      ctaHref="/ro/contact"
+    />
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  #service-tiers { background-color: var(--color-bg); padding-block: var(--space-section); }
+  .tiers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+  #comparison { background-color: var(--color-container); padding-block: var(--space-section); }
+  #add-ons { background-color: var(--color-bg); padding-block: var(--space-section); }
+  #who-its-for { background-color: var(--color-container); padding-block: var(--space-section); }
+  .section-heading { font-size: clamp(1.3rem, 2.5vw, 1.75rem); color: var(--color-text); margin-bottom: 0.75rem; }
+  .section-intro { color: var(--color-text-muted); margin-bottom: 2rem; max-width: 620px; line-height: 1.7; }
+  .addons-grid { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+  .addon-card { background-color: var(--color-container); border-radius: var(--radius-card); padding: 1.5rem; }
+  .addon-card h3 { font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.4rem; }
+  .addon-card p  { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6; }
+  .who-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.5rem; max-width: 720px; }
+  .who-list li { display: flex; align-items: flex-start; gap: 0.9rem; font-size: 1rem; color: var(--color-text-muted); line-height: 1.6; }
+  .who-check { color: var(--color-accent); font-weight: 700; flex-shrink: 0; margin-top: 0.1em; }
+  @media (max-width: 768px) { .tiers-grid { grid-template-columns: 1fr; } .addons-grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,456 @@
+---
+import BaseLayout  from '../../layouts/BaseLayout.astro';
+import Header      from '../../components/Header.astro';
+import Footer      from '../../components/Footer.astro';
+import PageHeader  from '../../components/shared/PageHeader.astro';
+
+const articles = [
+  {
+    title: 'Regulamentul UE privind IA este în vigoare — ce înseamnă asta pentru compania dumneavoastră?',
+    description: 'O prezentare accesibilă a Regulamentului 2024/1689, cine este afectat și ce trebuie să facă organizațiile acum.',
+    date: 'Martie 2026',
+    readTime: '6 min citire',
+    tag: 'Reglementare',
+    href: '#',
+    available: false,
+  },
+  {
+    title: 'Sisteme AI cu risc ridicat conform Regulamentului UE privind IA: un ghid în limbaj simplu',
+    description: 'Explicarea categoriilor de risc din Anexa III cu exemple reale din HR, sănătate, creditare și AI orientat către clienți.',
+    date: 'Martie 2026',
+    readTime: '8 min citire',
+    tag: 'Reglementare',
+    href: '#',
+    available: false,
+  },
+  {
+    title: 'Ce este o evaluare de pregătire AI și aveți nevoie de una?',
+    description: 'O explicație clară a ce acoperă evaluarea, pentru cine este și ce primiți la final.',
+    date: 'Martie 2026',
+    readTime: '5 min citire',
+    tag: 'Servicii',
+    href: '#',
+    available: false,
+  },
+  {
+    title: 'De ce chatbot-ul dumneavoastră AI ar putea fi un risc de securitate',
+    description: 'O introducere accesibilă în injecția de prompt pentru un public non-tehnic — și cum să vă reduceți expunerea.',
+    date: 'În curând',
+    readTime: '5 min citire',
+    tag: 'Securitate',
+    href: '#',
+    available: false,
+  },
+  {
+    title: '5 lucruri pe care compania dumneavoastră ar trebui să le facă în privința AI înainte de sfârșitul acestui an',
+    description: 'O listă de verificare practică pentru organizațiile care doresc să fie în avans față de supravegherea reglementară, fără a complica inutil.',
+    date: 'În curând',
+    readTime: '4 min citire',
+    tag: 'Listă de verificare',
+    href: '#',
+    available: false,
+  },
+];
+
+const downloads = [
+  {
+    title: 'Card de referință rapidă — Regulamentul UE privind IA',
+    description: 'Un PDF de o pagină care rezumă categoriile de risc și obligațiile cheie conform Regulamentului 2024/1689.',
+    format: 'PDF · 1 pagină',
+    available: false,
+  },
+  {
+    title: 'Listă de verificare pentru Guvernanță AI',
+    description: 'O listă de autoevaluare pe care organizația dumneavoastră o poate completa înainte de a rezerva o evaluare.',
+    format: 'PDF · 3 pagini',
+    available: false,
+  },
+  {
+    title: 'Exemplu de Raport de Evaluare',
+    description: 'Un extras anonimizat dintr-un raport real, care arată calitatea și profunzimea constatărilor.',
+    format: 'PDF · 8 pagini',
+    available: false,
+  },
+];
+---
+
+<BaseLayout
+  title="Resurse — Axionly"
+  description="Ghiduri practice privind Regulamentul UE privind IA, securitatea AI și ce înseamnă acestea pentru organizațiile care operează în Europa."
+  htmlLang="ro"
+>
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Resurse"
+      heading="Perspectivă în Guvernanță AI"
+      subheading="Ghiduri practice privind Regulamentul UE privind IA, securitatea AI și ce înseamnă acestea pentru organizațiile care operează în Europa."
+    />
+
+    <!-- Articole -->
+    <section id="articles">
+      <div class="container">
+        <h2 class="section-heading">Articole</h2>
+        <ul class="articles-grid" aria-label="Articole">
+          {articles.map(a => (
+            <li class:list={['article-card', { 'article-card--soon': !a.available }]}>
+              <div class="article-top">
+                <span class="article-tag">{a.tag}</span>
+                {!a.available && <span class="soon-badge">În curând</span>}
+              </div>
+              <h3>
+                {a.available
+                  ? <a href={a.href}>{a.title}</a>
+                  : a.title
+                }
+              </h3>
+              <p class="article-desc">{a.description}</p>
+              <div class="article-meta">
+                <span>{a.date}</span>
+                <span class="sep" aria-hidden="true">·</span>
+                <span>{a.readTime}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Descărcări -->
+    <section id="downloads">
+      <div class="container">
+        <h2 class="section-heading">Resurse descărcabile</h2>
+        <p class="section-intro">
+          Ghiduri gratuite și documente de referință — disponibile după lansare.
+          Înregistrați-vă adresa de email mai jos pentru a fi notificat când fiecare resursă este publicată.
+        </p>
+        <ul class="downloads-grid" aria-label="Resurse descărcabile">
+          {downloads.map(d => (
+            <li class="download-card">
+              <div class="dl-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="12" y1="18" x2="12" y2="12"/>
+                  <polyline points="9 15 12 18 15 15"/>
+                </svg>
+              </div>
+              <div class="dl-content">
+                <h3>{d.title}</h3>
+                <p>{d.description}</p>
+                <span class="dl-format">{d.format}</span>
+              </div>
+              <button class="dl-btn" disabled aria-disabled="true">
+                În curând
+              </button>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Buletin informativ -->
+    <section id="newsletter">
+      <div class="container newsletter-inner">
+        <div class="nl-text">
+          <p class="section-label">Rămâneți informat</p>
+          <h2>Rămâneți în avans față de reglementarea AI.</h2>
+          <p>
+            Actualizări lunare privind evoluțiile Regulamentului UE privind IA, riscurile de securitate AI și
+            cele mai bune practici în guvernanță. Fără spam. Dezabonare oricând.
+          </p>
+        </div>
+        <form class="nl-form" aria-label="Înregistrare buletin informativ">
+          <div class="nl-fields">
+            <input
+              type="text"
+              name="firstName"
+              placeholder="Prenume"
+              autocomplete="given-name"
+              required
+              aria-label="Prenume"
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Adresă de email de serviciu"
+              autocomplete="email"
+              required
+              aria-label="Adresă de email de serviciu"
+            />
+          </div>
+          <button type="submit" class="btn-primary">Abonați-vă</button>
+          <p class="nl-note">
+            Prin abonare sunteți de acord să primiți ocazional emailuri din partea Axionly.
+            Vă puteți dezabona oricând.
+          </p>
+        </form>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  /* ── Articole ── */
+  #articles {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  .section-heading {
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+    color: var(--color-text);
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+  }
+
+  .section-intro {
+    color: var(--color-text-muted);
+    max-width: 600px;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+  }
+
+  .articles-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+
+  .article-card {
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+
+  .article-card:not(.article-card--soon):hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 4px 20px rgba(53, 147, 255, 0.1);
+  }
+
+  .article-card--soon {
+    opacity: 0.7;
+  }
+
+  .article-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .article-tag {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+    background-color: var(--color-container);
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-pill);
+  }
+
+  .soon-badge {
+    font-size: 0.75rem;
+    color: var(--color-text-muted);
+    font-style: italic;
+  }
+
+  .article-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    line-height: 1.4;
+  }
+
+  .article-card h3 a {
+    color: inherit;
+    transition: color var(--transition);
+  }
+
+  .article-card h3 a:hover { color: var(--color-accent); }
+
+  .article-desc {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    flex: 1;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    margin-top: auto;
+  }
+
+  .sep { opacity: 0.4; }
+
+  /* ── Descărcări ── */
+  #downloads {
+    background-color: var(--color-container);
+    padding-block: var(--space-section);
+  }
+
+  .downloads-grid {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .download-card {
+    background-color: var(--color-white);
+    border: 1.5px solid rgba(0, 28, 59, 0.08);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .dl-icon {
+    width: 40px;
+    height: 40px;
+    color: var(--color-accent);
+    flex-shrink: 0;
+  }
+
+  .dl-icon svg { width: 100%; height: 100%; }
+
+  .dl-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+
+  .dl-content h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .dl-content p {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .dl-format {
+    font-size: 0.775rem;
+    color: var(--color-accent);
+    font-weight: 600;
+    margin-top: 0.2rem;
+  }
+
+  .dl-btn {
+    padding: 0.6rem 1.25rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-container);
+    color: var(--color-text-muted);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: none;
+    cursor: not-allowed;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  /* ── Buletin informativ ── */
+  #newsletter {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  .newsletter-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .nl-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .nl-text h2 {
+    font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+    color: var(--color-text);
+  }
+
+  .nl-text p {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .nl-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .nl-fields {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .nl-fields input {
+    flex: 1;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    color: var(--color-text);
+    background-color: var(--color-white);
+    transition: border-color var(--transition);
+    outline: none;
+  }
+
+  .nl-fields input:focus {
+    border-color: var(--color-accent);
+  }
+
+  .nl-fields input::placeholder {
+    color: var(--color-text-muted);
+    opacity: 0.7;
+  }
+
+  .nl-form .btn-primary {
+    align-self: flex-start;
+  }
+
+  .nl-note {
+    font-size: 0.8rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 900px) {
+    .articles-grid { grid-template-columns: repeat(2, 1fr); }
+    .newsletter-inner { grid-template-columns: 1fr; }
+    .nl-text { max-width: 520px; }
+  }
+
+  @media (max-width: 540px) {
+    .articles-grid { grid-template-columns: 1fr; }
+    .nl-fields { flex-direction: column; }
+    .download-card { flex-wrap: wrap; }
+    .dl-btn { width: 100%; text-align: center; }
+  }
+</style>

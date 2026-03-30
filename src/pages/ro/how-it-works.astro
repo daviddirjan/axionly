@@ -1,0 +1,211 @@
+---
+import BaseLayout  from '../../layouts/BaseLayout.astro';
+import Header      from '../../components/Header.astro';
+import Footer      from '../../components/Footer.astro';
+import PageHeader  from '../../components/shared/PageHeader.astro';
+import CtaBanner   from '../../components/shared/CtaBanner.astro';
+
+const steps = [
+  {
+    number: '01',
+    name:   'Apel de Descoperire',
+    tag:    'Ziua 0 — Gratuit, fără angajament',
+    duration: '20 de minute',
+    what:   'Purtăm o conversație scurtă pentru a înțelege organizația dumneavoastră, ce instrumente AI utilizați și ce preocupări sau întrebări aveți. Confirmăm dacă un audit este soluția potrivită. Puneți orice întrebare. Dacă dorim să continuăm, stabilim domeniul de aplicare și confirmăm data de start.',
+    fromYou: 'Nimic în avans. Doar un loc de 20 de minute în calendarul dumneavoastră.',
+  },
+  {
+    number: '02',
+    name:   'Delimitare și Onboarding',
+    tag:    'Ziua 1',
+    duration: 'Apel de 60 de minute',
+    what:   'Desfășurăm un apel structurat de delimitare cu persoanele relevante din organizația dumneavoastră — de obicei IT, juridic și un lider de business. Definim sistemele incluse în domeniu, stabilim o persoană de contact și colectăm documentele disponibile, cum ar fi politici existente, contracte cu furnizorii și liste de instrumente.',
+    fromYou: 'O listă a instrumentelor AI utilizate dacă există una, orice politici existente de guvernanță AI sau a datelor și disponibilitatea a 2–3 persoane pentru interviuri scurte.',
+  },
+  {
+    number: '03',
+    name:   'Evaluare',
+    tag:    'Zilele 2–4',
+    duration: '3 zile lucrătoare',
+    what:   'Desfășurăm evaluarea completă în mod independent. Aceasta include revizuirea documentelor, interviuri scurte cu stakeholderii (câte 30 de minute, desfășurate de la distanță), cartografierea reglementărilor și — pentru nivelul Analiză Aprofundată de Securitate — revizuirea tehnică a sistemelor AI și API-urilor. Nu solicităm acces extins la echipa dumneavoastră în această fază.',
+    fromYou: 'Disponibilitate pentru interviuri scurte (programate în avans). Acces la documente relevante prin partajare securizată de fișiere. Pentru Analiza Aprofundată de Securitate: acces read-only la configurațiile API, acolo unde este aplicabil.',
+  },
+  {
+    number: '04',
+    name:   'Raport și Prezentare',
+    tag:    'Ziua 5',
+    duration: 'Raport livrat la finalul zilei + apel de 30 de minute',
+    what:   'Primiți raportul complet în format PDF. Urmează un apel de prezentare de 30 de minute cu echipa de conducere sau de conformitate pentru a trece prin constatări, a răspunde la întrebări și a confirma responsabilitatea pentru fiecare element de acțiune.',
+    fromYou: 'Un slot de 30 de minute pentru principalii factori de decizie. Raportul este al dumneavoastră pentru a-l păstra, distribui intern și a acționa pe baza sa.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'Trebuie să vă oferim acces la sistemele noastre?',
+    a: 'Pentru evaluarea standard, nu. Lucrăm pe baza documentelor, interviurilor și informațiilor disponibile public despre instrumentele AI utilizate. Pentru Analiza Aprofundată de Securitate, putem solicita acces read-only la configurații API specifice — stabilit în prealabil, și nimic nu este accesat fără permisiune scrisă explicită.',
+  },
+  {
+    q: 'Cât timp va solicita din partea echipei noastre?',
+    a: 'Minim. În afara celor două apeluri (delimitare și prezentare), avem nevoie de câte 30 de minute de la 2–3 persoane pentru interviuri structurate. Angajamentul total din partea dumneavoastră este de aproximativ 3–4 ore pe durata întregului proiect.',
+  },
+  {
+    q: 'Ce se întâmplă dacă folosim doar instrumente comune precum ChatGPT sau Microsoft Copilot?',
+    a: 'Tocmai acele instrumente le evaluăm. Multe organizații presupun că utilizarea instrumentelor AI răspândite înseamnă că nu există risc de conformitate. Regulamentul UE privind IA creează obligații în funcție de modul în care utilizați IA, nu doar de instrumentele pe care le folosiți. Evaluăm cazul dumneavoastră de utilizare, datele implicate și controalele existente.',
+  },
+  {
+    q: 'Acesta este un angajament unic sau continuu?',
+    a: 'Evaluarea în sine este un angajament unic cu domeniu fix. Oferim servicii opționale de continuare, inclusiv revizuiri trimestriale de guvernanță și redactare de politici, dar nu există nicio obligație de a continua după raportul inițial.',
+  },
+  {
+    q: 'Lucrați și cu companii din afara României?',
+    a: 'Da. Toate angajamentele se desfășoară de la distanță. Lucrăm cu organizații din întreaga Uniune Europeană, iar evaluarea acoperă cerințele reglementare UE indiferent de locul în care se află clientul în UE.',
+  },
+];
+
+const reportSections = [
+  { num: '01', title: 'Rezumat Executiv',               desc: 'Ratingul general de pregătire AI cu principalele constatări.' },
+  { num: '02', title: 'Inventar Sisteme AI',            desc: 'Registru complet al instrumentelor AI cu clasificarea de risc conform Regulamentului UE privind IA.' },
+  { num: '03', title: 'Analiză Lacune Reglementare',    desc: 'Obligații identificate, articole citate, lacune cartografiate.' },
+  { num: '04', title: 'Evaluare Risc pe Domenii',       desc: 'Constatări pe domenii — juridic, guvernanță date, furnizori, politici.' },
+  { num: '05', title: 'Constatări de Securitate',       desc: 'Exclusiv nivelul Analiză Aprofundată: vulnerabilități, suprafață de atac, recomandări tehnice.' },
+  { num: '06', title: 'Plan de Acțiune Prioritizat',    desc: 'Acțiuni imediate, la 30 de zile și la 90 de zile — fiecare cu un responsabil și un rating de risc.' },
+];
+---
+
+<BaseLayout
+  title="Cum Funcționează — Axionly"
+  description="Simplu, structurat și finalizat în cinci zile. Iată exact ce se întâmplă din momentul în care ne contactați până la primirea raportului."
+  htmlLang="ro"
+>
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Cum Funcționează"
+      heading="Simplu, structurat și finalizat în cinci zile."
+      subheading="Iată exact ce se întâmplă din momentul în care ne contactați până la primirea raportului dumneavoastră."
+    />
+
+    <section id="steps">
+      <div class="container">
+        <ol class="steps-list" aria-label="Procesul de angajament">
+          {steps.map((step, i) => (
+            <li class="step-item">
+              <div class="step-left">
+                <span class="step-number" aria-hidden="true">{step.number}</span>
+                {i < steps.length - 1 && <span class="step-line" aria-hidden="true"></span>}
+              </div>
+              <div class="step-body">
+                <div class="step-meta">
+                  <h2 class="step-name">{step.name}</h2>
+                  <span class="step-tag">{step.tag}</span>
+                </div>
+                <p class="step-duration">Durată: <strong>{step.duration}</strong></p>
+                <div class="step-details">
+                  <div class="detail-block">
+                    <p class="detail-label">Ce se întâmplă</p>
+                    <p>{step.what}</p>
+                  </div>
+                  <div class="detail-block detail-block--accent">
+                    <p class="detail-label">Ce avem nevoie de la dumneavoastră</p>
+                    <p>{step.fromYou}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section id="report-structure">
+      <div class="container">
+        <div class="report-header">
+          <p class="section-label">Livrabilul</p>
+          <h2>Cum arată raportul</h2>
+          <p class="report-intro">
+            Un PDF profesional și confidențial — de obicei 20–35 de pagini în funcție de domeniu.
+            Șase secțiuni structurate, fiecare constatare legată de o acțiune specifică și un rating de risc.
+          </p>
+        </div>
+        <ul class="report-sections" aria-label="Structura raportului">
+          {reportSections.map(s => (
+            <li class="report-section">
+              <span class="rs-num" aria-hidden="true">{s.num}</span>
+              <div>
+                <h3>{s.title}</h3>
+                <p>{s.desc}</p>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="container faq-inner">
+        <div class="faq-header">
+          <p class="section-label">Întrebări frecvente</p>
+          <h2>Înainte să ne contactați</h2>
+        </div>
+        <dl class="faq-list">
+          {faqs.map(item => (
+            <div class="faq-item">
+              <dt>{item.q}</dt>
+              <dd>{item.a}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </section>
+
+    <CtaBanner
+      heading="Gata să vedeți procesul în acțiune?"
+      subtext="Rezervați un apel de descoperire gratuit de 20 de minute. Vă vom explica exact ce ar acoperi evaluarea pentru organizația dumneavoastră."
+      ctaLabel="Rezervați un Apel de Descoperire Gratuit"
+      ctaHref="/ro/contact"
+    />
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  #steps { background-color: var(--color-bg); padding-block: var(--space-section); }
+  .steps-list { list-style: none; display: flex; flex-direction: column; }
+  .step-item { display: flex; gap: 2rem; padding-bottom: 3rem; }
+  .step-item:last-child { padding-bottom: 0; }
+  .step-left { display: flex; flex-direction: column; align-items: center; flex-shrink: 0; width: 48px; }
+  .step-number { width: 48px; height: 48px; border-radius: 50%; background-color: var(--color-accent); color: var(--color-white); font-family: var(--font-logo); font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; letter-spacing: -0.02em; }
+  .step-line { width: 2px; flex: 1; background: linear-gradient(to bottom, var(--color-accent), var(--color-container)); margin-top: 0.5rem; min-height: 40px; }
+  .step-body { flex: 1; padding-top: 0.6rem; display: flex; flex-direction: column; gap: 0.9rem; padding-bottom: 1rem; }
+  .step-meta { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .step-name { font-size: clamp(1.15rem, 2vw, 1.4rem); font-weight: 700; color: var(--color-text); }
+  .step-tag { font-size: 0.8rem; font-weight: 600; color: var(--color-accent); background-color: var(--color-container); padding: 0.2rem 0.75rem; border-radius: var(--radius-pill); }
+  .step-duration { font-size: 0.9rem; color: var(--color-text-muted); }
+  .step-duration strong { color: var(--color-text); }
+  .step-details { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.25rem; }
+  .detail-block { background-color: var(--color-container); border-radius: var(--radius-card); padding: 1.25rem; font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; }
+  .detail-block--accent { border-left: 3px solid var(--color-accent); }
+  .detail-label { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-text-muted); margin-bottom: 0.5rem; }
+  #report-structure { background-color: var(--color-container); padding-block: var(--space-section); }
+  .report-header { display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 2.5rem; max-width: 560px; }
+  .report-intro { color: var(--color-text-muted); line-height: 1.7; }
+  .report-sections { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  .report-section { background-color: var(--color-white); border-radius: var(--radius-card); padding: 1.25rem 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+  .rs-num { font-family: var(--font-logo); font-size: 1.25rem; font-weight: 700; color: var(--color-accent); letter-spacing: -0.02em; flex-shrink: 0; line-height: 1.2; }
+  .report-section h3 { font-size: 0.9375rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.3rem; }
+  .report-section p  { font-size: 0.875rem; color: var(--color-text-muted); line-height: 1.55; }
+  #faq { background-color: var(--color-bg); padding-block: var(--space-section); }
+  .faq-inner { display: grid; grid-template-columns: 280px 1fr; gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+  .faq-header { position: sticky; top: calc(var(--header-height) + 2rem); display: flex; flex-direction: column; gap: 0.5rem; }
+  .faq-header h2 { font-size: clamp(1.3rem, 2.5vw, 1.75rem); color: var(--color-text); }
+  .faq-list { display: flex; flex-direction: column; }
+  .faq-item { border-bottom: 1px solid var(--color-container); padding-block: 1.5rem; }
+  .faq-item:first-child { border-top: 1px solid var(--color-container); }
+  .faq-item dt { font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.65rem; }
+  .faq-item dd { font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.7; margin: 0; }
+  @media (max-width: 900px) { .report-sections { grid-template-columns: repeat(2, 1fr); } .faq-inner { grid-template-columns: 1fr; } .faq-header { position: static; } }
+  @media (max-width: 640px) { .step-details { grid-template-columns: 1fr; } .report-sections { grid-template-columns: 1fr; } .step-left { display: none; } }
+</style>

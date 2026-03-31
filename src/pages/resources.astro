@@ -57,19 +57,22 @@ const downloads = [
     title: 'EU AI Act Quick Reference Card',
     description: 'A one-page PDF summarising the risk categories and key obligations under Regulation 2024/1689.',
     format: 'PDF · 1 page',
-    available: false,
+    available: true,
+    href: '/downloads/EU-AI-Act-Quick-Reference-Card.pdf',
   },
   {
     title: 'AI Governance Checklist',
     description: 'A self-assessment checklist your organisation can complete before booking an assessment.',
     format: 'PDF · 3 pages',
-    available: false,
+    available: true,
+    href: '/downloads/AI-Governance-Checklist.pdf',
   },
   {
     title: 'Sample Assessment Report',
     description: 'An anonymised extract of a real report showing the quality and depth of findings.',
     format: 'PDF · 8 pages',
-    available: false,
+    available: true,
+    href: '/downloads/Sample-Assessment-Report.pdf',
   },
 ];
 ---
@@ -121,8 +124,7 @@ const downloads = [
       <div class="container">
         <h2 class="section-heading">Downloadable resources</h2>
         <p class="section-intro">
-          Free guides and reference documents — available once launched.
-          Register your email below to be notified when each resource is published.
+          Free guides and reference documents — download them below.
         </p>
         <ul class="downloads-grid" aria-label="Downloadable resources">
           {downloads.map(d => (
@@ -140,9 +142,10 @@ const downloads = [
                 <p>{d.description}</p>
                 <span class="dl-format">{d.format}</span>
               </div>
-              <button class="dl-btn" disabled aria-disabled="true">
-                Coming soon
-              </button>
+              {d.available
+                ? <a class="dl-btn dl-btn--active" href={d.href} download>Download</a>
+                : <button class="dl-btn" disabled aria-disabled="true">Coming soon</button>
+              }
             </li>
           ))}
         </ul>
@@ -365,6 +368,18 @@ const downloads = [
     cursor: not-allowed;
     white-space: nowrap;
     flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .dl-btn--active {
+    background-color: var(--color-accent);
+    color: #fff;
+    cursor: pointer;
+    transition: opacity var(--transition);
+  }
+
+  .dl-btn--active:hover {
+    opacity: 0.85;
   }
 
   /* ── Newsletter ── */

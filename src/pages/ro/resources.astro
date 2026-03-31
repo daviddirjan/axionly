@@ -57,19 +57,22 @@ const downloads = [
     title: 'Card de referință rapidă — Regulamentul UE privind IA',
     description: 'Un PDF de o pagină care rezumă categoriile de risc și obligațiile cheie conform Regulamentului 2024/1689.',
     format: 'PDF · 1 pagină',
-    available: false,
+    available: true,
+    href: '/downloads/EU-AI-Act-Quick-Reference-Card.pdf',
   },
   {
     title: 'Listă de verificare pentru Guvernanță AI',
     description: 'O listă de autoevaluare pe care organizația dumneavoastră o poate completa înainte de a rezerva o evaluare.',
     format: 'PDF · 3 pagini',
-    available: false,
+    available: true,
+    href: '/downloads/AI-Governance-Checklist.pdf',
   },
   {
     title: 'Exemplu de Raport de Evaluare',
     description: 'Un extras anonimizat dintr-un raport real, care arată calitatea și profunzimea constatărilor.',
     format: 'PDF · 8 pagini',
-    available: false,
+    available: true,
+    href: '/downloads/Sample-Assessment-Report.pdf',
   },
 ];
 ---
@@ -122,8 +125,7 @@ const downloads = [
       <div class="container">
         <h2 class="section-heading">Resurse descărcabile</h2>
         <p class="section-intro">
-          Ghiduri gratuite și documente de referință — disponibile după lansare.
-          Înregistrați-vă adresa de email mai jos pentru a fi notificat când fiecare resursă este publicată.
+          Ghiduri gratuite și documente de referință — descărcați-le mai jos.
         </p>
         <ul class="downloads-grid" aria-label="Resurse descărcabile">
           {downloads.map(d => (
@@ -141,9 +143,10 @@ const downloads = [
                 <p>{d.description}</p>
                 <span class="dl-format">{d.format}</span>
               </div>
-              <button class="dl-btn" disabled aria-disabled="true">
-                În curând
-              </button>
+              {d.available
+                ? <a class="dl-btn dl-btn--active" href={d.href} download>Descarcă</a>
+                : <button class="dl-btn" disabled aria-disabled="true">În curând</button>
+              }
             </li>
           ))}
         </ul>
@@ -366,6 +369,18 @@ const downloads = [
     cursor: not-allowed;
     white-space: nowrap;
     flex-shrink: 0;
+    text-decoration: none;
+  }
+
+  .dl-btn--active {
+    background-color: var(--color-accent);
+    color: #fff;
+    cursor: pointer;
+    transition: opacity var(--transition);
+  }
+
+  .dl-btn--active:hover {
+    opacity: 0.85;
   }
 
   /* ── Buletin informativ ── */

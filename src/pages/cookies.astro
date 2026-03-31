@@ -1,0 +1,424 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header     from '../components/Header.astro';
+import Footer     from '../components/Footer.astro';
+import PageHeader from '../components/shared/PageHeader.astro';
+
+const updated = 'March 2026';
+---
+
+<BaseLayout
+  title="Cookie Policy — Axionly"
+  description="Cookie Policy for Axionly. We keep our cookie use to an absolute minimum — no tracking, no advertising, no profiling."
+>
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Legal"
+      heading="Cookie Policy"
+      subheading={"Last updated: " + updated}
+    />
+
+    <section id="cookie-content">
+      <div class="container legal-layout">
+
+        <!-- Table of contents -->
+        <aside class="toc" aria-label="Table of contents">
+          <p class="toc-heading">Contents</p>
+          <ol>
+            <li><a href="#what-are-cookies">1. What Are Cookies</a></li>
+            <li><a href="#our-approach">2. Our Approach</a></li>
+            <li><a href="#cookies-we-use">3. Cookies We Use</a></li>
+            <li><a href="#google-search-console">4. Google Search Console</a></li>
+            <li><a href="#no-tracking">5. No Tracking</a></li>
+            <li><a href="#your-choices">6. Your Choices</a></li>
+            <li><a href="#contact">7. Contact</a></li>
+          </ol>
+        </aside>
+
+        <!-- Policy body -->
+        <article class="legal-body">
+
+          <div class="summary-banner" role="note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <p>
+              <strong>Short version:</strong> This website does not use advertising cookies,
+              tracking cookies, or any tool that profiles your behaviour. We collect no analytics
+              about how you navigate the site. Your visit is private.
+            </p>
+          </div>
+
+          <section id="what-are-cookies">
+            <h2>1. What Are Cookies</h2>
+            <p>
+              Cookies are small text files that a website places on your device when you visit.
+              They are widely used to make websites work efficiently and to provide information
+              to the site owner. Cookies can be set by the website itself ("first-party cookies")
+              or by third-party services embedded in the page ("third-party cookies").
+            </p>
+            <p>
+              Under EU law — including the ePrivacy Directive and the General Data Protection
+              Regulation (GDPR) — cookies that are not strictly necessary require your informed
+              consent before they are placed on your device.
+            </p>
+          </section>
+
+          <section id="our-approach">
+            <h2>2. Our Approach</h2>
+            <p>
+              We keep our cookie use to an absolute minimum. Axionly.io is a static website with
+              no user accounts, no login sessions, and no advertising. We have deliberately chosen
+              not to embed analytics platforms, advertising networks, or session recording tools.
+            </p>
+            <p>
+              As a result, <strong>this website places no cookies on your device that require
+              your consent</strong>. You will not be shown a cookie consent banner because there
+              is nothing to consent to.
+            </p>
+          </section>
+
+          <section id="cookies-we-use">
+            <h2>3. Cookies We Use</h2>
+
+            <table class="cookie-table" aria-label="Cookie inventory">
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>In Use</th>
+                  <th>Details</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Strictly Necessary</td>
+                  <td><span class="badge badge--none">None</span></td>
+                  <td>The site is fully static. No session or authentication cookies are required.</td>
+                </tr>
+                <tr>
+                  <td>Analytics &amp; Performance</td>
+                  <td><span class="badge badge--none">None</span></td>
+                  <td>We do not use Google Analytics, Plausible, Matomo, or any visitor analytics platform.</td>
+                </tr>
+                <tr>
+                  <td>Functional</td>
+                  <td><span class="badge badge--none">None</span></td>
+                  <td>No preference or personalisation cookies are set. Language selection is handled via URL path only.</td>
+                </tr>
+                <tr>
+                  <td>Targeting &amp; Advertising</td>
+                  <td><span class="badge badge--none">None</span></td>
+                  <td>No advertising pixels, retargeting scripts, or social media trackers are present.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="google-search-console">
+            <h2>4. Google Search Console</h2>
+            <p>
+              We use <strong>Google Search Console</strong> — a free tool provided by Google —
+              to understand how our website performs in Google Search results. This includes
+              data such as which search queries lead users to our site, how our pages are indexed,
+              and whether there are any technical issues affecting our visibility.
+            </p>
+            <p>
+              <strong>Google Search Console does not place any cookies on website visitors'
+              browsers.</strong> It operates entirely within Google's own infrastructure and
+              the data it surfaces to us is aggregated and anonymised — we cannot identify
+              individual users from it. It is a tool for the site administrator, not a visitor
+              tracking mechanism.
+            </p>
+            <p>
+              For more information on how Google handles data in its tools, see
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Google's Privacy Policy</a>.
+            </p>
+          </section>
+
+          <section id="no-tracking">
+            <h2>5. No Behavioural Tracking</h2>
+            <p>
+              We do not track, record, or analyse how individual visitors navigate this website.
+              Specifically, we do <strong>not</strong> use:
+            </p>
+            <ul>
+              <li>Google Analytics or similar visitor analytics platforms</li>
+              <li>Session recording or heatmap tools (e.g. Hotjar, Microsoft Clarity)</li>
+              <li>Facebook Pixel or other advertising network trackers</li>
+              <li>LinkedIn Insight Tag or any social media pixel</li>
+              <li>A/B testing or personalisation tools that observe user behaviour</li>
+            </ul>
+            <p>
+              We made this choice deliberately. As a company that advises organisations on
+              AI governance and data privacy, we hold ourselves to the same standards we
+              recommend to our clients.
+            </p>
+          </section>
+
+          <section id="your-choices">
+            <h2>6. Your Choices</h2>
+            <p>
+              Because this website places no non-essential cookies, there is nothing to
+              opt out of. You can use this site without any impact from cookie-related choices.
+            </p>
+            <p>
+              If you nonetheless wish to control cookies at the browser level, all major
+              browsers allow you to view, block, or delete cookies. Refer to your browser's
+              help documentation:
+            </p>
+            <ul>
+              <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+              <li><a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+              <li><a href="https://support.apple.com/en-gb/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Apple Safari</a></li>
+              <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a></li>
+            </ul>
+          </section>
+
+          <section id="contact">
+            <h2>7. Contact</h2>
+            <p>
+              If you have any questions about this Cookie Policy or how we handle your data,
+              please contact us:
+            </p>
+            <div class="info-box">
+              <p><strong>Axiontic SRL — Axionly</strong></p>
+              <p>Aleea Lavandei 7B, Oradea, BH 410083, Romania</p>
+              <p>CUI: 44913578 · VAT EU: 46009350</p>
+              <p><a href="mailto:hello@axionly.io">hello@axionly.io</a></p>
+            </div>
+            <p>
+              See also our <a href="/privacy">Privacy Policy</a> for full details on how we
+              collect and protect your personal data.
+            </p>
+            <p class="policy-note">
+              This policy may be updated from time to time. The date at the top of the page
+              reflects when it was last revised.
+            </p>
+          </section>
+
+        </article>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  #cookie-content {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  .legal-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .toc-heading {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.9rem;
+  }
+
+  .toc ol {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .toc a {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    transition: color var(--transition);
+    display: block;
+  }
+
+  .toc a:hover { color: var(--color-accent); }
+
+  /* ── Summary Banner ── */
+  .summary-banner {
+    background-color: rgba(53, 147, 255, 0.07);
+    border: 1.5px solid rgba(53, 147, 255, 0.25);
+    border-radius: var(--radius-card);
+    padding: 1.15rem 1.4rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+  }
+
+  .summary-banner svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 0.15em;
+  }
+
+  .summary-banner p {
+    font-size: 0.9375rem !important;
+    color: var(--color-text) !important;
+    line-height: 1.65 !important;
+    margin: 0;
+  }
+
+  /* ── Body ── */
+  .legal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .legal-body section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    scroll-margin-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  .legal-body h2 {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    color: var(--color-text);
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid var(--color-container);
+  }
+
+  .legal-body p {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+  }
+
+  .legal-body ul {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .legal-body li {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  .legal-body strong { color: var(--color-text); }
+
+  .legal-body a {
+    color: var(--color-accent);
+    font-weight: 500;
+    transition: opacity var(--transition);
+  }
+
+  .legal-body a:hover { opacity: 0.75; }
+
+  /* ── Cookie table ── */
+  .cookie-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .cookie-table thead tr {
+    background-color: var(--color-container);
+  }
+
+  .cookie-table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .cookie-table td {
+    padding: 0.85rem 1rem;
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-container);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  .cookie-table td:first-child {
+    font-weight: 600;
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .badge--none {
+    background-color: var(--color-container);
+    color: var(--color-text-muted);
+  }
+
+  .info-box {
+    background-color: var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 1.15rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .info-box p {
+    font-size: 0.9rem !important;
+    color: var(--color-text) !important;
+    line-height: 1.55 !important;
+    margin: 0;
+  }
+
+  .policy-note {
+    font-size: 0.85rem !important;
+    font-style: italic;
+    opacity: 0.75;
+  }
+
+  /* ── Responsive ── */
+  @media (max-width: 860px) {
+    .legal-layout {
+      grid-template-columns: 1fr;
+    }
+    .toc {
+      position: static;
+    }
+    .cookie-table {
+      display: block;
+      overflow-x: auto;
+    }
+  }
+</style>

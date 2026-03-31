@@ -87,8 +87,8 @@ const badges = ['EU AI Act', 'GDPR', 'ISO 42001'];
     <div class="container footer-bottom-inner">
       <p>{t.copyright}</p>
       <div class="legal-links">
-        <a href="#">{t.privacy}</a>
-        <a href="#">{t.cookies}</a>
+        <a href={isRo ? '/ro/privacy' : '/privacy'}>{t.privacy}</a>
+        <a href={isRo ? '/ro/cookies' : '/cookies'}>{t.cookies}</a>
       </div>
     </div>
   </div>

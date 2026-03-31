@@ -1,0 +1,420 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header     from '../../components/Header.astro';
+import Footer     from '../../components/Footer.astro';
+import PageHeader from '../../components/shared/PageHeader.astro';
+
+const updated = 'Martie 2026';
+---
+
+<BaseLayout
+  title="Politică Cookie — Axionly"
+  description="Politica Cookie a Axionly. Utilizăm cookie-urile la minimum absolut — fără urmărire, fără publicitate, fără profilare."
+  htmlLang="ro"
+>
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Legal"
+      heading="Politică Cookie"
+      subheading={"Ultima actualizare: " + updated}
+    />
+
+    <section id="cookie-content">
+      <div class="container legal-layout">
+
+        <!-- Cuprins -->
+        <aside class="toc" aria-label="Cuprins">
+          <p class="toc-heading">Cuprins</p>
+          <ol>
+            <li><a href="#ce-sunt-cookie">1. Ce Sunt Cookie-urile</a></li>
+            <li><a href="#abordarea-noastra">2. Abordarea Noastră</a></li>
+            <li><a href="#cookie-uri-folosite">3. Cookie-uri Utilizate</a></li>
+            <li><a href="#google-search-console">4. Google Search Console</a></li>
+            <li><a href="#fara-urmarire">5. Fără Urmărire</a></li>
+            <li><a href="#optiunile-dvs">6. Opțiunile Dumneavoastră</a></li>
+            <li><a href="#contact">7. Contact</a></li>
+          </ol>
+        </aside>
+
+        <!-- Conținut politică -->
+        <article class="legal-body">
+
+          <div class="summary-banner" role="note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="12" y1="8" x2="12" y2="12"/>
+              <line x1="12" y1="16" x2="12.01" y2="16"/>
+            </svg>
+            <p>
+              <strong>Pe scurt:</strong> Acest site web nu utilizează cookie-uri publicitare,
+              cookie-uri de urmărire sau niciun instrument care să vă profileze comportamentul.
+              Nu colectăm date analitice despre modul în care navigați pe site. Vizita
+              dumneavoastră este privată.
+            </p>
+          </div>
+
+          <section id="ce-sunt-cookie">
+            <h2>1. Ce Sunt Cookie-urile</h2>
+            <p>
+              Cookie-urile sunt fișiere text mici pe care un site web le plasează pe dispozitivul
+              dumneavoastră atunci când îl vizitați. Sunt utilizate pe scară largă pentru a face
+              site-urile web să funcționeze eficient și pentru a furniza informații proprietarului
+              site-ului. Cookie-urile pot fi setate de site-ul în sine ("cookie-uri de primă parte")
+              sau de servicii terțe încorporate în pagină ("cookie-uri de terți").
+            </p>
+            <p>
+              Conform legislației UE — inclusiv Directiva ePrivacy și Regulamentul General privind
+              Protecția Datelor (GDPR) — cookie-urile care nu sunt strict necesare necesită
+              consimțământul dumneavoastră informat înainte de a fi plasate pe dispozitiv.
+            </p>
+          </section>
+
+          <section id="abordarea-noastra">
+            <h2>2. Abordarea Noastră</h2>
+            <p>
+              Menținem utilizarea cookie-urilor la minimum absolut. Axionly.io este un site web
+              static, fără conturi de utilizator, fără sesiuni de autentificare și fără publicitate.
+              Am ales deliberat să nu integrăm platforme de analiză, rețele publicitare sau
+              instrumente de înregistrare a sesiunilor.
+            </p>
+            <p>
+              Ca urmare, <strong>acest site web nu plasează niciun cookie pe dispozitivul
+              dumneavoastră care să necesite consimțământul dumneavoastră</strong>. Nu vi se va
+              afișa un banner de consimțământ pentru cookie-uri deoarece nu există nimic la care
+              să consimțiți.
+            </p>
+          </section>
+
+          <section id="cookie-uri-folosite">
+            <h2>3. Cookie-uri Utilizate</h2>
+
+            <table class="cookie-table" aria-label="Inventar cookie-uri">
+              <thead>
+                <tr>
+                  <th>Categorie</th>
+                  <th>Utilizate</th>
+                  <th>Detalii</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Strict Necesare</td>
+                  <td><span class="badge badge--none">Niciuna</span></td>
+                  <td>Site-ul este complet static. Nu sunt necesare cookie-uri de sesiune sau autentificare.</td>
+                </tr>
+                <tr>
+                  <td>Analiză și Performanță</td>
+                  <td><span class="badge badge--none">Niciuna</span></td>
+                  <td>Nu utilizăm Google Analytics, Plausible, Matomo sau nicio platformă de analiză a vizitatorilor.</td>
+                </tr>
+                <tr>
+                  <td>Funcționale</td>
+                  <td><span class="badge badge--none">Niciuna</span></td>
+                  <td>Nu sunt setate cookie-uri de preferință sau personalizare. Selectarea limbii este gestionată exclusiv prin calea URL.</td>
+                </tr>
+                <tr>
+                  <td>Direcționare și Publicitate</td>
+                  <td><span class="badge badge--none">Niciuna</span></td>
+                  <td>Nu există pixeli publicitari, scripturi de retargetare sau urmăritori de rețele sociale.</td>
+                </tr>
+              </tbody>
+            </table>
+          </section>
+
+          <section id="google-search-console">
+            <h2>4. Google Search Console</h2>
+            <p>
+              Utilizăm <strong>Google Search Console</strong> — un instrument gratuit furnizat de
+              Google — pentru a înțelege cum se comportă site-ul nostru în rezultatele Google
+              Search. Aceasta include date precum ce interogări de căutare conduc utilizatorii la
+              site-ul nostru, cum sunt indexate paginile noastre și dacă există probleme tehnice
+              care afectează vizibilitatea noastră.
+            </p>
+            <p>
+              <strong>Google Search Console nu plasează niciun cookie în browserele vizitatorilor
+              site-ului.</strong> Funcționează exclusiv în infrastructura Google, iar datele pe
+              care ni le furnizează sunt agregate și anonimizate — nu putem identifica utilizatori
+              individuali din acestea. Este un instrument pentru administratorul site-ului, nu un
+              mecanism de urmărire a vizitatorilor.
+            </p>
+            <p>
+              Pentru mai multe informații despre modul în care Google gestionează datele în
+              instrumentele sale, consultați
+              <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Politica de Confidențialitate a Google</a>.
+            </p>
+          </section>
+
+          <section id="fara-urmarire">
+            <h2>5. Fără Urmărire Comportamentală</h2>
+            <p>
+              Nu urmărim, înregistrăm sau analizăm modul în care vizitatorii individuali navighează
+              pe acest site web. În mod specific, nu utilizăm:
+            </p>
+            <ul>
+              <li>Google Analytics sau platforme similare de analiză a vizitatorilor</li>
+              <li>Instrumente de înregistrare a sesiunilor sau hărți termice (de ex. Hotjar, Microsoft Clarity)</li>
+              <li>Facebook Pixel sau alți urmăritori ai rețelelor publicitare</li>
+              <li>LinkedIn Insight Tag sau orice pixel de rețele sociale</li>
+              <li>Instrumente de testare A/B sau personalizare care observă comportamentul utilizatorilor</li>
+            </ul>
+            <p>
+              Am făcut această alegere în mod deliberat. Ca o companie care consiliază organizații
+              privind guvernanța AI și confidențialitatea datelor, ne menținem la aceleași standarde
+              pe care le recomandăm clienților noștri.
+            </p>
+          </section>
+
+          <section id="optiunile-dvs">
+            <h2>6. Opțiunile Dumneavoastră</h2>
+            <p>
+              Deoarece acest site web nu plasează cookie-uri non-esențiale, nu există nimic din
+              care să vă dezactivați. Puteți utiliza acest site fără niciun impact din alegerile
+              legate de cookie-uri.
+            </p>
+            <p>
+              Dacă doriți totuși să controlați cookie-urile la nivelul browserului, toate browserele
+              principale vă permit să vizualizați, să blocați sau să ștergeți cookie-urile.
+              Consultați documentația de ajutor a browserului dumneavoastră:
+            </p>
+            <ul>
+              <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener">Google Chrome</a></li>
+              <li><a href="https://support.mozilla.org/en-US/kb/cookies-information-websites-store-on-your-computer" target="_blank" rel="noopener">Mozilla Firefox</a></li>
+              <li><a href="https://support.apple.com/en-gb/guide/safari/sfri11471/mac" target="_blank" rel="noopener">Apple Safari</a></li>
+              <li><a href="https://support.microsoft.com/en-us/microsoft-edge/delete-cookies-in-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener">Microsoft Edge</a></li>
+            </ul>
+          </section>
+
+          <section id="contact">
+            <h2>7. Contact</h2>
+            <p>
+              Dacă aveți întrebări despre această Politică Cookie sau despre modul în care
+              gestionăm datele dumneavoastră, vă rugăm să ne contactați:
+            </p>
+            <div class="info-box">
+              <p><strong>Axiontic SRL — Axionly</strong></p>
+              <p>Aleea Lavandei 7B, Oradea, BH 410083, România</p>
+              <p>CUI: 44913578 · TVA UE: 46009350</p>
+              <p><a href="mailto:hello@axionly.io">hello@axionly.io</a></p>
+            </div>
+            <p>
+              Consultați și <a href="/ro/privacy">Politica noastră de Confidențialitate</a> pentru
+              detalii complete despre modul în care colectăm și protejăm datele dumneavoastră personale.
+            </p>
+            <p class="policy-note">
+              Această politică poate fi actualizată periodic. Data din partea de sus a paginii
+              reflectă momentul ultimei revizuiri.
+            </p>
+          </section>
+
+        </article>
+      </div>
+    </section>
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  #cookie-content {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  .legal-layout {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: clamp(2.5rem, 5vw, 5rem);
+    align-items: start;
+  }
+
+  .toc {
+    position: sticky;
+    top: calc(var(--header-height) + 2rem);
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 1.25rem 1.5rem;
+  }
+
+  .toc-heading {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 0.9rem;
+  }
+
+  .toc ol {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+
+  .toc a {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.4;
+    transition: color var(--transition);
+    display: block;
+  }
+
+  .toc a:hover { color: var(--color-accent); }
+
+  .summary-banner {
+    background-color: rgba(53, 147, 255, 0.07);
+    border: 1.5px solid rgba(53, 147, 255, 0.25);
+    border-radius: var(--radius-card);
+    padding: 1.15rem 1.4rem;
+    display: flex;
+    gap: 0.9rem;
+    align-items: flex-start;
+  }
+
+  .summary-banner svg {
+    width: 20px;
+    height: 20px;
+    color: var(--color-accent);
+    flex-shrink: 0;
+    margin-top: 0.15em;
+  }
+
+  .summary-banner p {
+    font-size: 0.9375rem !important;
+    color: var(--color-text) !important;
+    line-height: 1.65 !important;
+    margin: 0;
+  }
+
+  .legal-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .legal-body section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    scroll-margin-top: calc(var(--header-height) + 1.5rem);
+  }
+
+  .legal-body h2 {
+    font-size: clamp(1.1rem, 1.8vw, 1.35rem);
+    color: var(--color-text);
+    font-weight: 700;
+    padding-bottom: 0.5rem;
+    border-bottom: 1.5px solid var(--color-container);
+  }
+
+  .legal-body p {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+  }
+
+  .legal-body ul {
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .legal-body li {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  .legal-body strong { color: var(--color-text); }
+
+  .legal-body a {
+    color: var(--color-accent);
+    font-weight: 500;
+    transition: opacity var(--transition);
+  }
+
+  .legal-body a:hover { opacity: 0.75; }
+
+  .cookie-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+  }
+
+  .cookie-table thead tr {
+    background-color: var(--color-container);
+  }
+
+  .cookie-table th {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-text);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .cookie-table td {
+    padding: 0.85rem 1rem;
+    color: var(--color-text-muted);
+    border-top: 1px solid var(--color-container);
+    vertical-align: top;
+    line-height: 1.55;
+  }
+
+  .cookie-table td:first-child {
+    font-weight: 600;
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.65rem;
+    border-radius: var(--radius-pill);
+    font-size: 0.75rem;
+    font-weight: 700;
+  }
+
+  .badge--none {
+    background-color: var(--color-container);
+    color: var(--color-text-muted);
+  }
+
+  .info-box {
+    background-color: var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 1.15rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .info-box p {
+    font-size: 0.9rem !important;
+    color: var(--color-text) !important;
+    line-height: 1.55 !important;
+    margin: 0;
+  }
+
+  .policy-note {
+    font-size: 0.85rem !important;
+    font-style: italic;
+    opacity: 0.75;
+  }
+
+  @media (max-width: 860px) {
+    .legal-layout { grid-template-columns: 1fr; }
+    .toc { position: static; }
+    .cookie-table { display: block; overflow-x: auto; }
+  }
+</style>

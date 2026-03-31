@@ -73,10 +73,13 @@ const values = [
     <section id="founder">
       <div class="container founder-inner">
         <div class="founder-photo-col">
-          <div class="photo-placeholder" aria-label="Fotografie fondator">
-            <span>Fotografie</span>
-            <span class="photo-note">În curând</span>
-          </div>
+          <img
+            src="/team/DavidAlexandruDirjan.png"
+            alt="David Alexandru Dirjan — Fondatorul Axionly"
+            class="founder-photo"
+            width="280"
+            loading="eager"
+          />
           <ul class="credentials" aria-label="Credențiale">
             {credentials.map(c => (
               <li class="credential">
@@ -89,9 +92,9 @@ const values = [
         <div class="founder-text">
           <p class="section-label">Fondatorul</p>
           <h2>Fiecare audit este condus și revizuit personal.</h2>
-          <p>[Numele fondatorului] este fondatorul Axionly și consultantul principal pentru toate auditurile. Cu o expertiză în dezvoltare web, securitate cibernetică și guvernanță AI, Axionly a fost fondată pentru a ajuta organizațiile să navigheze intersecția dintre adoptarea IA și conformitatea reglementară.</p>
+          <p>David Alexandru Dirjan este fondatorul Axionly și consultantul principal pentru toate auditurile. Cu o expertiză în dezvoltare web, securitate cibernetică și guvernanță AI, Axionly a fost fondată pentru a ajuta organizațiile să navigheze intersecția dintre adoptarea IA și conformitatea reglementară.</p>
           <p>Cu formare specializată în guvernanță AI și cunoștințe practice în securitate cibernetică dobândite din ani de construire și securizare a produselor digitale pentru clienți din România și Uniunea Europeană, fiecare audit este condus și revizuit personal. Axionly nu externalizează munca sa.</p>
-          <a href="https://linkedin.com" target="_blank" rel="noopener" class="linkedin-link" aria-label="Conectați-vă pe LinkedIn">
+          <a href="https://www.linkedin.com/in/david-dirjan-3573561b3/" target="_blank" rel="noopener" class="linkedin-link" aria-label="Conectați-vă pe LinkedIn">
             <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
               <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
             </svg>
@@ -163,8 +166,7 @@ const values = [
   #founder { background-color: var(--color-container); padding-block: var(--space-section); }
   .founder-inner { display: grid; grid-template-columns: 280px 1fr; gap: clamp(2.5rem, 5vw, 5rem); align-items: start; }
   .founder-photo-col { display: flex; flex-direction: column; gap: 1.25rem; }
-  .photo-placeholder { width: 100%; aspect-ratio: 3/4; background-color: var(--color-bg); border: 2px dashed var(--color-accent); border-radius: var(--radius-card); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.4rem; color: var(--color-text-muted); font-size: 0.875rem; font-weight: 600; }
-  .photo-note { font-size: 0.75rem; font-weight: 400; color: var(--color-accent); }
+  .founder-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: center top; border-radius: var(--radius-card); display: block; }
   .credentials { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
   .credential { background-color: var(--color-white); border-radius: var(--radius-sm); padding: 0.65rem 0.9rem; display: flex; flex-direction: column; gap: 0.15rem; }
   .cred-label  { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--color-accent); }

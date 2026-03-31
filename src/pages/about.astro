@@ -86,10 +86,13 @@ const values = [
     <section id="founder">
       <div class="container founder-inner">
         <div class="founder-photo-col">
-          <div class="photo-placeholder" aria-label="Founder photo">
-            <span>Photo</span>
-            <span class="photo-note">Coming soon</span>
-          </div>
+          <img
+            src="/team/DavidAlexandruDirjan.png"
+            alt="David Alexandru Dirjan — Founder of Axionly"
+            class="founder-photo"
+            width="280"
+            loading="eager"
+          />
           <ul class="credentials" aria-label="Credentials">
             {credentials.map(c => (
               <li class="credential">
@@ -103,7 +106,7 @@ const values = [
           <p class="section-label">The founder</p>
           <h2>Every assessment is personally led and reviewed.</h2>
           <p>
-            [Founder name] is the founder of Axionly and lead consultant on all assessments.
+            David Alexandru Dirjan is the founder of Axionly and lead consultant on all assessments.
             With a background in web development, cybersecurity, and AI governance, Axionly
             was founded to help organisations navigate the intersection of AI adoption and
             regulatory compliance.
@@ -115,7 +118,7 @@ const values = [
             Axionly does not outsource its work.
           </p>
           <a
-            href="https://linkedin.com"
+            href="https://www.linkedin.com/in/david-dirjan-3573561b3/"
             target="_blank"
             rel="noopener"
             class="linkedin-link"
@@ -271,26 +274,13 @@ const values = [
     gap: 1.25rem;
   }
 
-  .photo-placeholder {
+  .founder-photo {
     width: 100%;
     aspect-ratio: 3/4;
-    background-color: var(--color-bg);
-    border: 2px dashed var(--color-accent);
+    object-fit: cover;
+    object-position: center top;
     border-radius: var(--radius-card);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem;
-    color: var(--color-text-muted);
-    font-size: 0.875rem;
-    font-weight: 600;
-  }
-
-  .photo-note {
-    font-size: 0.75rem;
-    font-weight: 400;
-    color: var(--color-accent);
+    display: block;
   }
 
   .credentials {

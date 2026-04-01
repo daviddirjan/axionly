@@ -1,11 +1,83 @@
 ---
+const SITE = 'https://axionly.io';
+
 interface Props {
   title: string;
   description: string;
   htmlLang?: string;
+  canonicalPath?: string;
+  ogImage?: string;
+  hreflangEN?: string;
+  hreflangRO?: string;
 }
 
-const { title, description, htmlLang = 'en' } = Astro.props;
+const {
+  title,
+  description,
+  htmlLang = 'en',
+  canonicalPath,
+  ogImage = '/axionly-og.svg',
+  hreflangEN,
+  hreflangRO,
+} = Astro.props;
+
+const canonicalURL = canonicalPath !== undefined ? `${SITE}${canonicalPath}` : SITE;
+const ogImageURL   = `${SITE}${ogImage}`;
+const ogLocale     = htmlLang === 'ro' ? 'ro_RO' : 'en_GB';
+
+const orgSchema = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": `${SITE}/#organization`,
+      "name": "Axionly",
+      "url": SITE,
+      "logo": `${SITE}/favicon.svg`,
+      "image": `${SITE}/axionly-og.svg`,
+      "description": "Axionly is a specialist AI readiness assessment and governance consultancy. We help European organisations comply with the EU AI Act, manage AI security risks, and meet data governance obligations — delivered in five business days.",
+      "serviceType": [
+        "AI Readiness Assessment",
+        "EU AI Act Compliance",
+        "AI Governance Consulting",
+        "AI Security Assessment",
+        "ISO 42001 Advisory"
+      ],
+      "areaServed": "Europe",
+      "founder": {
+        "@type": "Person",
+        "name": "David Alexandru Dirjan",
+        "sameAs": "https://www.linkedin.com/in/david-dirjan-3573561b3/"
+      },
+      "sameAs": ["https://www.linkedin.com/in/david-dirjan-3573561b3/"],
+      "parentOrganization": {
+        "@type": "Organization",
+        "name": "Axiontic",
+        "url": "https://axiontic.com"
+      },
+      "knowsAbout": [
+        "EU AI Act",
+        "Regulation 2024/1689",
+        "GDPR",
+        "AI Governance",
+        "AI Security",
+        "ISO 42001",
+        "AI Risk Assessment",
+        "AI Readiness Assessment",
+        "Artificial Intelligence Compliance"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE}/#website`,
+      "url": SITE,
+      "name": "Axionly",
+      "description": "AI Readiness Assessment & EU AI Act Compliance Consultancy",
+      "publisher": { "@id": `${SITE}/#organization` },
+      "inLanguage": ["en", "ro"]
+    }
+  ]
+});
 ---
 
 <!doctype html>
@@ -13,17 +85,52 @@ const { title, description, htmlLang = 'en' } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content={description} />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <title>{title}</title>
 
-    <!-- Google Fonts: Afacad (logo) + Inter (body) -->
+    <!-- Primary Meta -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:site_name"   content="Axionly" />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url"         content={canonicalURL} />
+    <meta property="og:image"       content={ogImageURL} />
+    <meta property="og:image:width"  content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale"      content={ogLocale} />
+    {htmlLang === 'en' && <meta property="og:locale:alternate" content="ro_RO" />}
+    {htmlLang === 'ro' && <meta property="og:locale:alternate" content="en_GB" />}
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={ogImageURL} />
+
+    <!-- hreflang -->
+    {hreflangEN && <link rel="alternate" hreflang="en"        href={`${SITE}${hreflangEN}`} />}
+    {hreflangRO && <link rel="alternate" hreflang="ro"        href={`${SITE}${hreflangRO}`} />}
+    {hreflangEN && hreflangRO && <link rel="alternate" hreflang="x-default" href={`${SITE}${hreflangEN}`} />}
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Afacad:wght@700&family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+
+    <!-- Structured Data: Organization + WebSite (every page) -->
+    <script type="application/ld+json" set:html={orgSchema} />
+
+    <!-- Page-specific head additions -->
+    <slot name="head" />
   </head>
   <body>
     <slot />

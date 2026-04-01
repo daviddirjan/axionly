@@ -43,10 +43,38 @@ const whoItIsFor = [
 ---
 
 <BaseLayout
-  title="Servicii — Axionly"
-  description="Două niveluri de audit AI cu domeniu fix: Evaluare de Pregătire AI (€2.500) și Evaluare de Pregătire AI + Analiză Aprofundată de Securitate (€3.200). Livrat în cinci zile lucrătoare."
+  title="Servicii și Prețuri Evaluare AI Readiness — Axionly"
+  description="Evaluări AI readiness cu domeniu fix de la €2.500. Audităm sistemele AI pentru conformitate cu Regulamentul UE privind IA, guvernanța datelor GDPR, vulnerabilități de securitate și riscuri legate de furnizori. Rezultate în 5 zile lucrătoare."
   htmlLang="ro"
+  canonicalPath="/ro/services"
+  hreflangEN="/services"
+  hreflangRO="/ro/services"
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Evaluare AI Readiness",
+    "provider": { "@id": "https://axionly.io/#organization" },
+    "description": "Un audit complet al sistemelor dumneavoastră AI care acoperă clasificarea conform Regulamentului UE privind IA, riscurile de guvernanță a datelor GDPR, vulnerabilitățile de securitate și expunerea față de furnizori. Livrat în cinci zile lucrătoare cu un raport scris și un plan de acțiune prioritizat.",
+    "areaServed": "Europe",
+    "serviceType": ["Evaluare AI Readiness", "Conformitate Regulament UE privind IA", "Consultanță Guvernanță AI", "Audit Securitate AI"],
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "Evaluare AI Readiness",
+        "price": "2500",
+        "priceCurrency": "EUR",
+        "description": "Clasificare conform Regulamentului UE privind IA, revizuire guvernanță date GDPR, analiză expunere furnizori și raport scris cu plan de acțiune prioritizat."
+      },
+      {
+        "@type": "Offer",
+        "name": "Evaluare AI Readiness + Analiză Aprofundată de Securitate",
+        "price": "3200",
+        "priceCurrency": "EUR",
+        "description": "Tot ce include evaluarea standard plus o revizuire tehnică completă de securitate care acoperă vulnerabilități, suprafețe de atac și amenințări specifice AI."
+      }
+    ]
+  })} />
   <Header />
   <main>
 

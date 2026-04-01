@@ -43,9 +43,37 @@ const whoItIsFor = [
 ---
 
 <BaseLayout
-  title="Services — Axionly"
-  description="Two fixed-scope AI audit tiers: AI Readiness Assessment (€2,500) and AI Readiness Assessment + Security Deep-Dive (€3,200). Delivered in five business days."
+  title="AI Readiness Assessment Services & Pricing — Axionly"
+  description="Fixed-scope AI readiness assessments from €2,500. We audit AI systems for EU AI Act compliance, GDPR data governance, security vulnerabilities, and vendor risks. Results in 5 business days."
+  canonicalPath="/services"
+  hreflangEN="/services"
+  hreflangRO="/ro/services"
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "AI Readiness Assessment",
+    "provider": { "@id": "https://axionly.io/#organization" },
+    "description": "A complete audit of your AI systems covering EU AI Act classification, GDPR data governance risks, security vulnerabilities, and vendor exposure. Delivered in five business days with a written report and prioritised action plan.",
+    "areaServed": "Europe",
+    "serviceType": ["AI Readiness Assessment", "EU AI Act Compliance", "AI Governance Consulting", "AI Security Assessment"],
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "AI Readiness Assessment",
+        "price": "2500",
+        "priceCurrency": "EUR",
+        "description": "EU AI Act classification, GDPR data governance review, vendor exposure analysis, and written report with prioritised action plan."
+      },
+      {
+        "@type": "Offer",
+        "name": "AI Readiness Assessment + Security Deep-Dive",
+        "price": "3200",
+        "priceCurrency": "EUR",
+        "description": "Everything in the standard assessment plus a full technical security review covering vulnerabilities, attack surfaces, and AI-specific threats."
+      }
+    ]
+  })} />
   <Header />
   <main>
 

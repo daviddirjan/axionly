@@ -91,9 +91,66 @@ const hiw = {
 ---
 
 <BaseLayout
-  title="Axionly — AI Governance & Security | EU AI Act Compliance"
-  description="Axionly helps organisations understand their AI systems, legal obligations under the EU AI Act, and security risks — delivered in five business days."
+  title="AI Readiness Assessment — Axionly | EU AI Act Compliance"
+  description="Axionly delivers AI readiness assessments in 5 business days — covering EU AI Act classification, AI security risks, and data governance for organisations in Europe. Fixed price from €2,500."
+  canonicalPath="/"
+  hreflangEN="/"
+  hreflangRO="/ro/"
 >
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is an AI readiness assessment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "An AI readiness assessment is a structured audit of your organisation's AI systems that evaluates EU AI Act classification, GDPR and data governance risks, security vulnerabilities, and vendor exposure. Axionly delivers a full written report with prioritised remediation actions in five business days."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What does EU AI Act compliance require?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "The EU AI Act (Regulation 2024/1689) requires organisations to classify their AI systems by risk level, maintain technical documentation, implement human oversight for high-risk systems, and register in the EU database where applicable. Non-compliance can result in fines of up to €35 million or 7% of global annual turnover."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How long does an AI readiness assessment take?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Axionly's AI readiness assessments are completed in five business days from the initial intake call. You receive a structured written report covering EU AI Act obligations, data governance risks, security findings, and a prioritised action plan."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How much does an AI readiness assessment cost?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Axionly offers two fixed-price tiers: the AI Readiness Assessment at €2,500, and the AI Readiness Assessment + Security Deep-Dive at €3,200. Both have a fixed scope and fixed price — no hourly billing, no scope creep."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which companies should get an AI readiness assessment?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Any organisation operating in Europe that uses AI tools — including third-party AI software, AI-powered product features, or custom AI models — should consider an AI readiness assessment. The EU AI Act applies from August 2026 for most high-risk systems. Early assessment reduces remediation cost and regulatory risk."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does Axionly work with companies outside Romania?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Axionly serves organisations across Europe. All assessments are conducted remotely and the written report is delivered in English (or Romanian on request)."
+        }
+      }
+    ]
+  })} />
   <Header />
   <main>
     <Hero          {...hero} />

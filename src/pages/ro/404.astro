@@ -1,0 +1,203 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header    from '../../components/Header.astro';
+import Footer    from '../../components/Footer.astro';
+---
+
+<BaseLayout
+  title="404 — Pagină Negăsită | Axionly"
+  description="Această pagină nu există. Reveniți la pagina principală Axionly pentru a afla despre evaluările noastre AI readiness."
+  htmlLang="ro"
+  canonicalPath="/ro/404"
+>
+  <Header />
+  <main>
+    <section id="not-found">
+      <div class="container inner">
+
+        <div class="content">
+          <span class="pill pill--dark">Eroare 404</span>
+          <h1>
+            Această pagină nu există.
+            <span class="h1-accent">Dar riscul dumneavoastră AI există.</span>
+          </h1>
+          <p class="sub">
+            Pagina pe care o căutați nu a putut fi găsită. Este posibil să fi fost mutată,
+            ștearsă sau adresa URL să fie incorectă.
+          </p>
+          <div class="actions">
+            <a href="/ro/" class="btn-primary">Înapoi la pagina principală</a>
+            <a href="/ro/contact" class="btn-ghost">Rezervați un apel de descoperire</a>
+          </div>
+        </div>
+
+        <div class="visual" aria-hidden="true">
+          <div class="visual-card">
+            <div class="card-top">
+              <span class="card-title">Raport Diagnostic</span>
+              <span class="card-tag">Scanare live</span>
+            </div>
+            <div class="card-domains">
+              <div class="domain domain--warn">
+                <span class="dot dot--warn"></span>
+                <span>Pagina solicitată</span>
+                <span class="domain-status">Negăsită</span>
+              </div>
+              <div class="domain domain--warn">
+                <span class="dot dot--warn"></span>
+                <span>Status HTTP</span>
+                <span class="domain-status">404</span>
+              </div>
+              <div class="domain domain--ok">
+                <span class="dot dot--ok"></span>
+                <span>Pagina principală</span>
+                <span class="domain-status">Disponibilă</span>
+              </div>
+              <div class="domain domain--ok">
+                <span class="dot dot--ok"></span>
+                <span>Evaluare risc AI</span>
+                <span class="domain-status">Disponibilă</span>
+              </div>
+            </div>
+            <div class="card-footer">
+              <span>Acțiune recomandată</span>
+              <span class="card-pages">Reveniți acasă →</span>
+            </div>
+          </div>
+          <div class="geo geo-1"></div>
+          <div class="geo geo-2"></div>
+          <div class="geo geo-3"></div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  #not-found {
+    background-color: var(--color-text);
+    min-height: calc(100vh - var(--header-height));
+    display: flex;
+    align-items: center;
+    padding-block: var(--space-section);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(2.5rem, 6vw, 5rem);
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+  }
+
+  .pill--dark {
+    background-color: rgba(53,147,255,0.15);
+    color: var(--color-accent);
+    border: 1px solid rgba(53,147,255,0.3);
+  }
+
+  h1 {
+    color: var(--color-white);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+  }
+
+  .h1-accent {
+    display: block;
+    color: var(--color-accent);
+    margin-top: 0.1em;
+  }
+
+  .sub {
+    color: rgba(255,255,255,0.7);
+    font-size: clamp(1rem, 1.3vw, 1.0625rem);
+    line-height: 1.75;
+    max-width: 460px;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.75rem;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    font-weight: 700;
+    font-size: 0.9375rem;
+    transition: background-color var(--transition), transform var(--transition);
+  }
+  .btn-primary:hover { background-color: var(--color-accent-dark); transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.75rem;
+    border-radius: var(--radius-pill);
+    background-color: transparent;
+    color: rgba(255,255,255,0.75);
+    font-weight: 600;
+    font-size: 0.9375rem;
+    border: 1.5px solid rgba(255,255,255,0.2);
+    transition: border-color var(--transition), color var(--transition), background-color var(--transition);
+  }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: var(--color-white); background-color: rgba(255,255,255,0.05); }
+
+  /* ── Visual card (mirrors Hero) ── */
+  .visual { position: relative; }
+
+  .visual-card {
+    background-color: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+    backdrop-filter: blur(8px);
+    position: relative;
+    z-index: 2;
+  }
+
+  .card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; }
+  .card-title { font-weight: 700; font-size: 0.9375rem; color: var(--color-white); }
+  .card-tag { font-size: 0.75rem; font-weight: 700; background-color: var(--color-accent); color: var(--color-white); padding: 0.2rem 0.65rem; border-radius: var(--radius-pill); }
+
+  .card-domains { display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 1.25rem; }
+  .domain { display: flex; align-items: center; gap: 0.6rem; font-size: 0.875rem; color: rgba(255,255,255,0.7); }
+  .domain-status { margin-left: auto; font-size: 0.8rem; font-weight: 600; }
+  .domain--ok  .domain-status { color: #6ee7b7; }
+  .domain--warn .domain-status { color: #fcd34d; }
+
+  .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .dot--ok   { background-color: #6ee7b7; }
+  .dot--warn { background-color: #fcd34d; }
+
+  .card-footer { display: flex; align-items: center; justify-content: space-between; font-size: 0.8125rem; color: rgba(255,255,255,0.4); border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1rem; }
+  .card-pages { font-weight: 600; color: rgba(255,255,255,0.5); }
+
+  .geo { position: absolute; border-radius: 50%; border: 1.5px solid rgba(53,147,255,0.35); pointer-events: none; z-index: 1; }
+  .geo-1 { width: 340px; height: 340px; top: -60px; right: -60px; background: radial-gradient(circle, rgba(53,147,255,0.07) 0%, transparent 70%); }
+  .geo-2 { width: 220px; height: 220px; top: 20px; right: 20px; border-style: dashed; border-color: rgba(53,147,255,0.28); }
+  .geo-3 { width: 500px; height: 500px; bottom: -180px; right: -120px; border-color: rgba(53,147,255,0.18); background: radial-gradient(circle, rgba(53,147,255,0.04) 0%, transparent 65%); }
+
+  @media (max-width: 768px) {
+    .inner { grid-template-columns: 1fr; }
+    .visual { display: none; }
+    h1 { font-size: clamp(1.75rem, 6vw, 2.5rem); }
+  }
+</style>

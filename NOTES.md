@@ -180,3 +180,49 @@ about what the regulation implies are the founder's to stand behind, not ours.
 indicative exposure" band with the biometric / HR / credit recommendations in priority order; the
 minimum-weight path returns "Expunere orientativă limitată" with the low-band fallbacks; the
 consent box is unticked and required; the privacy link is locale-correct; no console errors.
+
+---
+
+## 8. Summary and what remains
+
+### Delivered (3 commits, one per phase)
+
+| Phase | Commit | Outcome |
+|---|---|---|
+| 0 | — | Stack recon, this document. |
+| 1 | `d1da1e0` | Unevidenced trust claim removed; 3 dead LinkedIn links fixed; contact + newsletter forms actually submit; dev placeholder removed from production; `src/config/site.ts` created. |
+| 3 | `fc58a5e` | 450 € Readiness Check (EN + RO), four-rung pricing ladder, Governance Retainer tier, prices centralised, sitemap updated. |
+| 4 | `e978044` | 12-question Quick Check (EN + RO) with editable scoring config, immediate result, GDPR-consented email gate. |
+
+Phase 2 (`/about` with a real founder photo, name, background and LinkedIn) was already implemented
+before this work began; it was audited, not rebuilt.
+
+### Build state
+
+22 pages build clean. No broken internal links. All 20 content pages carry reciprocal `hreflang`
+(the two 404 pages do not — pre-existing, and they self-canonicalise, which should be fixed).
+
+### The one thing to do first
+
+**Set `FORM_ENDPOINT` in `src/config/site.ts`.** Until then, every form on the site — contact,
+newsletter, and the Quick Check PDF request — shows a notice and falls back to email. The lead
+capture built in Phase 4 produces nothing without it. Free key at web3forms.com, takes two minutes.
+
+Then work through blockers B2–B5 in section 4.
+
+### Deferred phases
+
+- **Phase 5 — content.** No blog infrastructure exists (no content collections, no MDX, no
+  articles). All five `/resources` article cards are `href: '#'` placeholders dated "March 2026",
+  which is now in the past. Either build the collection or remove the cards — a resources page
+  advertising five articles that do not exist is its own credibility problem.
+- **Phase 6 — SEO/technical.** Priority order: self-host Google Fonts (the site currently
+  contradicts its own cookie policy), PNG OG image, `@astrojs/sitemap`, `Person` JSON-LD on
+  `/about`, RO keyword pass, Lighthouse. No cookie banner is needed **as long as** no analytics or
+  third-party embeds are added — if any are, one becomes mandatory.
+- **Phase 7 — conversion.** Booking widget (B3), qualification fields on the contact form,
+  confirmation emails, privacy-respecting analytics (Plausible or Umami, not GA).
+
+### Repo hygiene, unrelated but worth doing
+
+`node_modules/` and `dist/` are committed — 9,000+ files. Add a `.gitignore` and untrack them.

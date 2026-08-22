@@ -1,0 +1,645 @@
+---
+/**
+ * Self-assessment questionnaire. All questions, weights, thresholds and
+ * recommendations come from src/config/quick-check.ts — nothing is defined here.
+ *
+ * Design decisions worth keeping:
+ *  - The result is shown in full **before** any email is requested. Gating the
+ *    basic result behind an email loses most users; the email gate is for the
+ *    extended PDF only.
+ *  - Scoring runs in the browser, so no answers leave the visitor's device unless
+ *    they submit the email form. That is also what the disclaimer promises.
+ *  - GDPR: the consent checkbox is unticked and `required`, and the privacy
+ *    policy is linked next to it.
+ */
+import { QUESTIONS, BANDS, RECOMMENDATIONS, RECOMMENDATION_COUNT } from '../../config/quick-check';
+import type { Lang } from '../../config/quick-check';
+import FormMeta from '../shared/FormMeta.astro';
+import { formAction, formsAreLive } from '../../config/site';
+
+interface Props {
+  lang: Lang;
+  /** Where a successful email submit returns the visitor. */
+  redirect: string;
+  /** Locale-correct links out of the result panel. */
+  privacyHref: string;
+  readinessHref: string;
+  contactHref: string;
+}
+
+const { lang, redirect, privacyHref, readinessHref, contactHref } = Astro.props;
+
+/** Client payload — Infinity does not survive JSON, so cap it. */
+const data = {
+  questions: QUESTIONS.map(q => ({
+    id: q.id,
+    label: q.label[lang],
+    help: q.help?.[lang] ?? null,
+    options: q.options.map(o => ({ label: o.label[lang], weight: o.weight, flags: o.flags ?? [] })),
+  })),
+  bands: BANDS.map(b => ({
+    key: b.key,
+    max: Number.isFinite(b.max) ? b.max : Number.MAX_SAFE_INTEGER,
+    tone: b.tone,
+    title: b.title[lang],
+    summary: b.summary[lang],
+    fallback: b.fallback.map(f => f[lang]),
+  })),
+  recommendations: RECOMMENDATIONS.map(r => ({ flag: r.flag, text: r.text[lang] })),
+  count: RECOMMENDATION_COUNT,
+};
+
+const t = {
+  en: {
+    progress: (a: number, b: number) => `Question ${a} of ${b}`,
+    back: '← Back',
+    restart: 'Start again',
+    resultEyebrow: 'Your indicative result',
+    scoreLabel: 'Indicative exposure',
+    recsHeading: 'Three things we would do first',
+    disclaimerHeading: 'Please read this',
+    disclaimer: 'This questionnaire produces an orientative indication only. It is not legal advice, it is not a classification of your AI systems under the EU AI Act, and it does not replace a proper assessment. Your answers are scored in your browser and are not sent to us unless you submit the form below.',
+    nextHeading: 'What you can do next',
+    nextBody: 'If this result is close to what you expected, the AI Act Readiness Check turns it into a documented view of your systems. If it is not what you expected, the free 20-minute call is the cheaper way to find out why.',
+    ctaPrimary: 'See the Readiness Check',
+    ctaGhost: 'Book a free 20-minute call',
+    gateHeading: 'Want the extended version?',
+    gateBody: 'We will send a longer PDF covering each of your answers, what it may imply, and a template you can use to start your AI system inventory.',
+    nameLabel: 'First name',
+    emailLabel: 'Work email address',
+    consent: 'I agree that Axionly may email me this document and occasional related updates. I have read the',
+    privacy: 'Privacy Policy',
+    consentTail: 'I can withdraw at any time.',
+    submit: 'Send me the PDF',
+    pdfNote: 'PDF not published yet — see NOTES.md blocker B5.',
+    answersHeading: 'Your answers',
+    noscript: 'This questionnaire needs JavaScript to calculate a result. The questions are all shown above — if you would rather not enable it, book a free 20-minute call and we will go through them with you.',
+  },
+  ro: {
+    progress: (a: number, b: number) => `Întrebarea ${a} din ${b}`,
+    back: '← Înapoi',
+    restart: 'Reluați',
+    resultEyebrow: 'Rezultatul dumneavoastră orientativ',
+    scoreLabel: 'Expunere orientativă',
+    recsHeading: 'Trei lucruri pe care le-am face primele',
+    disclaimerHeading: 'Vă rugăm să citiți',
+    disclaimer: 'Acest chestionar produce doar o indicație orientativă. Nu este consultanță juridică, nu reprezintă o încadrare a sistemelor dumneavoastră AI conform Regulamentului UE privind IA și nu înlocuiește o evaluare propriu-zisă. Răspunsurile sunt calculate în browserul dumneavoastră și nu ne sunt trimise decât dacă completați formularul de mai jos.',
+    nextHeading: 'Ce puteți face mai departe',
+    nextBody: 'Dacă rezultatul este apropiat de ce vă așteptați, AI Act Readiness Check îl transformă într-o imagine documentată a sistemelor dumneavoastră. Dacă nu este ce vă așteptați, apelul gratuit de 20 de minute este modalitatea mai ieftină de a afla de ce.',
+    ctaPrimary: 'Vedeți Readiness Check',
+    ctaGhost: 'Rezervați un apel gratuit de 20 de minute',
+    gateHeading: 'Doriți versiunea extinsă?',
+    gateBody: 'Vă trimitem un PDF mai amplu care acoperă fiecare răspuns al dumneavoastră, ce ar putea implica și un șablon cu care să începeți inventarul sistemelor AI.',
+    nameLabel: 'Prenume',
+    emailLabel: 'Adresă de email de serviciu',
+    consent: 'Sunt de acord ca Axionly să îmi trimită acest document și ocazional actualizări conexe. Am citit',
+    privacy: 'Politica de Confidențialitate',
+    consentTail: 'Îmi pot retrage acordul oricând.',
+    submit: 'Trimiteți-mi PDF-ul',
+    pdfNote: 'PDF-ul nu este încă publicat — vezi blocantul B5 din NOTES.md.',
+    answersHeading: 'Răspunsurile dumneavoastră',
+    noscript: 'Acest chestionar are nevoie de JavaScript pentru a calcula un rezultat. Toate întrebările sunt afișate mai sus — dacă preferați să nu îl activați, rezervați un apel gratuit de 20 de minute și le parcurgem împreună.',
+  },
+}[lang];
+
+const total = QUESTIONS.length;
+---
+
+<div class="qc" data-qc>
+  <script type="application/json" data-qc-data set:html={JSON.stringify(data)}></script>
+
+  <!-- ── Questions ────────────────────────────────────────────────────── -->
+  <div class="qc-quiz" data-qc-quiz>
+    <div class="qc-progress">
+      <p class="qc-progress-label" data-qc-progress>{t.progress(1, total)}</p>
+      <div class="qc-bar"><span class="qc-bar-fill" data-qc-bar style="width:0%"></span></div>
+    </div>
+
+    {data.questions.map((q, qi) => (
+      <fieldset class="qc-question" data-qc-question={qi}>
+        <legend>{q.label}</legend>
+        {q.help && <p class="qc-help">{q.help}</p>}
+        <div class="qc-options">
+          {q.options.map((o, oi) => (
+            <label class="qc-option">
+              <input type="radio" name={`q-${q.id}`} value={oi} data-qc-input={qi} />
+              <span>{o.label}</span>
+            </label>
+          ))}
+        </div>
+      </fieldset>
+    ))}
+
+    <button type="button" class="qc-back" data-qc-back hidden>{t.back}</button>
+
+    <noscript>
+      <p class="qc-noscript">{t.noscript}</p>
+    </noscript>
+  </div>
+
+  <!-- ── Result ───────────────────────────────────────────────────────── -->
+  <div class="qc-result" data-qc-result hidden tabindex="-1">
+    <p class="section-label">{t.resultEyebrow}</p>
+    <h2 data-qc-title></h2>
+
+    <div class="qc-meter">
+      <p class="qc-meter-label">{t.scoreLabel}</p>
+      <div class="qc-meter-track"><span class="qc-meter-fill" data-qc-meter></span></div>
+    </div>
+
+    <p class="qc-summary" data-qc-summary></p>
+
+    <h3 class="qc-recs-heading">{t.recsHeading}</h3>
+    <ol class="qc-recs" data-qc-recs></ol>
+
+    <div class="qc-disclaimer" role="note">
+      <p class="qc-disclaimer-heading">{t.disclaimerHeading}</p>
+      <p>{t.disclaimer}</p>
+    </div>
+
+    <div class="qc-next">
+      <h3>{t.nextHeading}</h3>
+      <p>{t.nextBody}</p>
+      <div class="qc-next-actions">
+        <a href={readinessHref} class="btn-primary">{t.ctaPrimary}</a>
+        <a href={contactHref} class="btn-ghost">{t.ctaGhost}</a>
+      </div>
+    </div>
+
+    <!-- Email gate — after the result, never before it -->
+    <div class="qc-gate">
+      <h3>{t.gateHeading}</h3>
+      <p>{t.gateBody}</p>
+      <form
+        class="qc-form"
+        method="POST"
+        action={formsAreLive ? formAction : undefined}
+        aria-label={t.gateHeading}
+      >
+        <FormMeta subject="Quick Check — extended PDF request" redirect={redirect} lang={lang} />
+        <input type="hidden" name="quick_check_result" data-qc-payload />
+        <div class="qc-fields">
+          <label class="qc-field">
+            <span>{t.nameLabel}</span>
+            <input type="text" name="firstName" autocomplete="given-name" required />
+          </label>
+          <label class="qc-field">
+            <span>{t.emailLabel}</span>
+            <input type="email" name="email" autocomplete="email" required />
+          </label>
+        </div>
+        <label class="qc-consent">
+          <input type="checkbox" name="consent" value="yes" required />
+          <span>
+            {t.consent} <a href={privacyHref}>{t.privacy}</a>. {t.consentTail}
+          </span>
+        </label>
+        <button type="submit" class="btn-primary">{t.submit}</button>
+      </form>
+    </div>
+
+    <button type="button" class="qc-restart" data-qc-restart>{t.restart}</button>
+  </div>
+</div>
+
+<script>
+  const root = document.querySelector('[data-qc]');
+  if (root) {
+    const data = JSON.parse(root.querySelector('[data-qc-data]').textContent);
+    const quiz     = root.querySelector('[data-qc-quiz]');
+    const result   = root.querySelector('[data-qc-result]');
+    const bar      = root.querySelector('[data-qc-bar]');
+    const progress = root.querySelector('[data-qc-progress]');
+    const backBtn  = root.querySelector('[data-qc-back]');
+    const cards    = [...root.querySelectorAll('[data-qc-question]')];
+    const total    = cards.length;
+    const progressTemplate = progress.textContent;
+
+    let current = 0;
+    const answers = new Array(total).fill(null);
+
+    const setProgress = () => {
+      // Rebuild "Question 1 of 12" from the server-rendered string, so the
+      // wording stays in whichever language the page was rendered in.
+      progress.textContent = progressTemplate.replace(/\d+/, String(current + 1));
+      bar.style.width = `${(current / total) * 100}%`;
+      backBtn.hidden = current === 0;
+    };
+
+    const show = (index) => {
+      cards.forEach((c, i) => { c.hidden = i !== index; });
+      current = index;
+      setProgress();
+      const first = cards[index].querySelector('input');
+      if (first) first.focus();
+    };
+
+    const score = () => {
+      let points = 0;
+      const flags = new Set();
+      answers.forEach((optionIndex, qi) => {
+        if (optionIndex === null) return;
+        const option = data.questions[qi].options[optionIndex];
+        points += option.weight;
+        option.flags.forEach(f => flags.add(f));
+      });
+      return { points, flags };
+    };
+
+    const maxPoints = data.questions.reduce(
+      (sum, q) => sum + Math.max(...q.options.map(o => o.weight)), 0,
+    );
+
+    const render = () => {
+      const { points, flags } = score();
+      const band = data.bands.find(b => points <= b.max) ?? data.bands[data.bands.length - 1];
+
+      root.querySelector('[data-qc-title]').textContent = band.title;
+      root.querySelector('[data-qc-summary]').textContent = band.summary;
+
+      const meter = root.querySelector('[data-qc-meter]');
+      meter.style.width = `${Math.min(100, Math.round((points / maxPoints) * 100))}%`;
+      meter.dataset.tone = band.tone;
+
+      const recs = data.recommendations.filter(r => flags.has(r.flag)).map(r => r.text);
+      for (const fallback of band.fallback) {
+        if (recs.length >= data.count) break;
+        if (!recs.includes(fallback)) recs.push(fallback);
+      }
+
+      const list = root.querySelector('[data-qc-recs]');
+      list.replaceChildren(...recs.slice(0, data.count).map(text => {
+        const li = document.createElement('li');
+        li.textContent = text;
+        return li;
+      }));
+
+      // Only sent if the visitor submits the email form.
+      root.querySelector('[data-qc-payload]').value = JSON.stringify({
+        band: band.key,
+        points,
+        maxPoints,
+        flags: [...flags],
+        answers: answers.map((optionIndex, qi) => ({
+          question: data.questions[qi].label,
+          answer: optionIndex === null ? null : data.questions[qi].options[optionIndex].label,
+        })),
+      });
+
+      quiz.hidden = true;
+      result.hidden = false;
+      result.focus();
+      result.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    root.querySelectorAll('[data-qc-input]').forEach(input => {
+      input.addEventListener('change', () => {
+        const qi = Number(input.dataset.qcInput);
+        answers[qi] = Number(input.value);
+        // Advance automatically — one click per question, no Next button.
+        setTimeout(() => (qi + 1 < total ? show(qi + 1) : render()), 180);
+      });
+    });
+
+    backBtn.addEventListener('click', () => show(Math.max(0, current - 1)));
+
+    root.querySelector('[data-qc-restart]').addEventListener('click', () => {
+      answers.fill(null);
+      root.querySelectorAll('[data-qc-input]').forEach(i => { i.checked = false; });
+      result.hidden = true;
+      quiz.hidden = false;
+      show(0);
+      quiz.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    // Progressive enhancement: the server renders every question visible, so a
+    // no-JS visitor still sees the full questionnaire. Collapse to one-at-a-time
+    // only once the script is running.
+    cards.forEach((c, i) => { c.hidden = i !== 0; });
+    setProgress();
+  }
+</script>
+
+<style>
+  .qc {
+    max-width: 720px;
+    margin-inline: auto;
+  }
+
+  /* ── Progress ─────────────────────────────────────────────────────────── */
+  .qc-progress { margin-bottom: 1.5rem; }
+
+  .qc-progress-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .qc-bar {
+    height: 4px;
+    background-color: var(--color-container);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+
+  .qc-bar-fill {
+    display: block;
+    height: 100%;
+    background-color: var(--color-accent);
+    transition: width var(--transition);
+  }
+
+  /* ── Questions ────────────────────────────────────────────────────────── */
+  .qc-question {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .qc-question + .qc-question { margin-top: 2.5rem; }
+
+  .qc-question legend {
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-weight: 700;
+    line-height: 1.35;
+    color: var(--color-text);
+    padding: 0;
+  }
+
+  .qc-help {
+    margin-top: 0.6rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .qc-options {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .qc-option {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    padding: 0.9rem 1.15rem;
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    line-height: 1.5;
+    transition: border-color var(--transition), background-color var(--transition);
+  }
+
+  .qc-option:hover { border-color: var(--color-accent); }
+
+  .qc-option:has(input:checked) {
+    border-color: var(--color-accent);
+    background-color: var(--color-bg);
+  }
+
+  .qc-option:has(input:focus-visible) {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+
+  .qc-option input {
+    flex-shrink: 0;
+    margin-top: 0.2em;
+    width: 1.1rem;
+    height: 1.1rem;
+    accent-color: var(--color-accent);
+  }
+
+  .qc-back,
+  .qc-restart {
+    margin-top: 1.5rem;
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+
+  .qc-back:hover,
+  .qc-restart:hover { color: var(--color-accent); }
+
+  .qc-noscript {
+    margin-top: 2rem;
+    padding: 1rem 1.15rem;
+    background-color: #fff6e5;
+    border: 1.5px solid #f0c56a;
+    border-radius: var(--radius-sm);
+    font-size: 0.9375rem;
+    line-height: 1.6;
+  }
+
+  /* ── Result ───────────────────────────────────────────────────────────── */
+  .qc-result:focus { outline: none; }
+
+  .qc-result h2 {
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    margin-top: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .qc-meter { margin-top: 1.5rem; }
+
+  .qc-meter-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 0.5rem;
+  }
+
+  .qc-meter-track {
+    height: 10px;
+    background-color: var(--color-container);
+    border-radius: var(--radius-pill);
+    overflow: hidden;
+  }
+
+  .qc-meter-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: var(--radius-pill);
+    background-color: var(--color-accent);
+    transition: width 600ms ease;
+  }
+
+  /* Tone is indicative only — deliberately not red/green "pass/fail" theatre. */
+  .qc-meter-fill[data-tone='low']      { background-color: #4b9f6e; }
+  .qc-meter-fill[data-tone='moderate'] { background-color: var(--color-accent); }
+  .qc-meter-fill[data-tone='elevated'] { background-color: #d99123; }
+  .qc-meter-fill[data-tone='high']     { background-color: #c0533f; }
+
+  .qc-summary {
+    margin-top: 1.5rem;
+    color: var(--color-text-muted);
+    line-height: 1.75;
+  }
+
+  .qc-recs-heading {
+    margin-top: 2.5rem;
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .qc-recs {
+    margin-top: 1rem;
+    padding-left: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .qc-recs li {
+    color: var(--color-text-muted);
+    line-height: 1.7;
+    padding-left: 0.35rem;
+  }
+
+  .qc-recs li::marker {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .qc-disclaimer {
+    margin-top: 2.5rem;
+    padding: 1.25rem 1.5rem;
+    background-color: var(--color-container);
+    border-radius: var(--radius-card);
+  }
+
+  .qc-disclaimer-heading {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-text);
+    margin-bottom: 0.5rem;
+  }
+
+  .qc-disclaimer p:last-child {
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .qc-next { margin-top: 2.5rem; }
+
+  .qc-next h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .qc-next p {
+    margin-top: 0.65rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .qc-next-actions {
+    margin-top: 1.25rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Email gate ───────────────────────────────────────────────────────── */
+  .qc-gate {
+    margin-top: 2.5rem;
+    padding: 1.75rem;
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+  }
+
+  .qc-gate h3 {
+    font-size: 1.125rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .qc-gate > p {
+    margin-top: 0.65rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+    line-height: 1.7;
+  }
+
+  .qc-form {
+    margin-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .qc-fields {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .qc-field { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  .qc-field > span {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  .qc-field input {
+    font: inherit;
+    padding: 0.7rem 0.9rem;
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-sm);
+    background-color: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  .qc-field input:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 1px;
+    border-color: var(--color-accent);
+  }
+
+  .qc-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+    cursor: pointer;
+  }
+
+  .qc-consent input {
+    flex-shrink: 0;
+    margin-top: 0.2em;
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--color-accent);
+  }
+
+  .qc-consent a { color: var(--color-accent); }
+
+  .qc-form button { align-self: flex-start; }
+
+  @media (max-width: 560px) {
+    .qc-fields { grid-template-columns: 1fr; }
+  }
+</style>

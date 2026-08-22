@@ -33,7 +33,7 @@ const t = {
 
 {!formsAreLive && (
   <p class="form-offline" role="status">
-    <strong>{t.offline}</strong> {t.mail}{' '}
+    <strong>{t.offline}</strong>{' '}{t.mail}{' '}
     <a href={`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`}>{EMAIL}</a>
   </p>
 )}

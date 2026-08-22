@@ -21,6 +21,15 @@
   </url>
 
   <url>
+    <loc>https://axionly.io/quick-check</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://axionly.io/quick-check"/>
+    <xhtml:link rel="alternate" hreflang="ro" href="https://axionly.io/ro/evaluare-rapida"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://axionly.io/quick-check"/>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
     <loc>https://axionly.io/readiness-check</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://axionly.io/readiness-check"/>
     <xhtml:link rel="alternate" hreflang="ro" href="https://axionly.io/ro/readiness-check"/>

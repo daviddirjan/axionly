@@ -95,6 +95,22 @@ const downloads = [
       subheading="Practical guidance on the EU AI Act, AI security, and what it means for organisations operating in Europe."
     />
 
+    <!-- Interactive tool -->
+    <section id="tool">
+      <div class="container tool-inner">
+        <div>
+          <p class="section-label">Free tool</p>
+          <h2>AI Act Quick Check</h2>
+          <p>
+            Twelve questions, about three minutes. You get an orientative read on where your
+            organisation sits and the three things we would address first. The result is shown
+            immediately — no email required.
+          </p>
+        </div>
+        <a href="/quick-check" class="btn-primary tool-cta">Take the Quick Check</a>
+      </div>
+    </section>
+
     <!-- Articles -->
     <section id="articles">
       <div class="container">
@@ -501,4 +517,32 @@ const downloads = [
   }
 
   .nl-consent a { color: var(--color-accent); }
+
+  /* ── Quick Check callout (Phase 4) ───────────────────────────────────── */
+  #tool { background-color: var(--color-container); }
+
+  .tool-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+
+  .tool-inner h2 {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    margin-top: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .tool-inner p {
+    margin-top: 0.75rem;
+    color: var(--color-text-muted);
+    max-width: 62ch;
+  }
+
+  .tool-cta { flex-shrink: 0; }
+
+  @media (max-width: 900px) {
+    .tool-inner { flex-direction: column; align-items: flex-start; }
+  }
 </style>

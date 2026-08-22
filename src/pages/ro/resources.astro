@@ -97,6 +97,21 @@ const downloads = [
     />
 
     <!-- Articole -->
+    <section id="tool">
+      <div class="container tool-inner">
+        <div>
+          <p class="section-label">Instrument gratuit</p>
+          <h2>Evaluare rapidă AI Act</h2>
+          <p>
+            Douăsprezece întrebări, aproximativ trei minute. Primiți o citire orientativă a
+            situației organizației dumneavoastră și primele trei lucruri de care ne-am ocupa.
+            Rezultatul apare imediat — fără email.
+          </p>
+        </div>
+        <a href="/ro/evaluare-rapida" class="btn-primary tool-cta">Începeți evaluarea</a>
+      </div>
+    </section>
+
     <section id="articles">
       <div class="container">
         <h2 class="section-heading">Articole</h2>
@@ -502,4 +517,32 @@ const downloads = [
   }
 
   .nl-consent a { color: var(--color-accent); }
+
+  /* ── Quick Check callout (Phase 4) ───────────────────────────────────── */
+  #tool { background-color: var(--color-container); }
+
+  .tool-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2.5rem;
+  }
+
+  .tool-inner h2 {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    margin-top: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .tool-inner p {
+    margin-top: 0.75rem;
+    color: var(--color-text-muted);
+    max-width: 62ch;
+  }
+
+  .tool-cta { flex-shrink: 0; }
+
+  @media (max-width: 900px) {
+    .tool-inner { flex-direction: column; align-items: flex-start; }
+  }
 </style>

@@ -141,3 +141,42 @@ alignment, not certification. Correct as written; do not "upgrade" this language
 
 Deliberately **not** added to the header navigation: it already carries six items, and the
 Readiness Check is reached from the hero, `/services`, and the ladder.
+
+### Phase 4 — Quick Check (lead-qualification tool)
+
+- `src/config/quick-check.ts` — **new.** The entire questionnaire: 12 questions, weights, four
+  score bands, and the flag-driven recommendation list. **This is the file to edit** to tune the
+  tool; nothing about the quiz is defined anywhere else. Weights are shared between EN and RO
+  (only the text is translated) so the two languages cannot drift apart in scoring.
+- `src/components/quick-check/QuickCheck.astro` — **new.** Renders the questionnaire and result.
+- `src/pages/quick-check.astro`, `src/pages/ro/evaluare-rapida.astro` — **new.**
+- `src/components/Header.astro` — the language switcher previously built the alternate URL by
+  adding or stripping `/ro`, which would have sent `/quick-check` to a non-existent
+  `/ro/quick-check`. It now consults a `SLUG_MAP`. **Add an entry there for any future route
+  whose Romanian slug differs from the English one.**
+- Cross-links added from `/resources` and `/readiness-check` in both languages; both slugs added
+  to `public/sitemap.xml` with correct cross-language alternates.
+
+**Design decisions, deliberate:**
+
+- The **full result is shown before any email is requested.** Gating the basic result behind an
+  email loses most visitors; the email gate is for the extended PDF only.
+- **Scoring runs entirely in the browser.** No answers leave the visitor's device unless they
+  submit the email form — which is what the on-page disclaimer promises, so it must stay true. If
+  anyone later adds analytics to this page, do not send answer data with it.
+- The GDPR consent checkbox is **unticked and required**, with the privacy policy linked beside it.
+- The result meter is deliberately not a red/green pass/fail. The tool indicates exposure; it does
+  not grade anyone.
+- Without JavaScript the page still renders all 12 questions plus a note explaining that a result
+  cannot be calculated — rather than showing one orphan question.
+
+**Legal wording:** every band summary and recommendation is phrased conditionally ("may fall
+within", "is likely to", "appears to"). The disclaimer states plainly that the output is
+orientative, is not legal advice, is not a classification under the EU AI Act, and does not
+replace an assessment. **Founder review required before publishing** — the substantive claims
+about what the regulation implies are the founder's to stand behind, not ours.
+
+**Verified in a browser** (dev server, both locales): the maximum-weight path returns the "High
+indicative exposure" band with the biometric / HR / credit recommendations in priority order; the
+minimum-weight path returns "Expunere orientativă limitată" with the low-band fallbacks; the
+consent box is unticked and required; the privacy link is locale-correct; no console errors.

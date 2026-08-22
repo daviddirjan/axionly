@@ -5,12 +5,26 @@ const lang  = isRo ? 'ro' : 'en';
 const pfx   = isRo ? '/ro' : '';           // URL prefix for nav links
 
 // ── Alternate URL for language switcher ──────────────────────────────────────
+// Most routes are the same slug under /ro, so stripping or adding the prefix is
+// enough. Routes whose Romanian slug differs are listed here; without an entry
+// the switcher would send visitors to a 404.
+const SLUG_MAP: Record<string, string> = {
+  '/quick-check': '/ro/evaluare-rapida',
+};
+const REVERSE_SLUG_MAP = Object.fromEntries(
+  Object.entries(SLUG_MAP).map(([en, ro]) => [ro, en]),
+);
+
+const bare = pathname.replace(/\/$/, '') || '/';
+
 const enUrl = isRo
-  ? (pathname === '/ro' || pathname === '/ro/' ? '/' : pathname.replace(/^\/ro/, ''))
-  : pathname;
+  ? (REVERSE_SLUG_MAP[bare]
+      ?? (bare === '/ro' ? '/' : bare.replace(/^\/ro/, '')))
+  : bare;
+
 const roUrl = isRo
-  ? pathname
-  : (pathname === '/' ? '/ro' : '/ro' + pathname);
+  ? bare
+  : (SLUG_MAP[bare] ?? (bare === '/' ? '/ro' : '/ro' + bare));
 
 // ── Translations ─────────────────────────────────────────────────────────────
 const t = {

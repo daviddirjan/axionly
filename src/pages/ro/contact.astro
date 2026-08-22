@@ -3,6 +3,8 @@ import BaseLayout  from '../../layouts/BaseLayout.astro';
 import Header      from '../../components/Header.astro';
 import Footer      from '../../components/Footer.astro';
 import PageHeader  from '../../components/shared/PageHeader.astro';
+import FormMeta    from '../../components/shared/FormMeta.astro';
+import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../../config/site';
 ---
 
 <BaseLayout
@@ -36,7 +38,7 @@ import PageHeader  from '../../components/shared/PageHeader.astro';
               Selectați un interval orar care vă convine. După rezervare veți primi un
               email de confirmare și o invitație de calendar cu un link pentru întâlnire.
             </p>
-            <div class="calendar-placeholder" aria-label="Widget de rezervare calendar">
+            <div class="calendar-placeholder">
               <div class="calendar-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                   <rect x="3" y="4" width="18" height="18" rx="2"/>
@@ -45,15 +47,17 @@ import PageHeader  from '../../components/shared/PageHeader.astro';
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
               </div>
-              <p class="cal-title">Widget Calendly / Cal.com</p>
+              <p class="cal-title">20 de minute, video sau telefon</p>
               <p class="cal-sub">
-                Înlocuiți acest bloc cu widget-ul dumneavoastră de rezervare integrat.
+                Spuneți-ne două-trei intervale orare care vă convin și vă trimitem o
+                invitație de calendar cu link-ul întâlnirii. Răspundem într-o zi lucrătoare.
               </p>
               <a
-                href="mailto:hello@axionly.io?subject=Solicitare Apel de Descoperire"
+                href={BOOKING_URL || `mailto:${EMAIL}?subject=${encodeURIComponent('Solicitare Apel de Descoperire')}`}
                 class="btn-primary cal-btn"
+                {...(BOOKING_URL ? { target: '_blank', rel: 'noopener' } : {})}
               >
-                Solicitați un apel prin email
+                {BOOKING_URL ? 'Alegeți un interval' : 'Solicitați un apel prin email'}
               </a>
             </div>
           </div>
@@ -69,7 +73,7 @@ import PageHeader  from '../../components/shared/PageHeader.astro';
                   </svg>
                   Email
                 </dt>
-                <dd><a href="mailto:hello@axionly.io">hello@axionly.io</a></dd>
+                <dd><a href={`mailto:${EMAIL}`}>{EMAIL}</a></dd>
               </div>
               <div class="detail-row">
                 <dt>
@@ -78,7 +82,7 @@ import PageHeader  from '../../components/shared/PageHeader.astro';
                   </svg>
                   LinkedIn
                 </dt>
-                <dd><a href="https://linkedin.com" target="_blank" rel="noopener">Conectați-vă pe LinkedIn</a></dd>
+                <dd><a href={LINKEDIN} target="_blank" rel="noopener">Conectați-vă pe LinkedIn</a></dd>
               </div>
               <div class="detail-row">
                 <dt>
@@ -116,7 +120,13 @@ import PageHeader  from '../../components/shared/PageHeader.astro';
             <p class="form-desc">
               Nu sunteți gata să rezervați un apel încă? Trimiteți-ne un mesaj și vă vom răspunde în maximum o zi lucrătoare.
             </p>
-            <form class="contact-form" method="POST" novalidate aria-label="Formular de contact">
+            <form
+              class="contact-form"
+              method="POST"
+              action={formsAreLive ? formAction : undefined}
+              aria-label="Formular de contact"
+            >
+              <FormMeta subject="Formular de contact website" redirect="/ro/contact/?sent=1" lang="ro" />
               <div class="field-row">
                 <div class="field">
                   <label for="fullName">Nume complet <span aria-hidden="true">*</span></label>
@@ -165,6 +175,10 @@ import PageHeader  from '../../components/shared/PageHeader.astro';
                 ></textarea>
               </div>
               <button type="submit" class="btn-primary submit-btn">Trimiteți Mesajul</button>
+              <p class="form-privacy">
+                Folosim datele dumneavoastră doar pentru a răspunde acestei solicitări. Vedeți
+                <a href="/ro/privacy">Politica de Confidențialitate</a>.
+              </p>
             </form>
           </div>
 
@@ -439,4 +453,12 @@ import PageHeader  from '../../components/shared/PageHeader.astro';
   @media (max-width: 540px) {
     .field-row { grid-template-columns: 1fr; }
   }
+
+  .form-privacy {
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  .form-privacy a { color: var(--color-accent); }
 </style>

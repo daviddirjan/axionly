@@ -3,6 +3,8 @@ import BaseLayout  from '../layouts/BaseLayout.astro';
 import Header      from '../components/Header.astro';
 import Footer      from '../components/Footer.astro';
 import PageHeader  from '../components/shared/PageHeader.astro';
+import FormMeta    from '../components/shared/FormMeta.astro';
+import { formAction, formsAreLive } from '../config/site';
 
 const articles = [
   {
@@ -166,7 +168,13 @@ const downloads = [
             best practice. No spam. Unsubscribe anytime.
           </p>
         </div>
-        <form class="nl-form" aria-label="Newsletter sign-up">
+        <form
+          class="nl-form"
+          method="POST"
+          action={formsAreLive ? formAction : undefined}
+          aria-label="Newsletter sign-up"
+        >
+          <FormMeta subject="Newsletter sign-up" redirect="/resources/?subscribed=1" />
           <div class="nl-fields">
             <input
               type="text"
@@ -186,10 +194,13 @@ const downloads = [
             />
           </div>
           <button type="submit" class="btn-primary">Subscribe</button>
-          <p class="nl-note">
-            By subscribing you agree to receive occasional emails from Axionly.
-            You can unsubscribe at any time.
-          </p>
+          <label class="nl-consent">
+            <input type="checkbox" name="consent" value="yes" required />
+            <span>
+              I agree to receive occasional emails from Axionly and I have read the
+              <a href="/privacy">Privacy Policy</a>. You can unsubscribe at any time.
+            </span>
+          </label>
         </form>
       </div>
     </section>
@@ -470,4 +481,24 @@ const downloads = [
     .download-card { flex-wrap: wrap; }
     .dl-btn { width: 100%; text-align: center; }
   }
+
+  .nl-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .nl-consent input {
+    flex-shrink: 0;
+    margin-top: 0.2em;
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--color-accent);
+  }
+
+  .nl-consent a { color: var(--color-accent); }
 </style>

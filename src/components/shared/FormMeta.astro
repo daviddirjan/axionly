@@ -1,0 +1,76 @@
+---
+/**
+ * Hidden plumbing shared by every form on the site, plus the "not wired up yet"
+ * notice. Drop this *inside* a page's own <form> element — it deliberately does
+ * not render the <form> itself, so each page keeps its own scoped form styles.
+ *
+ * The page is responsible for the form tag:
+ *   <form method="POST" action={formsAreLive ? formAction : undefined}>
+ *     <FormMeta subject="…" redirect="…" />
+ *
+ * Why third-party: the site is a static build with no adapter, so there is no
+ * server route to POST to. Until a key is set in src/config/site.ts the form has
+ * no target at all — hence the visible notice and the mailto fallback, rather
+ * than a form that looks fine and silently drops every lead.
+ */
+import { formsAreLive, FORM_ENDPOINT, FORM_PROVIDER, EMAIL } from '../../config/site';
+
+interface Props {
+  /** Subject line delivered to the inbox — identifies which form fired. */
+  subject: string;
+  /** Path the user is returned to after a successful submit. */
+  redirect: string;
+  lang?: 'en' | 'ro';
+}
+
+const { subject, redirect, lang = 'en' } = Astro.props;
+
+const t = {
+  en: { offline: 'This form is not connected yet.', mail: 'Please email us directly at' },
+  ro: { offline: 'Acest formular nu este încă conectat.', mail: 'Vă rugăm să ne scrieți direct la' },
+}[lang];
+---
+
+{!formsAreLive && (
+  <p class="form-offline" role="status">
+    <strong>{t.offline}</strong> {t.mail}{' '}
+    <a href={`mailto:${EMAIL}?subject=${encodeURIComponent(subject)}`}>{EMAIL}</a>
+  </p>
+)}
+
+{formsAreLive && FORM_PROVIDER === 'web3forms' && (
+  <input type="hidden" name="access_key" value={FORM_ENDPOINT} />
+)}
+<input type="hidden" name="subject" value={subject} />
+<input type="hidden" name="from_name" value="Axionly website" />
+<input type="hidden" name="redirect" value={redirect} />
+
+{/* Spam honeypot — bots fill it, humans never see it. */}
+<input
+  type="checkbox"
+  name="botcheck"
+  class="honeypot"
+  tabindex="-1"
+  autocomplete="off"
+  aria-hidden="true"
+/>
+
+<style>
+  .form-offline {
+    background-color: #fff6e5;
+    border: 1.5px solid #f0c56a;
+    border-radius: var(--radius-sm);
+    padding: 0.75rem 1rem;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--color-text);
+  }
+
+  .honeypot {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+  }
+</style>

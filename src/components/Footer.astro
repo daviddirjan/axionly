@@ -1,4 +1,6 @@
 ---
+import { LINKEDIN, EMAIL } from '../config/site';
+
 const { pathname } = Astro.url;
 const isRo = pathname.startsWith('/ro');
 const pfx  = isRo ? '/ro' : '';
@@ -68,8 +70,8 @@ const badges = ['EU AI Act', 'GDPR', 'ISO 42001'];
     <div class="col">
       <p class="col-heading">{t.contact}</p>
       <ul class="contact-list">
-        <li><a href="mailto:hello@axionly.io">hello@axionly.io</a></li>
-        <li><a href="https://linkedin.com" target="_blank" rel="noopener">{t.linkedin}</a></li>
+        <li><a href={`mailto:${EMAIL}`}>{EMAIL}</a></li>
+        <li><a href={LINKEDIN} target="_blank" rel="noopener">{t.linkedin}</a></li>
         <li>{t.location}</li>
       </ul>
     </div>

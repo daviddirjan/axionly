@@ -3,6 +3,8 @@ import BaseLayout  from '../../layouts/BaseLayout.astro';
 import Header      from '../../components/Header.astro';
 import Footer      from '../../components/Footer.astro';
 import PageHeader  from '../../components/shared/PageHeader.astro';
+import FormMeta    from '../../components/shared/FormMeta.astro';
+import { formAction, formsAreLive } from '../../config/site';
 
 const articles = [
   {
@@ -167,7 +169,13 @@ const downloads = [
             cele mai bune practici în guvernanță. Fără spam. Dezabonare oricând.
           </p>
         </div>
-        <form class="nl-form" aria-label="Înregistrare buletin informativ">
+        <form
+          class="nl-form"
+          method="POST"
+          action={formsAreLive ? formAction : undefined}
+          aria-label="Înregistrare buletin informativ"
+        >
+          <FormMeta subject="Abonare buletin informativ" redirect="/ro/resources/?subscribed=1" lang="ro" />
           <div class="nl-fields">
             <input
               type="text"
@@ -187,10 +195,13 @@ const downloads = [
             />
           </div>
           <button type="submit" class="btn-primary">Abonați-vă</button>
-          <p class="nl-note">
-            Prin abonare sunteți de acord să primiți ocazional emailuri din partea Axionly.
-            Vă puteți dezabona oricând.
-          </p>
+          <label class="nl-consent">
+            <input type="checkbox" name="consent" value="da" required />
+            <span>
+              Sunt de acord să primesc ocazional emailuri din partea Axionly și am citit
+              <a href="/ro/privacy">Politica de Confidențialitate</a>. Vă puteți dezabona oricând.
+            </span>
+          </label>
         </form>
       </div>
     </section>
@@ -471,4 +482,24 @@ const downloads = [
     .download-card { flex-wrap: wrap; }
     .dl-btn { width: 100%; text-align: center; }
   }
+
+  .nl-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+    cursor: pointer;
+  }
+
+  .nl-consent input {
+    flex-shrink: 0;
+    margin-top: 0.2em;
+    width: 1rem;
+    height: 1rem;
+    accent-color: var(--color-accent);
+  }
+
+  .nl-consent a { color: var(--color-accent); }
 </style>

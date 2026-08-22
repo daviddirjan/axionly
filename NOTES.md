@@ -101,3 +101,43 @@ that tooling becomes the platform specification later.
 ---
 
 ## 7. Change log
+
+### Phase 1 — credibility (commit `d1da1e0`)
+
+- `src/components/home/TrustSignals.astro` — gained an optional `statementHref` /
+  `statementLinkLabel` so the credential line can link to `/about#founder`.
+- `src/pages/index.astro`, `src/pages/ro/index.astro` — trust claim replaced.
+- `src/components/Footer.astro`, `src/pages/contact.astro`, `src/pages/ro/contact.astro` —
+  LinkedIn placeholder replaced; email now comes from config.
+- `src/config/site.ts` — **new.** Single source of truth.
+- `src/components/shared/FormMeta.astro` — **new.** Hidden form plumbing + offline notice.
+- `src/pages/resources.astro`, `src/pages/ro/resources.astro` — newsletter form wired, GDPR
+  consent checkbox added (unticked, `required`).
+
+**Address and email were not verified.** `hello@axionly.io` and "Oradea, BH, Romania, EU" are
+carried over from the existing site; nobody has confirmed the mailbox is monitored. Founder to
+check — plan item 1.3.
+
+Badge wording (plan item 1.3) was audited and left alone: "ISO 42001 — Aligned",
+"GDPR — Compliant practice", and "Aligned — certification in progress" on `/about` all describe
+alignment, not certification. Correct as written; do not "upgrade" this language.
+
+### Phase 3 — pricing ladder
+
+- `src/components/services/PricingLadder.astro` — **new.** Four-rung ladder shown above the
+  detailed tier cards.
+- `src/pages/readiness-check.astro`, `src/pages/ro/readiness-check.astro` — **new.** The
+  450 € entry product, with `Service` + `Offer` JSON-LD and the credit-back promise stated
+  explicitly on the page.
+- `src/pages/services.astro`, `src/pages/ro/services.astro` — ladder + entry-point callout +
+  Governance Retainer section; all prices routed through `src/config/site.ts`; the Readiness
+  Check added as a third `Offer` in the `Service` schema.
+- `src/components/services/ComparisonTable.astro` — prices come from config, which also fixes
+  the RO page showing `€2,500` in English number format.
+- `src/pages/index.astro`, `src/pages/ro/index.astro` — secondary hero CTA now points at the
+  Readiness Check instead of `/services`. The free discovery call remains primary.
+- `public/sitemap.xml` — added `/readiness-check`, plus the `/privacy` and `/cookies` entries
+  that were already missing before this work.
+
+Deliberately **not** added to the header navigation: it already carries six items, and the
+Readiness Check is reached from the hero, `/services`, and the ladder.

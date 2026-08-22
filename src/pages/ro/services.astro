@@ -5,7 +5,9 @@ import Footer           from '../../components/Footer.astro';
 import PageHeader       from '../../components/shared/PageHeader.astro';
 import ServiceTier      from '../../components/services/ServiceTier.astro';
 import ComparisonTable  from '../../components/services/ComparisonTable.astro';
+import PricingLadder    from '../../components/services/PricingLadder.astro';
 import CtaBanner        from '../../components/shared/CtaBanner.astro';
+import { PRICES, DELIVERY, CREDIT_WINDOW_DAYS } from '../../config/site';
 
 const standardIncludes = [
   'Inventar Sisteme AI — registru complet cu clasificare de risc conform Regulamentului UE privind IA',
@@ -23,6 +25,44 @@ const deepDiveIncludes = [
   'Revizuire API și Control Acces — configurarea API-urilor AI, drepturile de acces și gestionarea cheilor',
   'Evaluare Risc Scurgeri de Date — dacă datele sensibile transmise instrumentelor AI pot fi expuse',
   'Revizuire Răspuns la Incidente AI — dacă organizația poate detecta și răspunde la incidente de securitate AI',
+];
+
+const ladder = [
+  {
+    step: 'Pasul 1', name: 'AI Act Readiness Check',
+    price: PRICES.readiness.ro, duration: DELIVERY.readiness.ro,
+    role: 'Punctul de plecare. Aflați dacă și cum vi se aplică regulamentul.',
+    href: '/ro/readiness-check',
+  },
+  {
+    step: 'Pasul 2', name: 'Evaluare de Risc AI',
+    price: PRICES.assessment.ro, duration: DELIVERY.assessment.ro,
+    role: 'Angajamentul complet. Obligații cartografiate, lacune identificate, acțiuni prioritizate.',
+    href: '#service-tiers', current: true,
+  },
+  {
+    step: 'Pasul 2+', name: 'Evaluare + Analiză Aprofundată de Securitate',
+    price: PRICES.deepDive.ro, duration: DELIVERY.assessment.ro,
+    role: 'Evaluarea completă plus o revizuire tehnică de securitate a sistemelor AI.',
+    href: '#service-tiers',
+  },
+  {
+    step: 'Pasul 3', name: 'Abonament de Guvernanță',
+    price: 'La cerere', duration: 'Continuu, lunar',
+    role: 'Monitorizare continuă, actualizări de reglementare și sprijin la audit.',
+    href: '#retainer',
+  },
+];
+
+// NOTĂ (revizuire fondator): abonamentul nu are încă un preț lunar publicat — vezi
+// blocantul B2 din NOTES.md. Este descris aici deliberat, înainte de a avea clienți
+// pe el, pentru că este nivelul care produce venit recurent.
+const retainerIncludes = [
+  'Revizuire trimestrială de guvernanță — progresul față de planul de acțiune, urmărit și documentat.',
+  'Monitorizare reglementară — vă spunem noi când se schimbă ceva care vă afectează sistemele, în loc să aflați din presă.',
+  'Reevaluarea sistemelor AI noi pe măsură ce le adoptați, ca inventarul să nu rămână în urmă.',
+  'Persoană de contact desemnată pentru întrebări de guvernanță AI între revizuiri.',
+  'Sprijin în timpul auditurilor, al revizuirilor de securitate cerute de clienți și al solicitărilor de due diligence.',
 ];
 
 const addOns = [
@@ -44,7 +84,7 @@ const whoItIsFor = [
 
 <BaseLayout
   title="Servicii și Prețuri Evaluare AI Readiness — Axionly"
-  description="Evaluări AI readiness cu domeniu fix de la €2.500. Audităm sistemele AI pentru conformitate cu Regulamentul UE privind IA, guvernanța datelor GDPR, vulnerabilități de securitate și riscuri legate de furnizori. Rezultate în 5 zile lucrătoare."
+  description={`Servicii de guvernanță AI cu domeniu fix, de la ${PRICES.readiness.ro}: un AI Act Readiness Check de ${PRICES.readiness.ro}, o evaluare completă de risc AI de ${PRICES.assessment.ro} pentru conformitate cu Regulamentul UE privind IA, guvernanța datelor GDPR, securitate și risc de furnizori, plus un abonament de guvernanță continuă.`}
   htmlLang="ro"
   canonicalPath="/ro/services"
   hreflangEN="/services"
@@ -61,15 +101,22 @@ const whoItIsFor = [
     "offers": [
       {
         "@type": "Offer",
+        "name": "AI Act Readiness Check",
+        "price": PRICES.readiness.raw,
+        "priceCurrency": "EUR",
+        "description": `Serviciu de intrare: o sesiune de 90 de minute plus un document de cinci pagini cu inventarul sistemelor AI, încadrarea preliminară pe categoriile de risc din Regulamentul UE privind IA și primele trei acțiuni recomandate. Costul se scade din evaluarea completă în ${CREDIT_WINDOW_DAYS} de zile.`
+      },
+      {
+        "@type": "Offer",
         "name": "Evaluare AI Readiness",
-        "price": "2500",
+        "price": PRICES.assessment.raw,
         "priceCurrency": "EUR",
         "description": "Clasificare conform Regulamentului UE privind IA, revizuire guvernanță date GDPR, analiză expunere furnizori și raport scris cu plan de acțiune prioritizat."
       },
       {
         "@type": "Offer",
         "name": "Evaluare AI Readiness + Analiză Aprofundată de Securitate",
-        "price": "3200",
+        "price": PRICES.deepDive.raw,
         "priceCurrency": "EUR",
         "description": "Tot ce include evaluarea standard plus o revizuire tehnică completă de securitate care acoperă vulnerabilități, suprafețe de atac și amenințări specifice AI."
       }
@@ -81,16 +128,44 @@ const whoItIsFor = [
     <PageHeader
       eyebrow="Servicii"
       heading="Serviciile Noastre"
-      subheading="Două niveluri de servicii. Domeniu fix. Preț fix. Fără surprize."
+      subheading="Trei niveluri, de la un punct de plecare de 90 de minute până la sprijin continuu de guvernanță. Domeniu fix, preț fix, fără surprize."
     />
+
+    <section id="ladder">
+      <div class="container">
+        <h2 class="section-heading">De unde începeți</h2>
+        <p class="section-intro">
+          Nu trebuie să începeți cu o evaluare completă. Majoritatea organizațiilor încep cu
+          Readiness Check, iar costul se scade dacă merg mai departe.
+        </p>
+        <PricingLadder rungs={ladder} ariaLabel="Niveluri de servicii și prețuri" />
+      </div>
+    </section>
+
+    <section id="entry-point">
+      <div class="container entry-inner">
+        <div>
+          <p class="section-label">Pasul unu</p>
+          <h2>Nu sunteți încă pregătit pentru o evaluare completă?</h2>
+          <p>
+            AI Act Readiness Check costă {PRICES.readiness.ro}: o sesiune de 90 de minute și un
+            document de cinci pagini cu inventarul sistemelor AI, o încadrare preliminară pe
+            categorii de risc și primele trei acțiuni de făcut. Livrat în
+            {' '}{DELIVERY.readiness.ro}. Dacă treceți la o evaluare completă în
+            {' '}{CREDIT_WINDOW_DAYS} de zile, costul se scade integral.
+          </p>
+        </div>
+        <a href="/ro/readiness-check" class="btn-primary entry-cta">Vedeți Readiness Check</a>
+      </div>
+    </section>
 
     <section id="service-tiers">
       <div class="container tiers-grid">
         <ServiceTier
           name="Evaluare de Pregătire AI"
           description="Un audit complet al sistemelor dumneavoastră AI, obligațiilor din Regulamentul UE privind IA, riscurilor de guvernanță a datelor și expunerii față de furnizori — livrat în cinci zile lucrătoare."
-          price="€2.500"
-          delivery="5 zile lucrătoare de la apelul de delimitare"
+          price={PRICES.assessment.ro}
+          delivery={`${DELIVERY.assessment.ro} de la apelul de delimitare`}
           deliveryLabel="Livrat în"
           includes={standardIncludes}
           ctaLabel="Rezervați un Apel de Descoperire Gratuit"
@@ -99,8 +174,8 @@ const whoItIsFor = [
         <ServiceTier
           name="Evaluare de Pregătire AI + Analiză Aprofundată de Securitate"
           description="Tot ce include evaluarea standard, plus o revizuire tehnică de securitate a sistemelor dumneavoastră AI — acoperind vulnerabilități, suprafețe de atac și amenințări specifice AI."
-          price="€3.200"
-          delivery="5 zile lucrătoare de la apelul de delimitare"
+          price={PRICES.deepDive.ro}
+          delivery={`${DELIVERY.assessment.ro} de la apelul de delimitare`}
           deliveryLabel="Livrat în"
           includes={deepDiveIncludes}
           highlight={true}
@@ -115,6 +190,35 @@ const whoItIsFor = [
       <div class="container">
         <h2 class="section-heading">Ce este inclus în fiecare nivel</h2>
         <ComparisonTable lang="ro" />
+      </div>
+    </section>
+
+    <section id="retainer">
+      <div class="container">
+        <p class="section-label">Pasul trei</p>
+        <h2 class="section-heading">Abonament de Guvernanță</h2>
+        <p class="section-intro">
+          O evaluare vă spune unde vă aflați într-o anumită zi. Reglementarea se mișcă, la fel și
+          sistemele dumneavoastră AI — echipele adoptă instrumente noi, furnizorii își schimbă
+          termenii, apar ghiduri noi. Abonamentul menține imaginea actuală, în loc să o lase să
+          expire.
+        </p>
+        <div class="retainer-card">
+          <ul class="retainer-list">
+            {retainerIncludes.map(item => (
+              <li><span class="check" aria-hidden="true">✓</span><span>{item}</span></li>
+            ))}
+          </ul>
+          <div class="retainer-aside">
+            <p class="retainer-price">Preț la cerere</p>
+            <p class="retainer-note">
+              Dimensionat în funcție de amploarea sistemelor dumneavoastră AI și facturat lunar.
+              Disponibil după o evaluare, astfel încât domeniul să se bazeze pe constatări, nu pe
+              presupuneri.
+            </p>
+            <a href="/ro/contact" class="btn-ghost">Întrebați despre abonament</a>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -177,4 +281,93 @@ const whoItIsFor = [
   .who-list li { display: flex; align-items: flex-start; gap: 0.9rem; font-size: 1rem; color: var(--color-text-muted); line-height: 1.6; }
   .who-check { color: var(--color-accent); font-weight: 700; flex-shrink: 0; margin-top: 0.1em; }
   @media (max-width: 768px) { .tiers-grid { grid-template-columns: 1fr; } .addons-grid { grid-template-columns: 1fr; } }
+
+  /* ── Pricing ladder + entry point (Phase 3) ─────────────────────────── */
+  #ladder { background-color: var(--color-bg); }
+
+  #entry-point { background-color: var(--color-container); }
+
+  .entry-inner {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    justify-content: space-between;
+  }
+
+  .entry-inner h2 {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    margin-top: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .entry-inner p {
+    margin-top: 0.75rem;
+    color: var(--color-text-muted);
+    max-width: 62ch;
+  }
+
+  .entry-cta { flex-shrink: 0; }
+
+  /* ── Retainer ────────────────────────────────────────────────────────── */
+  .retainer-card {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2.5rem;
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 2rem;
+  }
+
+  .retainer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .retainer-list li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    font-size: 0.9375rem;
+  }
+
+  .retainer-list .check {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.15em;
+  }
+
+  .retainer-aside {
+    border-left: 1px solid var(--color-container);
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .retainer-price {
+    font-family: var(--font-logo);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  .retainer-note {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .entry-inner { flex-direction: column; align-items: flex-start; }
+    .retainer-card { grid-template-columns: 1fr; gap: 1.75rem; }
+    .retainer-aside { border-left: none; border-top: 1px solid var(--color-container); padding-left: 0; padding-top: 1.75rem; }
+  }
 </style>

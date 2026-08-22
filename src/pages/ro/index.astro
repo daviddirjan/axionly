@@ -9,6 +9,7 @@ import Solution            from '../../components/home/Solution.astro';
 import TrustSignals        from '../../components/home/TrustSignals.astro';
 import HowItWorksPreview   from '../../components/home/HowItWorksPreview.astro';
 import CtaBanner           from '../../components/shared/CtaBanner.astro';
+import { PRICES }          from '../../config/site';
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
 const hero = {
@@ -17,9 +18,11 @@ const hero = {
   h1Accent: 'Știți ce obligații legale implică asta?',
   sub:      'Regulamentul UE privind IA este în vigoare. Axionly ajută organizațiile să înțeleagă sistemele lor AI, obligațiile legale și riscurile de securitate — înainte ca un regulator s-o facă.',
   cta1:     'Rezervați un Apel de Descoperire Gratuit',
-  cta2:     'Vedeți ce acoperă un audit',
+  // Faza 3.3 — CTA-ul secundar trimite către oferta de intrare, nu către evaluarea
+  // completă. Apelul gratuit rămâne acțiunea principală.
+  cta2:     `Începeți cu un Readiness Check de ${PRICES.readiness.ro}`,
   cta1Href: '/ro/contact',
-  cta2Href: '/ro/services',
+  cta2Href: '/ro/readiness-check',
   card: {
     title:  'Evaluare Risc AI',
     tag:    '5 zile lucrătoare',

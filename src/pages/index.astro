@@ -9,6 +9,7 @@ import Solution            from '../components/home/Solution.astro';
 import TrustSignals        from '../components/home/TrustSignals.astro';
 import HowItWorksPreview   from '../components/home/HowItWorksPreview.astro';
 import CtaBanner           from '../components/shared/CtaBanner.astro';
+import { PRICES }           from '../config/site';
 
 // ── Hero content ─────────────────────────────────────────────────────────────
 const hero = {
@@ -17,9 +18,11 @@ const hero = {
   h1Accent: 'Do you know what that legally means?',
   sub:      'The EU AI Act is in force. Axionly helps organisations understand their AI systems, their legal obligations, and their security risks — before a regulator does.',
   cta1:     'Book a Free Discovery Call',
-  cta2:     'See what an assessment covers',
+  // Phase 3.3 — secondary CTA points at the entry-level offer, not the full
+  // assessment. The free call stays the primary action.
+  cta2:     `Start with a ${PRICES.readiness.en} Readiness Check`,
   cta1Href: '/contact',
-  cta2Href: '/services',
+  cta2Href: '/readiness-check',
   card: {
     title:  'AI Risk Assessment',
     tag:    '5 business days',

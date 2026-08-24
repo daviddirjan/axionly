@@ -9,102 +9,103 @@ import Solution            from '../components/home/Solution.astro';
 import TrustSignals        from '../components/home/TrustSignals.astro';
 import HowItWorksPreview   from '../components/home/HowItWorksPreview.astro';
 import CtaBanner           from '../components/shared/CtaBanner.astro';
-import { PRICES }           from '../config/site';
+import { PRICES }          from '../config/site';
 
-// ── Hero content ─────────────────────────────────────────────────────────────
+// ── Hero ──────────────────────────────────────────────────────────────────────
 const hero = {
-  pill:     'EU AI Act · GDPR · AI Security',
-  h1:       'Your company is using AI.',
-  h1Accent: 'Do you know what that legally means?',
-  sub:      'The EU AI Act is in force. Axionly helps organisations understand their AI systems, their legal obligations, and their security risks — before a regulator does.',
-  cta1:     'Book a Free Discovery Call',
-  // Phase 3.3 — secondary CTA points at the entry-level offer, not the full
-  // assessment. The free call stays the primary action.
-  cta2:     `Start with a ${PRICES.readiness.en} Readiness Check`,
+  pill:     'Regulament UE privind IA · GDPR · Securitate AI',
+  h1:       'Compania dumneavoastră folosește inteligență artificială.',
+  h1Accent: 'Știți ce obligații legale implică asta?',
+  sub:      'Regulamentul UE privind IA este în vigoare. Axionly ajută organizațiile să înțeleagă sistemele lor AI, obligațiile legale și riscurile de securitate — înainte ca un regulator s-o facă.',
+  cta1:     'Rezervați un Apel de Descoperire Gratuit',
+  // Faza 3.3 — CTA-ul secundar trimite către oferta de intrare, nu către evaluarea
+  // completă. Apelul gratuit rămâne acțiunea principală.
+  cta2:     `Începeți cu un Readiness Check de ${PRICES.readiness.ro}`,
   cta1Href: '/contact',
   cta2Href: '/readiness-check',
   card: {
-    title:  'AI Risk Assessment',
-    tag:    '5 business days',
+    title:  'Evaluare Risc AI',
+    tag:    '5 zile lucrătoare',
     domains: [
-      { label: 'EU AI Act classification', status: 'Mapped',      type: 'ok'   as const },
-      { label: 'GDPR data processing',     status: 'Reviewed',    type: 'ok'   as const },
-      { label: 'Prompt injection risk',    status: '2 findings',  type: 'warn' as const },
-      { label: 'Vendor data exposure',     status: '1 finding',   type: 'warn' as const },
-      { label: 'Internal AI policy',       status: 'Assessed',    type: 'ok'   as const },
+      { label: 'Clasificare Regulament UE privind IA', status: 'Cartografiat',  type: 'ok'   as const },
+      { label: 'Procesare date GDPR',                  status: 'Revizuit',      type: 'ok'   as const },
+      { label: 'Risc injecție de prompt',              status: '2 constatări',  type: 'warn' as const },
+      { label: 'Expunere date furnizori',              status: '1 constatare',  type: 'warn' as const },
+      { label: 'Politică internă AI',                  status: 'Evaluat',       type: 'ok'   as const },
     ],
-    footer: 'Prioritised action plan included',
-    pages:  '28 pages',
+    footer: 'Plan de acțiune prioritizat inclus',
+    pages:  '28 pagini',
   },
 };
 
 // ── Urgency bar ───────────────────────────────────────────────────────────────
 const urgency = {
-  label:    'Regulatory update',
-  text:     "The EU AI Act's high-risk provisions are already enforceable. Organisations using AI in HR, credit, healthcare, or customer-facing systems may already be in breach.",
-  linkText: 'Does your organisation know which category it falls into?',
+  label:    'Actualizare reglementară',
+  text:     'Prevederile cu risc ridicat ale Regulamentului UE privind IA sunt deja aplicabile. Organizațiile care utilizează IA în HR, creditare, sănătate sau sisteme orientate către clienți pot fi deja în neconformitate.',
+  linkText: 'Știe organizația dumneavoastră în ce categorie se încadrează?',
   linkHref: '/services',
 };
 
 // ── Problem ───────────────────────────────────────────────────────────────────
 const problem = {
-  eyebrow: 'The problem',
-  heading: 'Most companies are using AI.\nVery few are managing it.',
+  eyebrow: 'Problema',
+  heading: 'Majoritatea companiilor folosesc AI.\nFoarte puține îl gestionează.',
   cards: [
-    { title: 'No inventory',   body: 'Most organisations do not have a complete list of the AI tools in use across their teams. Shadow AI is widespread — tools adopted without IT or legal review.' },
-    { title: 'No compliance',  body: 'The EU AI Act creates specific legal obligations depending on the type of AI system in use. Most organisations have not assessed their exposure or identified which systems are in scope.' },
-    { title: 'No security',    body: 'AI systems introduce new attack surfaces: prompt injection, data leakage through third-party APIs, and uncontrolled model access. Standard IT security reviews do not cover these.' },
+    { title: 'Fără inventar',    body: 'Majoritatea organizațiilor nu au o listă completă a instrumentelor AI utilizate în echipele lor. Shadow AI este răspândit — instrumente adoptate fără nicio revizuire IT sau juridică.' },
+    { title: 'Fără conformitate', body: 'Regulamentul UE privind IA creează obligații legale specifice în funcție de tipul de sistem AI utilizat. Majoritatea organizațiilor nu și-au evaluat expunerea sau nu au identificat care sisteme intră în domeniu.' },
+    { title: 'Fără securitate',  body: 'Sistemele AI introduc noi suprafețe de atac: injecție de prompt, scurgeri de date prin API-uri terțe și acces necontrolat la modele. Auditurile standard de securitate IT nu acoperă aceste riscuri.' },
   ],
 };
 
 // ── Solution ──────────────────────────────────────────────────────────────────
 const solution = {
-  eyebrow: 'The solution',
-  heading: 'Axionly gives you the full picture.',
-  body1:   'We are an AI governance and security consultancy. We assess your AI systems against your legal obligations under the EU AI Act and GDPR, surface your real security risks, and hand you a clear, prioritised action plan.',
-  body2:   'Fixed scope. Fixed price. Delivered in five business days.',
-  cta:     'See our services',
+  eyebrow: 'Soluția',
+  heading: 'Axionly vă oferă imaginea completă.',
+  body1:   'Suntem o firmă de consultanță specializată în guvernanță AI și securitate. Evaluăm sistemele dumneavoastră AI față de obligațiile legale din Regulamentul UE privind IA și GDPR, identificăm riscurile reale de securitate și vă oferim un plan de acțiune clar și prioritizat.',
+  body2:   'Domeniu fix. Preț fix. Livrat în cinci zile lucrătoare.',
+  cta:     'Vedeți serviciile noastre',
   ctaHref: '/services',
   pillars: [
-    { title: 'Legal clarity',       body: 'Know exactly which of your AI systems fall under the EU AI Act — and what you must do about each one.' },
-    { title: 'Security depth',      body: 'AI-specific vulnerabilities assessed by a team with a cybersecurity background — not just governance theory.' },
-    { title: 'Actionable output',   body: 'No abstract reports. Every finding is tied to a specific owner, a concrete action, and a recommended deadline.' },
+    { title: 'Claritate juridică',      body: 'Știți exact care dintre sistemele dumneavoastră AI intră sub incidența Regulamentului UE privind IA — și ce trebuie să faceți pentru fiecare.' },
+    { title: 'Profunzime în securitate', body: 'Vulnerabilități specifice AI evaluate de o echipă cu expertiză în securitate cibernetică — nu doar teoria guvernanței.' },
+    { title: 'Rezultate acționabile',   body: 'Niciun raport abstract. Fiecare constatare este legată de un responsabil specific, o acțiune concretă și un termen recomandat.' },
   ],
 };
 
 // ── Trust signals ─────────────────────────────────────────────────────────────
-// Phase 1.1 — the previous line here read "Trusted by organisations in Romania and
-// across the European Union", which we cannot evidence. Replaced with credentials
-// that are verifiable on /about. Do not reintroduce a client claim without named,
-// written-permission references.
+// Faza 1.1 — afirmația anterioară („De încredere pentru organizații din România și
+// din Uniunea Europeană") nu poate fi dovedită. Înlocuită cu credențiale verificabile
+// pe /about. A nu se reintroduce o afirmație despre clienți fără referințe
+// nominale și acord scris.
 const trust = {
-  label:          'Assessment aligned with',
-  statement:      'Led by a practitioner with a cybersecurity background and certified training in AI governance.',
-  statementHref:  '/about#founder',
-  statementLabel: 'Meet the founder',
+  label:              'Evaluare aliniată cu',
+  statement:          'Condus de un specialist cu experiență în securitate cibernetică și formare certificată în guvernanța AI.',
+  statementHref:      '/about#founder',
+  statementLinkLabel: 'Despre fondator',
 };
 
 // ── How It Works preview ──────────────────────────────────────────────────────
 const hiw = {
-  eyebrow: 'How it works',
-  heading: 'Five days. One clear answer.',
+  eyebrow: 'Cum funcționează',
+  heading: 'Cinci zile. Un răspuns clar.',
   steps: [
-    { number: '01', name: 'Scoping Call',      time: 'Day 0 · Free',  description: 'A 20-minute conversation to confirm scope and whether an assessment is the right fit.' },
-    { number: '02', name: 'Review',            time: 'Day 1',         description: 'We analyse your AI systems, vendor contracts, and any existing governance policies.' },
-    { number: '03', name: 'Assessment',        time: 'Days 2–4',      description: 'We map your legal obligations and security posture — independently, with minimal time from your team.' },
-    { number: '04', name: 'Report & Briefing', time: 'Day 5',         description: 'Full written report delivered, followed by a 30-minute executive walkthrough call.' },
+    { number: '01', name: 'Apel de Delimitare', time: 'Ziua 0 · Gratuit', description: 'O conversație de 20 de minute pentru a confirma domeniul și dacă un audit este potrivit.' },
+    { number: '02', name: 'Revizuire',          time: 'Ziua 1',           description: 'Analizăm sistemele dumneavoastră AI, contractele cu furnizorii și orice politici de guvernanță existente.' },
+    { number: '03', name: 'Evaluare',           time: 'Zilele 2–4',       description: 'Cartografiem obligațiile legale și postura de securitate — în mod independent, cu timp minim din partea echipei dumneavoastră.' },
+    { number: '04', name: 'Raport și Prezentare', time: 'Ziua 5',         description: 'Raport complet livrat, urmat de o prezentare executivă de 30 de minute.' },
   ],
-  cta:     'Learn more about the process →',
+  cta:     'Aflați mai multe despre proces →',
   ctaHref: '/how-it-works',
 };
 ---
 
 <BaseLayout
-  title="AI Readiness Assessment — Axionly | EU AI Act Compliance"
-  description="Axionly delivers AI readiness assessments in 5 business days — covering EU AI Act classification, AI security risks, and data governance for organisations in Europe. Fixed price from €2,500."
+  title="Evaluare AI Readiness — Axionly | Conformitate Regulament UE privind IA"
+  description="Axionly livrează evaluări AI readiness în 5 zile lucrătoare — acoperind clasificarea conform Regulamentului UE privind IA, riscurile de securitate AI și guvernanța datelor pentru organizații din Europa. Preț fix de la €2.500."
+  htmlLang="ro"
   canonicalPath="/"
-  hreflangEN="/"
-  hreflangRO="/ro/"
+  hreflangEN="/en/"
+  hreflangRO="/"
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
@@ -112,50 +113,42 @@ const hiw = {
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "What is an AI readiness assessment?",
+        "name": "Ce este o evaluare AI readiness?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "An AI readiness assessment is a structured audit of your organisation's AI systems that evaluates EU AI Act classification, GDPR and data governance risks, security vulnerabilities, and vendor exposure. Axionly delivers a full written report with prioritised remediation actions in five business days."
+          "text": "O evaluare AI readiness este un audit structurat al sistemelor AI ale organizației dumneavoastră, care evaluează clasificarea conform Regulamentului UE privind IA, riscurile GDPR și de guvernanță a datelor, vulnerabilitățile de securitate și expunerea față de furnizori. Axionly livrează un raport scris complet cu acțiuni de remediere prioritizate în cinci zile lucrătoare."
         }
       },
       {
         "@type": "Question",
-        "name": "What does EU AI Act compliance require?",
+        "name": "Ce presupune conformitatea cu Regulamentul UE privind IA?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "The EU AI Act (Regulation 2024/1689) requires organisations to classify their AI systems by risk level, maintain technical documentation, implement human oversight for high-risk systems, and register in the EU database where applicable. Non-compliance can result in fines of up to €35 million or 7% of global annual turnover."
+          "text": "Regulamentul UE privind IA (Regulamentul 2024/1689) impune organizațiilor să clasifice sistemele AI după nivelul de risc, să mențină documentație tehnică, să implementeze supraveghere umană pentru sistemele cu risc ridicat și să se înregistreze în baza de date UE unde este aplicabil. Neconformitatea poate duce la amenzi de până la 35 milioane euro sau 7% din cifra de afaceri anuală globală."
         }
       },
       {
         "@type": "Question",
-        "name": "How long does an AI readiness assessment take?",
+        "name": "Cât durează o evaluare AI readiness?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Axionly's AI readiness assessments are completed in five business days from the initial intake call. You receive a structured written report covering EU AI Act obligations, data governance risks, security findings, and a prioritised action plan."
+          "text": "Evaluările AI readiness ale Axionly sunt finalizate în cinci zile lucrătoare de la apelul inițial de intake. Primiți un raport scris structurat care acoperă obligațiile din Regulamentul UE privind IA, riscurile de guvernanță a datelor, constatările de securitate și un plan de acțiune prioritizat."
         }
       },
       {
         "@type": "Question",
-        "name": "How much does an AI readiness assessment cost?",
+        "name": "Cât costă o evaluare AI readiness?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Axionly offers two fixed-price tiers: the AI Readiness Assessment at €2,500, and the AI Readiness Assessment + Security Deep-Dive at €3,200. Both have a fixed scope and fixed price — no hourly billing, no scope creep."
+          "text": "Axionly oferă două niveluri de preț fix: Evaluarea AI Readiness la €2.500 și Evaluarea AI Readiness + Analiză Aprofundată de Securitate la €3.200. Ambele au un domeniu fix și un preț fix — fără facturare orară, fără extindere a domeniului."
         }
       },
       {
         "@type": "Question",
-        "name": "Which companies should get an AI readiness assessment?",
+        "name": "Ce companii ar trebui să facă o evaluare AI readiness?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Any organisation operating in Europe that uses AI tools — including third-party AI software, AI-powered product features, or custom AI models — should consider an AI readiness assessment. The EU AI Act applies from August 2026 for most high-risk systems. Early assessment reduces remediation cost and regulatory risk."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Does Axionly work with companies outside Romania?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Axionly serves organisations across Europe. All assessments are conducted remotely and the written report is delivered in English (or Romanian on request)."
+          "text": "Orice organizație care operează în Europa și utilizează instrumente AI — inclusiv software AI de la terți, funcționalități AI în produse existente sau modele AI personalizate — ar trebui să ia în considerare o evaluare AI readiness. Regulamentul UE privind IA se aplică din august 2026 pentru majoritatea sistemelor cu risc ridicat. O evaluare timpurie reduce costul de remediere și riscul regulamentar."
         }
       }
     ]
@@ -169,9 +162,9 @@ const hiw = {
     <TrustSignals  {...trust} />
     <HowItWorksPreview {...hiw} />
     <CtaBanner
-      heading="Ready to understand your AI risk?"
-      subtext="Book a free 20-minute discovery call. No commitment, no jargon. We will tell you honestly whether an assessment makes sense for your organisation."
-      ctaLabel="Book a Free Discovery Call"
+      heading="Gata să vă înțelegeți riscul AI?"
+      subtext="Rezervați un apel de descoperire gratuit de 20 de minute. Fără angajament, fără jargon. Vă vom spune sincer dacă un audit are sens pentru organizația dumneavoastră."
+      ctaLabel="Rezervați un Apel de Descoperire Gratuit"
       ctaHref="/contact"
     />
   </main>

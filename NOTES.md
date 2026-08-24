@@ -226,3 +226,42 @@ Then work through blockers B2–B5 in section 4.
 ### Repo hygiene, unrelated but worth doing
 
 `node_modules/` and `dist/` are committed — 9,000+ files. Add a `.gitignore` and untrack them.
+
+---
+
+## 8. Romanian-first locale swap (2026-08-24)
+
+The site is now **Romanian by default**. Romanian lives at the root, English moved under `/en`.
+
+| Before | After |
+|---|---|
+| `/services` (EN) | `/services` (RO) |
+| `/ro/services` (RO) | `/en/services` (EN) |
+| `/quick-check` (EN) | `/en/quick-check` (EN) |
+| `/ro/evaluare-rapida` (RO) | `/evaluare-rapida` (RO) |
+
+What changed:
+
+- `astro.config.mjs` — `defaultLocale: 'ro'`, `locales: ['ro', 'en']`. `prefixDefaultLocale`
+  stays `false`, so the default locale (now RO) is the unprefixed one.
+- `src/pages/` — the RO duplicates moved up from `src/pages/ro/` to the root; the EN pages moved
+  down into `src/pages/en/`. All internal links, `canonicalPath` and `hreflang*` values were
+  rewritten to match. The RO slug exception (`evaluare-rapida` ↔ `quick-check`) is unchanged.
+- `src/layouts/BaseLayout.astro` — `htmlLang` now defaults to `'ro'`; every EN page passes
+  `htmlLang="en"` explicitly. `hreflang="x-default"` now points at the **Romanian** URL, and
+  `WebSite.inLanguage` is `["ro", "en"]`.
+- `src/components/Header.astro` / `Footer.astro` — the locale test flipped from
+  `pathname.startsWith('/ro')` to `pathname.startsWith('/en')`; the prefix is `'/en'` for English
+  and `''` for Romanian. `SLUG_MAP` is now keyed RO → EN. The switcher reads **RO / EN**, in that
+  order, with RO active by default.
+- `public/sitemap.xml` — regenerated. Romanian URLs first and at higher priority, `x-default` on
+  the Romanian URL. `/readiness-check` and the Quick Check now appear in both locales (the RO
+  entries for them were missing before).
+- `public/_redirects` — **new.** 301s for the old `/ro/*` URLs and for `/quick-check`. Netlify /
+  Cloudflare Pages syntax; **if the site is hosted somewhere else these rules do nothing** and the
+  equivalent has to be configured on that host. Old English URLs like `/services` are deliberately
+  *not* redirected — they still resolve, they simply serve Romanian now, and `hreflang` tells
+  search engines where the English version went.
+
+Not changed: page copy, the components, and the `FormMeta`/`QuickCheck` `lang` props (English
+pages still rely on `FormMeta`'s `lang = 'en'` default).

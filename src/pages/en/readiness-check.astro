@@ -1,0 +1,368 @@
+---
+import BaseLayout   from '../../layouts/BaseLayout.astro';
+import Header       from '../../components/Header.astro';
+import Footer       from '../../components/Footer.astro';
+import PageHeader   from '../../components/shared/PageHeader.astro';
+import CtaBanner    from '../../components/shared/CtaBanner.astro';
+import { PRICES, DELIVERY, CREDIT_WINDOW_DAYS } from '../../config/site';
+
+const price    = PRICES.readiness.en;
+const delivery = DELIVERY.readiness.en;
+
+const deliverable = [
+  'An inventory of the AI systems your organisation actually uses — including the ones adopted without IT or legal review.',
+  'A preliminary categorisation of each system against the EU AI Act risk tiers, with the reasoning shown.',
+  'The three actions we would prioritise first, with an indication of effort and urgency for each.',
+];
+
+const steps = [
+  {
+    number: '01',
+    name:   'A 90-minute working session',
+    body:   'One call with whoever knows how your teams actually work — usually an operations, IT, or leadership contact. No preparation required, no documents to assemble in advance.',
+  },
+  {
+    number: '02',
+    name:   'We do the analysis',
+    body:   'We take what came out of the session and map it against the EU AI Act risk categories and the obligations that appear to follow from them.',
+  },
+  {
+    number: '03',
+    name:   'You get a five-page document',
+    body:   `Delivered within ${delivery}. Written in plain language, addressed to a decision-maker rather than a lawyer.`,
+  },
+];
+
+const whoFor = [
+  'You know your teams use AI tools, but nobody has written down which ones.',
+  'Someone has asked whether the EU AI Act applies to you, and the honest answer is that nobody is sure.',
+  'You want to know the size of the problem before committing to a full assessment.',
+  'You need something concrete to bring to a board or management meeting.',
+];
+---
+
+<BaseLayout
+  htmlLang="en"
+  title={`AI Act Readiness Check — ${price} — Axionly`}
+  description={`A ${price} starting point before a full assessment: a 90-minute session and a five-page document covering your AI system inventory, preliminary EU AI Act risk categorisation, and the first three actions to take. Delivered in ${delivery}.`}
+  canonicalPath="/en/readiness-check"
+  hreflangEN="/en/readiness-check"
+  hreflangRO="/readiness-check"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "AI Act Readiness Check",
+    "provider": { "@id": "https://axionly.io/#organization" },
+    "description": "A 90-minute working session plus a five-page document: an inventory of the AI systems in use, a preliminary categorisation against EU AI Act risk tiers, and the first three recommended actions. Delivered in three business days.",
+    "areaServed": "Europe",
+    "serviceType": ["AI Act Readiness Check", "EU AI Act Compliance", "AI Governance Consulting"],
+    "offers": {
+      "@type": "Offer",
+      "name": "AI Act Readiness Check",
+      "price": PRICES.readiness.raw,
+      "priceCurrency": "EUR",
+      "description": `Entry-level engagement. The fee is credited in full against a full AI Risk Assessment if you proceed within ${CREDIT_WINDOW_DAYS} days.`
+    }
+  })} />
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Step one"
+      heading="AI Act Readiness Check"
+      subheading="Before you commit to a full assessment, find out how big the question actually is. Ninety minutes of our time, a five-page document, and a clear view of where you stand."
+    />
+
+    <!-- Offer summary -->
+    <section id="offer">
+      <div class="container offer-grid">
+
+        <div class="offer-text">
+          <p class="section-label">What you get</p>
+          <h2>A short, honest read on your exposure.</h2>
+          <p class="lead">
+            Most organisations we speak to are not asking us to fix anything yet. They are
+            asking a simpler question: does this regulation apply to us, and how badly?
+            The Readiness Check answers that question and nothing more.
+          </p>
+          <ul class="deliverable">
+            {deliverable.map(item => (
+              <li>
+                <span class="check" aria-hidden="true">✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
+          <p class="caveat">
+            This is a preliminary view, not a legal opinion and not a substitute for a full
+            assessment. Where the categorisation is genuinely uncertain, we say so rather than
+            guessing.
+          </p>
+        </div>
+
+        <aside class="offer-card" aria-label="Readiness Check pricing">
+          <p class="card-name">AI Act Readiness Check</p>
+          <p class="card-price">{price}</p>
+          <p class="card-price-note">fixed price, no additional fees</p>
+          <dl class="card-facts">
+            <div><dt>Your time</dt><dd>90 minutes</dd></div>
+            <div><dt>Deliverable</dt><dd>5-page document</dd></div>
+            <div><dt>Turnaround</dt><dd>{delivery}</dd></div>
+          </dl>
+          <a href="/en/contact" class="btn-primary card-cta">Book a Readiness Check</a>
+          <p class="card-foot">
+            Not sure yet? The 20-minute discovery call is free and comes first either way.
+          </p>
+        </aside>
+
+      </div>
+    </section>
+
+    <!-- Credit -->
+    <section id="credit">
+      <div class="container credit-inner">
+        <div class="credit-badge" aria-hidden="true">↺</div>
+        <div>
+          <h2>The fee comes off the full assessment.</h2>
+          <p>
+            If you decide to go ahead with a full AI Risk Assessment within {CREDIT_WINDOW_DAYS}
+            days of receiving your Readiness Check, the {price} is deducted in full from the
+            assessment price. You are not paying twice for the same starting point — and if the
+            Readiness Check shows you do not need a full assessment, we will tell you that too.
+          </p>
+          <a href="/en/services" class="credit-link">See the full range of services →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Process -->
+    <section id="process">
+      <div class="container">
+        <h2 class="section-heading">How it runs</h2>
+        <ol class="steps">
+          {steps.map(step => (
+            <li class="step">
+              <span class="step-number">{step.number}</span>
+              <div>
+                <h3>{step.name}</h3>
+                <p>{step.body}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section id="who">
+      <div class="container">
+        <h2 class="section-heading">Start here if…</h2>
+        <ul class="who-list">
+          {whoFor.map(item => (
+            <li><span class="who-arrow" aria-hidden="true">→</span><span>{item}</span></li>
+          ))}
+        </ul>
+        <p class="who-note">
+          If you already have an AI system inventory and know which systems are in scope, skip
+          this and go straight to the <a href="/en/services">full assessment</a>. If you are not
+          sure this is the right step at all, the free
+          <a href="/en/quick-check">AI Act Quick Check</a> takes three minutes and costs nothing.
+        </p>
+      </div>
+    </section>
+
+    <CtaBanner
+      heading="Ninety minutes to find out where you stand."
+      subtext="Start with the free 20-minute discovery call. We will confirm whether the Readiness Check is the right first step for you, or tell you honestly if it is not."
+    />
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .section-heading {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-bottom: 2rem;
+    color: var(--color-text);
+  }
+
+  /* ── Offer ─────────────────────────────────────────────────────────────── */
+  #offer { background-color: var(--color-bg); }
+
+  .offer-grid {
+    display: grid;
+    grid-template-columns: 1fr 360px;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .offer-text h2 {
+    font-size: clamp(1.5rem, 2.5vw, 2rem);
+    margin-top: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .lead { margin-top: 1rem; color: var(--color-text-muted); }
+
+  .deliverable {
+    list-style: none;
+    margin-top: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .deliverable li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+  }
+
+  .check {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.15em;
+  }
+
+  .caveat {
+    margin-top: 1.75rem;
+    padding-left: 1rem;
+    border-left: 3px solid var(--color-container);
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+  }
+
+  .offer-card {
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-accent);
+    border-radius: var(--radius-card);
+    padding: 2rem;
+    box-shadow: 0 4px 32px rgba(53, 147, 255, 0.12);
+    position: sticky;
+    top: calc(var(--header-height) + 1.5rem);
+  }
+
+  .card-name { font-size: 1rem; font-weight: 700; color: var(--color-text); }
+
+  .card-price {
+    font-family: var(--font-logo);
+    font-size: 2.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    margin-top: 0.75rem;
+  }
+
+  .card-price-note { font-size: 0.8125rem; color: var(--color-text-muted); }
+
+  .card-facts {
+    margin-top: 1.5rem;
+    border-top: 1px solid var(--color-container);
+    padding-top: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .card-facts > div { display: flex; justify-content: space-between; gap: 1rem; }
+  .card-facts dt { font-size: 0.875rem; color: var(--color-text-muted); }
+  .card-facts dd { font-size: 0.875rem; font-weight: 600; color: var(--color-text); text-align: right; }
+
+  .card-cta { width: 100%; margin-top: 1.5rem; text-align: center; justify-content: center; }
+
+  .card-foot {
+    margin-top: 1rem;
+    font-size: 0.8125rem;
+    color: var(--color-text-muted);
+    line-height: 1.5;
+  }
+
+  /* ── Credit ────────────────────────────────────────────────────────────── */
+  #credit { background-color: var(--color-container); }
+
+  .credit-inner {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+    max-width: 900px;
+  }
+
+  .credit-badge {
+    flex-shrink: 0;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: var(--color-accent);
+    color: var(--color-white);
+    display: grid;
+    place-items: center;
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .credit-inner h2 { font-size: clamp(1.35rem, 2.2vw, 1.75rem); color: var(--color-text); }
+  .credit-inner p  { margin-top: 0.75rem; color: var(--color-text-muted); }
+
+  .credit-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: var(--color-accent-dark);
+    font-weight: 600;
+  }
+
+  /* ── Process ───────────────────────────────────────────────────────────── */
+  .steps {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  .step { display: flex; gap: 1rem; align-items: flex-start; }
+
+  .step-number {
+    font-family: var(--font-logo);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .step h3 { font-size: 1.0625rem; font-weight: 700; color: var(--color-text); }
+  .step p  { margin-top: 0.5rem; font-size: 0.9375rem; color: var(--color-text-muted); line-height: 1.65; }
+
+  /* ── Who ───────────────────────────────────────────────────────────────── */
+  #who { background-color: var(--color-bg); }
+
+  .who-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+    max-width: 760px;
+  }
+
+  .who-list li { display: flex; gap: 0.75rem; align-items: flex-start; color: var(--color-text-muted); line-height: 1.65; }
+
+  .who-arrow { color: var(--color-accent); font-weight: 700; flex-shrink: 0; }
+
+  .who-note {
+    margin-top: 1.75rem;
+    font-size: 0.9375rem;
+    color: var(--color-text-muted);
+  }
+
+  .who-note a { color: var(--color-accent); font-weight: 600; }
+
+  @media (max-width: 900px) {
+    .offer-grid { grid-template-columns: 1fr; }
+    .offer-card { position: static; }
+    .steps { grid-template-columns: 1fr; gap: 1.5rem; }
+  }
+</style>

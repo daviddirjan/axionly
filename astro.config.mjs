@@ -3,8 +3,8 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://axionly.io',
   i18n: {
-    defaultLocale: 'en',
-    locales: ['en', 'ro'],
+    defaultLocale: 'ro',
+    locales: ['ro', 'en'],
     routing: {
       prefixDefaultLocale: false,
     },

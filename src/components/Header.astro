@@ -1,30 +1,31 @@
 ---
 const { pathname } = Astro.url;
-const isRo  = pathname.startsWith('/ro');
-const lang  = isRo ? 'ro' : 'en';
-const pfx   = isRo ? '/ro' : '';           // URL prefix for nav links
+const isEn  = pathname.startsWith('/en');
+const isRo  = !isEn;                        // Romanian is the default locale
+const lang  = isEn ? 'en' : 'ro';
+const pfx   = isEn ? '/en' : '';           // URL prefix for nav links
 
 // ── Alternate URL for language switcher ──────────────────────────────────────
-// Most routes are the same slug under /ro, so stripping or adding the prefix is
-// enough. Routes whose Romanian slug differs are listed here; without an entry
-// the switcher would send visitors to a 404.
+// Most routes share a slug, so adding or stripping the /en prefix is enough.
+// Routes whose Romanian slug differs are listed here; without an entry the
+// switcher would send visitors to a 404.
 const SLUG_MAP: Record<string, string> = {
-  '/quick-check': '/ro/evaluare-rapida',
+  '/evaluare-rapida': '/en/quick-check',
 };
 const REVERSE_SLUG_MAP = Object.fromEntries(
-  Object.entries(SLUG_MAP).map(([en, ro]) => [ro, en]),
+  Object.entries(SLUG_MAP).map(([ro, en]) => [en, ro]),
 );
 
 const bare = pathname.replace(/\/$/, '') || '/';
 
-const enUrl = isRo
+const roUrl = isEn
   ? (REVERSE_SLUG_MAP[bare]
-      ?? (bare === '/ro' ? '/' : bare.replace(/^\/ro/, '')))
+      ?? (bare === '/en' ? '/' : bare.replace(/^\/en/, '')))
   : bare;
 
-const roUrl = isRo
+const enUrl = isEn
   ? bare
-  : (SLUG_MAP[bare] ?? (bare === '/' ? '/ro' : '/ro' + bare));
+  : (SLUG_MAP[bare] ?? (bare === '/' ? '/en' : '/en' + bare));
 
 // ── Translations ─────────────────────────────────────────────────────────────
 const t = {
@@ -42,19 +43,19 @@ const navSlugs = ['/', '/services', '/how-it-works', '/about', '/resources', '/c
 
 const navLinks = t.nav.map((label, i) => ({
   label,
-  href: i === 0 ? (isRo ? '/ro' : '/') : pfx + navSlugs[i],
+  href: i === 0 ? (isEn ? '/en' : '/') : pfx + navSlugs[i],
 }));
 
 // Active: for home compare exactly; for others use startsWith
 const isActive = (href: string) => {
-  if (href === '/' || href === '/ro') return pathname === href || pathname === href + '/';
+  if (href === '/' || href === '/en') return pathname === href || pathname === href + '/';
   return pathname.startsWith(href);
 };
 ---
 
 <header>
   <div class="container header-inner">
-    <a href={isRo ? '/ro' : '/'} class="logo" aria-label="Axionly home">
+    <a href={isEn ? '/en' : '/'} class="logo" aria-label="Axionly home">
       Axionly<span class="logo-dot">.</span>
     </a>
 
@@ -78,9 +79,9 @@ const isActive = (href: string) => {
     <div class="header-right">
       <!-- Language switcher -->
       <div class="lang-switch" aria-label="Language switcher">
-        <a href={enUrl} class:list={['lang-btn', { 'lang-btn--active': !isRo }]} lang="en" hreflang="en">EN</a>
+        <a href={roUrl} class:list={['lang-btn', { 'lang-btn--active': isRo }]} lang="ro" hreflang="ro">RO</a>
         <span aria-hidden="true">/</span>
-        <a href={roUrl} class:list={['lang-btn', { 'lang-btn--active': isRo  }]} lang="ro" hreflang="ro">RO</a>
+        <a href={enUrl} class:list={['lang-btn', { 'lang-btn--active': isEn }]} lang="en" hreflang="en">EN</a>
       </div>
       <a href={pfx + '/contact'} class="btn-primary header-cta">{t.cta}</a>
     </div>
@@ -106,9 +107,9 @@ const isActive = (href: string) => {
             </li>
           ))}
           <li class="mobile-lang">
-            <a href={enUrl} class:list={['lang-btn', { 'lang-btn--active': !isRo }]}>EN</a>
+            <a href={roUrl} class:list={['lang-btn', { 'lang-btn--active': isRo }]}>RO</a>
             <span aria-hidden="true">/</span>
-            <a href={roUrl} class:list={['lang-btn', { 'lang-btn--active': isRo  }]}>RO</a>
+            <a href={enUrl} class:list={['lang-btn', { 'lang-btn--active': isEn }]}>EN</a>
           </li>
           <li><a href={pfx + '/contact'} class="btn-primary mobile-cta">{t.cta}</a></li>
         </ul>

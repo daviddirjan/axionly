@@ -8,34 +8,35 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
 ---
 
 <BaseLayout
-  title="Book an AI Readiness Assessment — Axionly"
-  description="Start with a free 20-minute discovery call. We'll assess your AI systems, explain your EU AI Act obligations, and outline what an AI readiness assessment would cover — no commitment required."
+  title="Rezervați o Evaluare AI Readiness — Axionly"
+  description="Începeți cu un apel de descoperire gratuit de 20 de minute. Vom evalua sistemele dumneavoastră AI, vom explica obligațiile din Regulamentul UE privind IA și vom contura ce ar acoperi o evaluare AI readiness — fără angajament."
+  htmlLang="ro"
   canonicalPath="/contact"
-  hreflangEN="/contact"
-  hreflangRO="/ro/contact"
+  hreflangEN="/en/contact"
+  hreflangRO="/contact"
 >
   <Header />
   <main>
 
     <PageHeader
       eyebrow="Contact"
-      heading="Let's talk about your AI risk."
-      subheading="Book a free 20-minute discovery call. No commitment, no jargon. We will tell you honestly whether an assessment makes sense for your organisation."
+      heading="Să vorbim despre riscul dumneavoastră AI."
+      subheading="Rezervați un apel de descoperire gratuit de 20 de minute. Fără angajament, fără jargon. Vă vom spune sincer dacă o evaluare are sens pentru organizația dumneavoastră."
     />
 
     <section id="contact-main">
       <div class="container contact-grid">
 
-        <!-- Left: booking + contact details -->
+        <!-- Stânga: rezervare + detalii de contact -->
         <div class="contact-left">
 
-          <!-- Booking widget placeholder -->
+          <!-- Bloc rezervare -->
           <div class="booking-block">
-            <p class="block-label">Book a call</p>
-            <h2>Free Discovery Call — 20 minutes</h2>
+            <p class="block-label">Rezervați un apel</p>
+            <h2>Apel de Descoperire Gratuit — 20 de minute</h2>
             <p class="booking-desc">
-              Select a time that works for you. After booking you will receive a
-              confirmation email and calendar invite with a meeting link.
+              Selectați un interval orar care vă convine. După rezervare veți primi un
+              email de confirmare și o invitație de calendar cu un link pentru întâlnire.
             </p>
             <div class="calendar-placeholder">
               <div class="calendar-icon" aria-hidden="true">
@@ -46,22 +47,22 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
                   <line x1="3" y1="10" x2="21" y2="10"/>
                 </svg>
               </div>
-              <p class="cal-title">20 minutes, by video or phone</p>
+              <p class="cal-title">20 de minute, video sau telefon</p>
               <p class="cal-sub">
-                Tell us two or three times that suit you and we will send a calendar
-                invite with a meeting link. We reply within one business day.
+                Spuneți-ne două-trei intervale orare care vă convin și vă trimitem o
+                invitație de calendar cu link-ul întâlnirii. Răspundem într-o zi lucrătoare.
               </p>
               <a
-                href={BOOKING_URL || `mailto:${EMAIL}?subject=${encodeURIComponent('Discovery Call Request')}`}
+                href={BOOKING_URL || `mailto:${EMAIL}?subject=${encodeURIComponent('Solicitare Apel de Descoperire')}`}
                 class="btn-primary cal-btn"
                 {...(BOOKING_URL ? { target: '_blank', rel: 'noopener' } : {})}
               >
-                {BOOKING_URL ? 'Choose a time' : 'Request a call by email'}
+                {BOOKING_URL ? 'Alegeți un interval' : 'Solicitați un apel prin email'}
               </a>
             </div>
           </div>
 
-          <!-- Contact details -->
+          <!-- Detalii de contact -->
           <div class="contact-details">
             <dl class="details-list">
               <div class="detail-row">
@@ -81,7 +82,7 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
                   </svg>
                   LinkedIn
                 </dt>
-                <dd><a href={LINKEDIN} target="_blank" rel="noopener">Connect on LinkedIn</a></dd>
+                <dd><a href={LINKEDIN} target="_blank" rel="noopener">Conectați-vă pe LinkedIn</a></dd>
               </div>
               <div class="detail-row">
                 <dt>
@@ -90,9 +91,9 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
                     <line x1="2" y1="12" x2="22" y2="12"/>
                     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
                   </svg>
-                  Location
+                  Locație
                 </dt>
-                <dd>Oradea, BH, Romania, EU</dd>
+                <dd>Oradea, BH, România, UE</dd>
               </div>
               <div class="detail-row">
                 <dt>
@@ -101,34 +102,34 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
                     <line x1="8" y1="21" x2="16" y2="21"/>
                     <line x1="12" y1="17" x2="12" y2="21"/>
                   </svg>
-                  Company
+                  Companie
                 </dt>
-                <dd>Axionly — a division of <a href="https://axiontic.com" target="_blank" rel="noopener">Axiontic</a></dd>
+                <dd>Axionly — o divizie a <a href="https://axiontic.com" target="_blank" rel="noopener">Axiontic</a></dd>
               </div>
             </dl>
           </div>
 
         </div>
 
-        <!-- Right: contact form + trust text -->
+        <!-- Dreapta: formular de contact + text de încredere -->
         <div class="contact-right">
 
           <div class="form-block">
-            <p class="block-label">Send a message</p>
-            <h2>Prefer to write first?</h2>
+            <p class="block-label">Trimiteți un mesaj</p>
+            <h2>Preferați să scrieți mai întâi?</h2>
             <p class="form-desc">
-              Not ready to book a call yet? Send us a message and we will reply within one business day.
+              Nu sunteți gata să rezervați un apel încă? Trimiteți-ne un mesaj și vă vom răspunde în maximum o zi lucrătoare.
             </p>
             <form
               class="contact-form"
               method="POST"
               action={formsAreLive ? formAction : undefined}
-              aria-label="Contact form"
+              aria-label="Formular de contact"
             >
-              <FormMeta subject="Website contact form" redirect="/contact/?sent=1" />
+              <FormMeta subject="Formular de contact website" redirect="/contact/?sent=1" lang="ro" />
               <div class="field-row">
                 <div class="field">
-                  <label for="fullName">Full name <span aria-hidden="true">*</span></label>
+                  <label for="fullName">Nume complet <span aria-hidden="true">*</span></label>
                   <input
                     type="text"
                     id="fullName"
@@ -136,11 +137,11 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
                     autocomplete="name"
                     required
                     aria-required="true"
-                    placeholder="Jane Smith"
+                    placeholder="Ion Popescu"
                   />
                 </div>
                 <div class="field">
-                  <label for="company">Company name <span aria-hidden="true">*</span></label>
+                  <label for="company">Numele companiei <span aria-hidden="true">*</span></label>
                   <input
                     type="text"
                     id="company"
@@ -148,12 +149,12 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
                     autocomplete="organization"
                     required
                     aria-required="true"
-                    placeholder="Acme SRL"
+                    placeholder="Firma SA"
                   />
                 </div>
               </div>
               <div class="field">
-                <label for="email">Work email address <span aria-hidden="true">*</span></label>
+                <label for="email">Adresă de email de serviciu <span aria-hidden="true">*</span></label>
                 <input
                   type="email"
                   id="email"
@@ -161,36 +162,36 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
                   autocomplete="email"
                   required
                   aria-required="true"
-                  placeholder="jane@company.com"
+                  placeholder="ion@companie.ro"
                 />
               </div>
               <div class="field">
-                <label for="message">Your message</label>
+                <label for="message">Mesajul dumneavoastră</label>
                 <textarea
                   id="message"
                   name="message"
                   rows="5"
-                  placeholder="Tell us briefly what AI tools your organisation uses and what questions you have."
+                  placeholder="Descrieți pe scurt ce instrumente AI utilizează organizația dumneavoastră și ce întrebări aveți."
                 ></textarea>
               </div>
-              <button type="submit" class="btn-primary submit-btn">Send Message</button>
+              <button type="submit" class="btn-primary submit-btn">Trimiteți Mesajul</button>
               <p class="form-privacy">
-                We use your details only to reply to this enquiry. See our
-                <a href="/privacy">Privacy Policy</a>.
+                Folosim datele dumneavoastră doar pentru a răspunde acestei solicitări. Vedeți
+                <a href="/privacy">Politica de Confidențialitate</a>.
               </p>
             </form>
           </div>
 
-          <!-- Trust block -->
+          <!-- Bloc de încredere -->
           <div class="trust-block" role="note">
             <svg class="trust-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
             </svg>
             <p>
-              The discovery call is genuinely free and carries no obligation. We will listen
-              to your situation, tell you what we would assess, and give you an honest view
-              of whether our service would be useful. If it is not the right fit, we will
-              tell you — and suggest what might be.
+              Apelul de descoperire este cu adevărat gratuit și nu implică nicio obligație. Vom asculta
+              situația dumneavoastră, vă vom spune ce am evalua și vă vom oferi o opinie sinceră
+              dacă serviciul nostru ar fi util. Dacă nu este potrivit pentru dumneavoastră, vă vom spune —
+              și vom sugera ce ar putea fi.
             </p>
           </div>
 
@@ -215,7 +216,7 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
     align-items: start;
   }
 
-  /* ── Shared ── */
+  /* ── Comun ── */
   .block-label {
     font-size: 0.75rem;
     font-weight: 700;
@@ -232,7 +233,7 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
     gap: 2rem;
   }
 
-  /* ── Booking block ── */
+  /* ── Bloc rezervare ── */
   .booking-block {
     display: flex;
     flex-direction: column;
@@ -289,7 +290,7 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
     margin-top: 0.5rem;
   }
 
-  /* ── Contact details ── */
+  /* ── Detalii de contact ── */
   .contact-details {
     background-color: var(--color-container);
     border-radius: var(--radius-card);
@@ -343,7 +344,7 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
 
   .detail-row dd a:hover { opacity: 0.75; }
 
-  /* ── Form block ── */
+  /* ── Bloc formular ── */
   .form-block {
     display: flex;
     flex-direction: column;
@@ -419,7 +420,7 @@ import { LINKEDIN, EMAIL, BOOKING_URL, formAction, formsAreLive } from '../confi
     align-self: flex-start;
   }
 
-  /* ── Trust block ── */
+  /* ── Bloc de încredere ── */
   .trust-block {
     background-color: var(--color-container);
     border-radius: var(--radius-card);

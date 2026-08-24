@@ -10,114 +10,115 @@ import CtaBanner        from '../components/shared/CtaBanner.astro';
 import { PRICES, DELIVERY, CREDIT_WINDOW_DAYS } from '../config/site';
 
 const standardIncludes = [
-  'AI System Inventory — complete register with EU AI Act risk classification',
-  'EU AI Act Gap Analysis — obligations mapped, gaps identified, applicable articles cited',
-  'Data Governance Review — how personal data is handled by AI systems against GDPR',
-  'Vendor Risk Assessment — contracts and data processing agreements reviewed',
-  'Internal Policy Review — whether an AI use policy exists and whether it is adequate',
-  'Prioritised Action Plan — immediate, 30-day, and 90-day actions ranked by risk',
-  'Executive Briefing Call — 30-minute walkthrough with key stakeholders',
+  'Inventar Sisteme AI — registru complet cu clasificare de risc conform Regulamentului UE privind IA',
+  'Analiză Lacune Regulament UE privind IA — obligații cartografiate, lacune identificate, articole aplicabile citate',
+  'Revizuire Guvernanță Date — modul în care datele cu caracter personal sunt gestionate de sistemele AI față de cerințele GDPR',
+  'Evaluare Risc Furnizori — contracte și acorduri de procesare a datelor revizuite',
+  'Revizuire Politică Internă — dacă o politică de utilizare AI există și dacă este adecvată',
+  'Plan de Acțiune Prioritizat — acțiuni imediate, la 30 de zile și la 90 de zile, clasificate după risc',
+  'Apel de Prezentare Executivă — prezentare de 30 de minute cu principalii factori de decizie',
 ];
 
 const deepDiveIncludes = [
   ...standardIncludes,
-  'Prompt Injection Testing — whether AI systems are vulnerable to prompt injection attacks',
-  'API & Access Control Review — how AI APIs are configured and who has access',
-  'Data Leakage Risk Assessment — whether sensitive data submitted to AI tools could be exposed',
-  'AI Incident Response Gap — whether the organisation can detect and respond to AI security incidents',
+  'Testare Injecție Prompt — dacă sistemele AI sunt vulnerabile la atacuri de injecție de prompt',
+  'Revizuire API și Control Acces — configurarea API-urilor AI, drepturile de acces și gestionarea cheilor',
+  'Evaluare Risc Scurgeri de Date — dacă datele sensibile transmise instrumentelor AI pot fi expuse',
+  'Revizuire Răspuns la Incidente AI — dacă organizația poate detecta și răspunde la incidente de securitate AI',
 ];
 
 const ladder = [
   {
-    step: 'Step 1', name: 'AI Act Readiness Check',
-    price: PRICES.readiness.en, duration: DELIVERY.readiness.en,
-    role: 'The starting point. Find out whether and how the regulation applies to you.',
+    step: 'Pasul 1', name: 'AI Act Readiness Check',
+    price: PRICES.readiness.ro, duration: DELIVERY.readiness.ro,
+    role: 'Punctul de plecare. Aflați dacă și cum vi se aplică regulamentul.',
     href: '/readiness-check',
   },
   {
-    step: 'Step 2', name: 'AI Risk Assessment',
-    price: PRICES.assessment.en, duration: DELIVERY.assessment.en,
-    role: 'The full engagement. Obligations mapped, gaps identified, actions prioritised.',
+    step: 'Pasul 2', name: 'Evaluare de Risc AI',
+    price: PRICES.assessment.ro, duration: DELIVERY.assessment.ro,
+    role: 'Angajamentul complet. Obligații cartografiate, lacune identificate, acțiuni prioritizate.',
     href: '#service-tiers', current: true,
   },
   {
-    step: 'Step 2+', name: 'Assessment + Security Deep-Dive',
-    price: PRICES.deepDive.en, duration: DELIVERY.assessment.en,
-    role: 'The assessment plus a technical security review of your AI systems.',
+    step: 'Pasul 2+', name: 'Evaluare + Analiză Aprofundată de Securitate',
+    price: PRICES.deepDive.ro, duration: DELIVERY.assessment.ro,
+    role: 'Evaluarea completă plus o revizuire tehnică de securitate a sistemelor AI.',
     href: '#service-tiers',
   },
   {
-    step: 'Step 3', name: 'Governance Retainer',
-    price: 'On request', duration: 'Ongoing, monthly',
-    role: 'Continuous monitoring, regulatory updates, and support when you are audited.',
+    step: 'Pasul 3', name: 'Abonament de Guvernanță',
+    price: 'La cerere', duration: 'Continuu, lunar',
+    role: 'Monitorizare continuă, actualizări de reglementare și sprijin la audit.',
     href: '#retainer',
   },
 ];
 
-// NOTE (founder review): the retainer has no published monthly price yet — see
-// blocker B2 in NOTES.md. It is described here deliberately, ahead of having
-// clients on it, because it is the tier that produces recurring revenue.
+// NOTĂ (revizuire fondator): abonamentul nu are încă un preț lunar publicat — vezi
+// blocantul B2 din NOTES.md. Este descris aici deliberat, înainte de a avea clienți
+// pe el, pentru că este nivelul care produce venit recurent.
 const retainerIncludes = [
-  'Quarterly governance review — progress against your action plan, tracked and documented.',
-  'Regulatory monitoring — we tell you when something changes that affects your systems, rather than you finding out from the news.',
-  'Re-assessment of new AI systems as you adopt them, so the inventory does not go stale.',
-  'Named contact for AI governance questions between reviews.',
-  'Support during audits, customer security reviews, and due diligence requests.',
+  'Revizuire trimestrială de guvernanță — progresul față de planul de acțiune, urmărit și documentat.',
+  'Monitorizare reglementară — vă spunem noi când se schimbă ceva care vă afectează sistemele, în loc să aflați din presă.',
+  'Reevaluarea sistemelor AI noi pe măsură ce le adoptați, ca inventarul să nu rămână în urmă.',
+  'Persoană de contact desemnată pentru întrebări de guvernanță AI între revizuiri.',
+  'Sprijin în timpul auditurilor, al revizuirilor de securitate cerute de clienți și al solicitărilor de due diligence.',
 ];
 
 const addOns = [
-  { name: 'AI Use Policy Drafting',           desc: 'We write your internal AI governance policy based on assessment findings.' },
-  { name: 'Quarterly Governance Review',      desc: 'A lighter-touch quarterly check-in to track progress and flag regulatory changes. Retainer-based.' },
-  { name: 'Vendor Due Diligence',             desc: 'A one-off review of a specific AI product your organisation is considering purchasing.' },
-  { name: 'EU AI Act Technical Documentation', desc: 'Preparation of required technical documentation for high-risk AI systems. Scoped individually.' },
+  { name: 'Redactare Politică de Utilizare AI',           desc: 'Redactăm politica internă de guvernanță AI pe baza constatărilor din audit.' },
+  { name: 'Revizuire Trimestrială de Guvernanță',         desc: 'Un control trimestrial mai ușor pentru a urmări progresul și a semnala modificările reglementare. Pe bază de abonament.' },
+  { name: 'Due Diligence Furnizori',                      desc: 'O analiză unică a unui produs AI specific pe care organizația dumneavoastră ia în considerare să îl achiziționeze.' },
+  { name: 'Documentație Tehnică Regulament UE privind IA', desc: 'Pregătirea documentației tehnice necesare pentru sistemele AI cu risc ridicat. Prețul se stabilește în funcție de scopul proiectului.' },
 ];
 
 const whoItIsFor = [
-  'You are using AI tools but have no formal policy governing their use.',
-  'You are unsure whether your AI systems trigger obligations under the EU AI Act.',
-  'You process customer, employee, or financial data through AI platforms.',
-  'Legal, compliance, or leadership is asking about AI risk and you need a clear answer.',
-  'You have a customer-facing AI product and want compliance confidence before you scale.',
-  'You want to get ahead of regulatory scrutiny rather than react to it.',
+  'Utilizați instrumente AI, dar nu aveți o politică formală care să le reglementeze.',
+  'Nu știți dacă sistemele dumneavoastră AI declanșează obligații conform Regulamentului UE privind IA.',
+  'Procesați date ale clienților, angajaților sau date financiare prin platforme AI.',
+  'Departamentul juridic, de conformitate sau conducerea pune întrebări despre riscul AI și aveți nevoie de un răspuns clar.',
+  'Aveți un produs AI orientat către clienți și doriți conformitate înainte de a scala.',
+  'Doriți să vă pregătiți pentru supravegherea reglementară înainte ca aceasta să vă fie impusă.',
 ];
 ---
 
 <BaseLayout
-  title="AI Readiness Assessment Services & Pricing — Axionly"
-  description={`Fixed-scope AI governance services from ${PRICES.readiness.en}: a ${PRICES.readiness.en} AI Act Readiness Check, a ${PRICES.assessment.en} full AI Risk Assessment covering EU AI Act compliance, GDPR data governance, security and vendor risk, and an ongoing governance retainer.`}
+  title="Servicii și Prețuri Evaluare AI Readiness — Axionly"
+  description={`Servicii de guvernanță AI cu domeniu fix, de la ${PRICES.readiness.ro}: un AI Act Readiness Check de ${PRICES.readiness.ro}, o evaluare completă de risc AI de ${PRICES.assessment.ro} pentru conformitate cu Regulamentul UE privind IA, guvernanța datelor GDPR, securitate și risc de furnizori, plus un abonament de guvernanță continuă.`}
+  htmlLang="ro"
   canonicalPath="/services"
-  hreflangEN="/services"
-  hreflangRO="/ro/services"
+  hreflangEN="/en/services"
+  hreflangRO="/services"
 >
   <script type="application/ld+json" slot="head" set:html={JSON.stringify({
     "@context": "https://schema.org",
     "@type": "Service",
-    "name": "AI Readiness Assessment",
+    "name": "Evaluare AI Readiness",
     "provider": { "@id": "https://axionly.io/#organization" },
-    "description": "A complete audit of your AI systems covering EU AI Act classification, GDPR data governance risks, security vulnerabilities, and vendor exposure. Delivered in five business days with a written report and prioritised action plan.",
+    "description": "Un audit complet al sistemelor dumneavoastră AI care acoperă clasificarea conform Regulamentului UE privind IA, riscurile de guvernanță a datelor GDPR, vulnerabilitățile de securitate și expunerea față de furnizori. Livrat în cinci zile lucrătoare cu un raport scris și un plan de acțiune prioritizat.",
     "areaServed": "Europe",
-    "serviceType": ["AI Readiness Assessment", "EU AI Act Compliance", "AI Governance Consulting", "AI Security Assessment"],
+    "serviceType": ["Evaluare AI Readiness", "Conformitate Regulament UE privind IA", "Consultanță Guvernanță AI", "Audit Securitate AI"],
     "offers": [
       {
         "@type": "Offer",
         "name": "AI Act Readiness Check",
         "price": PRICES.readiness.raw,
         "priceCurrency": "EUR",
-        "description": `Entry-level engagement: a 90-minute session plus a five-page document covering the AI system inventory, preliminary EU AI Act risk categorisation, and the first three recommended actions. Credited against a full assessment within ${CREDIT_WINDOW_DAYS} days.`
+        "description": `Serviciu de intrare: o sesiune de 90 de minute plus un document de cinci pagini cu inventarul sistemelor AI, încadrarea preliminară pe categoriile de risc din Regulamentul UE privind IA și primele trei acțiuni recomandate. Costul se scade din evaluarea completă în ${CREDIT_WINDOW_DAYS} de zile.`
       },
       {
         "@type": "Offer",
-        "name": "AI Readiness Assessment",
+        "name": "Evaluare AI Readiness",
         "price": PRICES.assessment.raw,
         "priceCurrency": "EUR",
-        "description": "EU AI Act classification, GDPR data governance review, vendor exposure analysis, and written report with prioritised action plan."
+        "description": "Clasificare conform Regulamentului UE privind IA, revizuire guvernanță date GDPR, analiză expunere furnizori și raport scris cu plan de acțiune prioritizat."
       },
       {
         "@type": "Offer",
-        "name": "AI Readiness Assessment + Security Deep-Dive",
+        "name": "Evaluare AI Readiness + Analiză Aprofundată de Securitate",
         "price": PRICES.deepDive.raw,
         "priceCurrency": "EUR",
-        "description": "Everything in the standard assessment plus a full technical security review covering vulnerabilities, attack surfaces, and AI-specific threats."
+        "description": "Tot ce include evaluarea standard plus o revizuire tehnică completă de securitate care acoperă vulnerabilități, suprafețe de atac și amenințări specifice AI."
       }
     ]
   })} />
@@ -125,79 +126,82 @@ const whoItIsFor = [
   <main>
 
     <PageHeader
-      eyebrow="Services"
-      heading="Our Services"
-      subheading="Three levels, from a 90-minute starting point to ongoing governance support. Fixed scope, fixed price, no surprises."
+      eyebrow="Servicii"
+      heading="Serviciile Noastre"
+      subheading="Trei niveluri, de la un punct de plecare de 90 de minute până la sprijin continuu de guvernanță. Domeniu fix, preț fix, fără surprize."
     />
 
-    <!-- Pricing ladder -->
     <section id="ladder">
       <div class="container">
-        <h2 class="section-heading">Where to start</h2>
+        <h2 class="section-heading">De unde începeți</h2>
         <p class="section-intro">
-          You do not have to begin with a full assessment. Most organisations start with the
-          Readiness Check, and the fee is credited back if they go further.
+          Nu trebuie să începeți cu o evaluare completă. Majoritatea organizațiilor încep cu
+          Readiness Check, iar costul se scade dacă merg mai departe.
         </p>
-        <PricingLadder rungs={ladder} ariaLabel="Service levels and pricing" />
+        <PricingLadder rungs={ladder} ariaLabel="Niveluri de servicii și prețuri" />
       </div>
     </section>
 
-    <!-- Entry point -->
     <section id="entry-point">
       <div class="container entry-inner">
         <div>
-          <p class="section-label">Step one</p>
-          <h2>Not ready for a full assessment?</h2>
+          <p class="section-label">Pasul unu</p>
+          <h2>Nu sunteți încă pregătit pentru o evaluare completă?</h2>
           <p>
-            The AI Act Readiness Check is {PRICES.readiness.en}: a 90-minute session and a
-            five-page document covering your AI system inventory, a preliminary risk
-            categorisation, and the first three actions to take. Delivered in
-            {' '}{DELIVERY.readiness.en}. If you go on to a full assessment within
-            {' '}{CREDIT_WINDOW_DAYS} days, the fee is deducted in full.
+            AI Act Readiness Check costă {PRICES.readiness.ro}: o sesiune de 90 de minute și un
+            document de cinci pagini cu inventarul sistemelor AI, o încadrare preliminară pe
+            categorii de risc și primele trei acțiuni de făcut. Livrat în
+            {' '}{DELIVERY.readiness.ro}. Dacă treceți la o evaluare completă în
+            {' '}{CREDIT_WINDOW_DAYS} de zile, costul se scade integral.
           </p>
         </div>
-        <a href="/readiness-check" class="btn-primary entry-cta">See the Readiness Check</a>
+        <a href="/readiness-check" class="btn-primary entry-cta">Vedeți Readiness Check</a>
       </div>
     </section>
 
-    <!-- Service tiers -->
     <section id="service-tiers">
       <div class="container tiers-grid">
         <ServiceTier
-          name="AI Readiness Assessment"
-          description="A complete audit of your AI systems, EU AI Act obligations, data governance risks, and vendor exposure — delivered in five business days."
-          price={PRICES.assessment.en}
-          delivery={`${DELIVERY.assessment.en} from scoping call`}
+          name="Evaluare de Pregătire AI"
+          description="Un audit complet al sistemelor dumneavoastră AI, obligațiilor din Regulamentul UE privind IA, riscurilor de guvernanță a datelor și expunerii față de furnizori — livrat în cinci zile lucrătoare."
+          price={PRICES.assessment.ro}
+          delivery={`${DELIVERY.assessment.ro} de la apelul de delimitare`}
+          deliveryLabel="Livrat în"
           includes={standardIncludes}
+          ctaLabel="Rezervați un Apel de Descoperire Gratuit"
+          ctaHref="/contact"
         />
         <ServiceTier
-          name="AI Readiness Assessment + Security Deep-Dive"
-          description="Everything in the standard assessment, plus a technical security review covering vulnerabilities, attack surfaces, and AI-specific threats."
-          price={PRICES.deepDive.en}
-          delivery={`${DELIVERY.assessment.en} from scoping call`}
+          name="Evaluare de Pregătire AI + Analiză Aprofundată de Securitate"
+          description="Tot ce include evaluarea standard, plus o revizuire tehnică de securitate a sistemelor dumneavoastră AI — acoperind vulnerabilități, suprafețe de atac și amenințări specifice AI."
+          price={PRICES.deepDive.ro}
+          delivery={`${DELIVERY.assessment.ro} de la apelul de delimitare`}
+          deliveryLabel="Livrat în"
           includes={deepDiveIncludes}
           highlight={true}
+          highlightLabel="Cel mai complet"
+          ctaLabel="Rezervați un Apel de Descoperire Gratuit"
+          ctaHref="/contact"
         />
       </div>
     </section>
 
-    <!-- Comparison table -->
     <section id="comparison">
       <div class="container">
-        <h2 class="section-heading">What's included in each tier</h2>
-        <ComparisonTable />
+        <h2 class="section-heading">Ce este inclus în fiecare nivel</h2>
+        <ComparisonTable lang="ro" />
       </div>
     </section>
 
-    <!-- Retainer -->
     <section id="retainer">
       <div class="container">
-        <p class="section-label">Step three</p>
-        <h2 class="section-heading">Governance Retainer</h2>
+        <p class="section-label">Pasul trei</p>
+        <h2 class="section-heading">Abonament de Guvernanță</h2>
         <p class="section-intro">
-          An assessment tells you where you stand on one day. Regulation moves, and so does your
-          AI estate — teams adopt new tools, vendors change their terms, guidance is published.
-          The retainer keeps the picture current instead of letting it expire.
+          O evaluare vă spune unde vă aflați într-o anumită zi. Reglementarea se mișcă, la fel și
+          sistemele dumneavoastră AI — echipele adoptă instrumente noi, furnizorii își schimbă
+          termenii, apar ghiduri noi. Abonamentul menține imaginea actuală, în loc să o lase să
+          expire.
         </p>
         <div class="retainer-card">
           <ul class="retainer-list">
@@ -206,40 +210,39 @@ const whoItIsFor = [
             ))}
           </ul>
           <div class="retainer-aside">
-            <p class="retainer-price">Priced on request</p>
+            <p class="retainer-price">Preț la cerere</p>
             <p class="retainer-note">
-              Scoped to the size of your AI estate and billed monthly. Available after an
-              assessment, so the scope is based on findings rather than guesswork.
+              Dimensionat în funcție de amploarea sistemelor dumneavoastră AI și facturat lunar.
+              Disponibil după o evaluare, astfel încât domeniul să se bazeze pe constatări, nu pe
+              presupuneri.
             </p>
-            <a href="/contact" class="btn-ghost">Ask about the retainer</a>
+            <a href="/contact" class="btn-ghost">Întrebați despre abonament</a>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Add-ons -->
     <section id="add-ons">
       <div class="container">
-        <h2 class="section-heading">Optional follow-up services</h2>
+        <h2 class="section-heading">Servicii opționale suplimentare</h2>
         <p class="section-intro">
-          After an initial assessment, clients may need further support. These are available
-          separately — not bundled into the primary offer.
+          După un audit inițial, clienții pot necesita asistență suplimentară. Acestea sunt disponibile
+          separat — nu incluse în oferta principală.
         </p>
         <ul class="addons-grid">
           {addOns.map(a => (
             <li class="addon-card">
               <h3>{a.name}</h3>
-              <p>{a.desc} Priced on request.</p>
+              <p>{a.desc} Preț la cerere.</p>
             </li>
           ))}
         </ul>
       </div>
     </section>
 
-    <!-- Who it's for -->
     <section id="who-its-for">
       <div class="container">
-        <h2 class="section-heading">This is right for your organisation if…</h2>
+        <h2 class="section-heading">Acest serviciu este potrivit pentru organizația dumneavoastră dacă…</h2>
         <ul class="who-list">
           {whoItIsFor.map(item => (
             <li>
@@ -252,8 +255,10 @@ const whoItIsFor = [
     </section>
 
     <CtaBanner
-      heading="Not sure which tier is right?"
-      subtext="Book a free 20-minute discovery call. We'll confirm what's in scope and which tier fits your situation — at no cost and with no obligation."
+      heading="Nu știți sigur care nivel vi se potrivește?"
+      subtext="Rezervați un apel de descoperire gratuit de 20 de minute. Vom confirma ce intră în domeniu și care nivel se potrivește situației dumneavoastră — fără costuri și fără obligații."
+      ctaLabel="Rezervați un Apel de Descoperire Gratuit"
+      ctaHref="/contact"
     />
 
   </main>
@@ -261,104 +266,21 @@ const whoItIsFor = [
 </BaseLayout>
 
 <style>
-  #service-tiers {
-    background-color: var(--color-bg);
-    padding-block: var(--space-section);
-  }
-
-  .tiers-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-    align-items: start;
-  }
-
-  #comparison {
-    background-color: var(--color-container);
-    padding-block: var(--space-section);
-  }
-
-  #add-ons {
-    background-color: var(--color-bg);
-    padding-block: var(--space-section);
-  }
-
-  #who-its-for {
-    background-color: var(--color-container);
-    padding-block: var(--space-section);
-  }
-
-  .section-heading {
-    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
-    color: var(--color-text);
-    margin-bottom: 0.75rem;
-  }
-
-  .section-intro {
-    color: var(--color-text-muted);
-    margin-bottom: 2rem;
-    max-width: 620px;
-    line-height: 1.7;
-  }
-
-  /* Add-ons grid */
-  .addons-grid {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-
-  .addon-card {
-    background-color: var(--color-container);
-    border-radius: var(--radius-card);
-    padding: 1.5rem;
-  }
-
-  .addon-card h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--color-text);
-    margin-bottom: 0.4rem;
-  }
-
-  .addon-card p {
-    font-size: 0.9rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-  }
-
-  /* Who it's for */
-  .who-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-    margin-top: 1.5rem;
-    max-width: 720px;
-  }
-
-  .who-list li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.9rem;
-    font-size: 1rem;
-    color: var(--color-text-muted);
-    line-height: 1.6;
-  }
-
-  .who-check {
-    color: var(--color-accent);
-    font-weight: 700;
-    flex-shrink: 0;
-    margin-top: 0.1em;
-  }
-
-  @media (max-width: 768px) {
-    .tiers-grid { grid-template-columns: 1fr; }
-    .addons-grid { grid-template-columns: 1fr; }
-  }
+  #service-tiers { background-color: var(--color-bg); padding-block: var(--space-section); }
+  .tiers-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; align-items: start; }
+  #comparison { background-color: var(--color-container); padding-block: var(--space-section); }
+  #add-ons { background-color: var(--color-bg); padding-block: var(--space-section); }
+  #who-its-for { background-color: var(--color-container); padding-block: var(--space-section); }
+  .section-heading { font-size: clamp(1.3rem, 2.5vw, 1.75rem); color: var(--color-text); margin-bottom: 0.75rem; }
+  .section-intro { color: var(--color-text-muted); margin-bottom: 2rem; max-width: 620px; line-height: 1.7; }
+  .addons-grid { list-style: none; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-top: 2rem; }
+  .addon-card { background-color: var(--color-container); border-radius: var(--radius-card); padding: 1.5rem; }
+  .addon-card h3 { font-size: 1rem; font-weight: 700; color: var(--color-text); margin-bottom: 0.4rem; }
+  .addon-card p  { font-size: 0.9rem; color: var(--color-text-muted); line-height: 1.6; }
+  .who-list { list-style: none; display: flex; flex-direction: column; gap: 0.85rem; margin-top: 1.5rem; max-width: 720px; }
+  .who-list li { display: flex; align-items: flex-start; gap: 0.9rem; font-size: 1rem; color: var(--color-text-muted); line-height: 1.6; }
+  .who-check { color: var(--color-accent); font-weight: 700; flex-shrink: 0; margin-top: 0.1em; }
+  @media (max-width: 768px) { .tiers-grid { grid-template-columns: 1fr; } .addons-grid { grid-template-columns: 1fr; } }
 
   /* ── Pricing ladder + entry point (Phase 3) ─────────────────────────── */
   #ladder { background-color: var(--color-bg); }

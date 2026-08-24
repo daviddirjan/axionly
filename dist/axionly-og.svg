@@ -1,0 +1,90 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1200" y2="630" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#0a1628"/>
+      <stop offset="100%" stop-color="#0d1e3a"/>
+    </linearGradient>
+    <linearGradient id="cardBg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#162040"/>
+      <stop offset="100%" stop-color="#111830"/>
+    </linearGradient>
+    <linearGradient id="pillGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#3593ff" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#3593ff" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="630" fill="url(#bg)"/>
+
+  <g stroke="#1a2d4a" stroke-width="0.5" opacity="0.5">
+    <line x1="0" y1="105" x2="1200" y2="105"/>
+    <line x1="0" y1="210" x2="1200" y2="210"/>
+    <line x1="0" y1="315" x2="1200" y2="315"/>
+    <line x1="0" y1="420" x2="1200" y2="420"/>
+    <line x1="0" y1="525" x2="1200" y2="525"/>
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="400" y1="0" x2="400" y2="630"/>
+    <line x1="600" y1="0" x2="600" y2="630"/>
+    <line x1="800" y1="0" x2="800" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <!-- Pill label -->
+  <rect x="90" y="108" width="290" height="32" rx="16" fill="url(#pillGrad)" stroke="#3593ff" stroke-width="0.75" stroke-opacity="0.4"/>
+  <text x="235" y="129" font-family="'Trebuchet MS', Arial, sans-serif" font-size="12" font-weight="600" letter-spacing="2" fill="#3593ff" text-anchor="middle">EU AI ACT · GDPR · AI SECURITY</text>
+
+  <!-- Headline -->
+  <text x="90" y="228" font-family="'Georgia', 'Times New Roman', serif" font-size="62" font-weight="700" fill="#e8f0ff">Your company is</text>
+  <text x="90" y="302" font-family="'Georgia', 'Times New Roman', serif" font-size="62" font-weight="700" fill="#e8f0ff">using AI.</text>
+  <text x="90" y="374" font-family="'Georgia', 'Times New Roman', serif" font-size="46" font-weight="700" fill="#3593ff">Do you know what</text>
+  <text x="90" y="430" font-family="'Georgia', 'Times New Roman', serif" font-size="46" font-weight="700" fill="#3593ff">that legally means?</text>
+
+  <!-- Subline -->
+  <text x="90" y="492" font-family="'Trebuchet MS', Arial, sans-serif" font-size="17" fill="#6b8ab5">The EU AI Act is in force. Fixed scope. Fixed price. 5 business days.</text>
+
+  <!-- Brand -->
+  <text x="90" y="578" font-family="'Trebuchet MS', Arial, sans-serif" font-size="20" font-weight="700" letter-spacing="4" fill="#e8f0ff">AXIONLY</text>
+  <text x="90" y="602" font-family="'Trebuchet MS', Arial, sans-serif" font-size="12" letter-spacing="2" fill="#3a5a80">A DIVISION OF AXIONTIC · axionly.com</text>
+
+  <!-- Card glow -->
+  <rect x="693" y="144" width="417" height="342" rx="14" fill="#3593ff" opacity="0.06"/>
+  <!-- Card -->
+  <rect x="690" y="140" width="418" height="344" rx="12" fill="url(#cardBg)" stroke="#2a3f60" stroke-width="1"/>
+
+  <!-- Card header -->
+  <text x="720" y="182" font-family="'Trebuchet MS', Arial, sans-serif" font-size="16" font-weight="700" fill="#e8f0ff">AI Risk Assessment</text>
+  <rect x="934" y="163" width="148" height="28" rx="14" fill="#3593ff"/>
+  <text x="1008" y="182" font-family="'Trebuchet MS', Arial, sans-serif" font-size="12" font-weight="700" fill="#ffffff" text-anchor="middle">5 business days</text>
+
+  <line x1="720" y1="205" x2="1088" y2="205" stroke="#2a3f60" stroke-width="1"/>
+
+  <!-- Rows -->
+  <circle cx="732" cy="234" r="5" fill="#3593ff"/>
+  <text x="750" y="239" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" fill="#b0c8e8">EU AI Act classification</text>
+  <text x="1080" y="239" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" font-weight="600" fill="#3593ff" text-anchor="end">Mapped</text>
+
+  <circle cx="732" cy="272" r="5" fill="#3593ff"/>
+  <text x="750" y="277" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" fill="#b0c8e8">GDPR data processing</text>
+  <text x="1080" y="277" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" font-weight="600" fill="#3593ff" text-anchor="end">Reviewed</text>
+
+  <circle cx="732" cy="310" r="5" fill="#f5a623"/>
+  <text x="750" y="315" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" fill="#b0c8e8">Prompt injection risk</text>
+  <text x="1080" y="315" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" font-weight="600" fill="#f5a623" text-anchor="end">2 findings</text>
+
+  <circle cx="732" cy="348" r="5" fill="#f5a623"/>
+  <text x="750" y="353" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" fill="#b0c8e8">Vendor data exposure</text>
+  <text x="1080" y="353" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" font-weight="600" fill="#f5a623" text-anchor="end">1 finding</text>
+
+  <circle cx="732" cy="386" r="5" fill="#3593ff"/>
+  <text x="750" y="391" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" fill="#b0c8e8">Internal AI policy</text>
+  <text x="1080" y="391" font-family="'Trebuchet MS', Arial, sans-serif" font-size="14" font-weight="600" fill="#3593ff" text-anchor="end">Assessed</text>
+
+  <line x1="720" y1="415" x2="1088" y2="415" stroke="#2a3f60" stroke-width="1"/>
+
+  <text x="720" y="450" font-family="'Trebuchet MS', Arial, sans-serif" font-size="13" fill="#3a5a80">Prioritised action plan included</text>
+  <text x="1080" y="450" font-family="'Trebuchet MS', Arial, sans-serif" font-size="13" font-weight="600" fill="#6b8ab5" text-anchor="end">28 pages</text>
+
+  <!-- Urgency strip -->
+  <rect x="690" y="500" width="418" height="44" rx="8" fill="#3593ff" fill-opacity="0.1" stroke="#3593ff" stroke-width="0.75" stroke-opacity="0.3"/>
+  <text x="899" y="527" font-family="'Trebuchet MS', Arial, sans-serif" font-size="13" font-weight="600" fill="#3593ff" text-anchor="middle" letter-spacing="0.5">High-risk provisions are already enforceable →</text>
+</svg>

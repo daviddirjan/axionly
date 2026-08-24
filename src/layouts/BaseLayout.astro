@@ -14,7 +14,7 @@ interface Props {
 const {
   title,
   description,
-  htmlLang = 'en',
+  htmlLang = 'ro',
   canonicalPath,
   ogImage = '/axionly-og.svg',
   hreflangEN,
@@ -74,7 +74,7 @@ const orgSchema = JSON.stringify({
       "name": "Axionly",
       "description": "AI Readiness Assessment & EU AI Act Compliance Consultancy",
       "publisher": { "@id": `${SITE}/#organization` },
-      "inLanguage": ["en", "ro"]
+      "inLanguage": ["ro", "en"]
     }
   ]
 });
@@ -113,7 +113,7 @@ const orgSchema = JSON.stringify({
     <!-- hreflang -->
     {hreflangEN && <link rel="alternate" hreflang="en"        href={`${SITE}${hreflangEN}`} />}
     {hreflangRO && <link rel="alternate" hreflang="ro"        href={`${SITE}${hreflangRO}`} />}
-    {hreflangEN && hreflangRO && <link rel="alternate" hreflang="x-default" href={`${SITE}${hreflangEN}`} />}
+    {hreflangEN && hreflangRO && <link rel="alternate" hreflang="x-default" href={`${SITE}${hreflangRO}`} />}
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />

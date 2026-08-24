@@ -2,8 +2,9 @@
 import { LINKEDIN, EMAIL } from '../config/site';
 
 const { pathname } = Astro.url;
-const isRo = pathname.startsWith('/ro');
-const pfx  = isRo ? '/ro' : '';
+const isEn = pathname.startsWith('/en');
+const isRo = !isEn;                       // Romanian is the default locale
+const pfx  = isEn ? '/en' : '';
 
 const t = {
   en: {
@@ -37,7 +38,7 @@ const t = {
 const navSlugs = ['/', '/services', '/how-it-works', '/about', '/resources', '/contact'];
 const navLinks = t.pages.map((label, i) => ({
   label,
-  href: i === 0 ? (isRo ? '/ro' : '/') : pfx + navSlugs[i],
+  href: i === 0 ? (isEn ? '/en' : '/') : pfx + navSlugs[i],
 }));
 
 const badges = ['EU AI Act', 'GDPR', 'ISO 42001'];
@@ -47,7 +48,7 @@ const badges = ['EU AI Act', 'GDPR', 'ISO 42001'];
   <div class="container footer-inner">
 
     <div class="col col-brand">
-      <a href={isRo ? '/ro' : '/'} class="logo" aria-label="Axionly home">
+      <a href={isEn ? '/en' : '/'} class="logo" aria-label="Axionly home">
         Axionly<span class="logo-dot">.</span>
       </a>
       <p class="tagline">{t.tagline}</p>
@@ -89,8 +90,8 @@ const badges = ['EU AI Act', 'GDPR', 'ISO 42001'];
     <div class="container footer-bottom-inner">
       <p>{t.copyright}</p>
       <div class="legal-links">
-        <a href={isRo ? '/ro/privacy' : '/privacy'}>{t.privacy}</a>
-        <a href={isRo ? '/ro/cookies' : '/cookies'}>{t.cookies}</a>
+        <a href={pfx + '/privacy'}>{t.privacy}</a>
+        <a href={pfx + '/cookies'}>{t.cookies}</a>
       </div>
     </div>
   </div>

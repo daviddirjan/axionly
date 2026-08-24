@@ -1,0 +1,452 @@
+---
+import BaseLayout       from '../../layouts/BaseLayout.astro';
+import Header           from '../../components/Header.astro';
+import Footer           from '../../components/Footer.astro';
+import PageHeader       from '../../components/shared/PageHeader.astro';
+import ServiceTier      from '../../components/services/ServiceTier.astro';
+import ComparisonTable  from '../../components/services/ComparisonTable.astro';
+import PricingLadder    from '../../components/services/PricingLadder.astro';
+import CtaBanner        from '../../components/shared/CtaBanner.astro';
+import { PRICES, DELIVERY, CREDIT_WINDOW_DAYS } from '../../config/site';
+
+const standardIncludes = [
+  'AI System Inventory — complete register with EU AI Act risk classification',
+  'EU AI Act Gap Analysis — obligations mapped, gaps identified, applicable articles cited',
+  'Data Governance Review — how personal data is handled by AI systems against GDPR',
+  'Vendor Risk Assessment — contracts and data processing agreements reviewed',
+  'Internal Policy Review — whether an AI use policy exists and whether it is adequate',
+  'Prioritised Action Plan — immediate, 30-day, and 90-day actions ranked by risk',
+  'Executive Briefing Call — 30-minute walkthrough with key stakeholders',
+];
+
+const deepDiveIncludes = [
+  ...standardIncludes,
+  'Prompt Injection Testing — whether AI systems are vulnerable to prompt injection attacks',
+  'API & Access Control Review — how AI APIs are configured and who has access',
+  'Data Leakage Risk Assessment — whether sensitive data submitted to AI tools could be exposed',
+  'AI Incident Response Gap — whether the organisation can detect and respond to AI security incidents',
+];
+
+const ladder = [
+  {
+    step: 'Step 1', name: 'AI Act Readiness Check',
+    price: PRICES.readiness.en, duration: DELIVERY.readiness.en,
+    role: 'The starting point. Find out whether and how the regulation applies to you.',
+    href: '/en/readiness-check',
+  },
+  {
+    step: 'Step 2', name: 'AI Risk Assessment',
+    price: PRICES.assessment.en, duration: DELIVERY.assessment.en,
+    role: 'The full engagement. Obligations mapped, gaps identified, actions prioritised.',
+    href: '#service-tiers', current: true,
+  },
+  {
+    step: 'Step 2+', name: 'Assessment + Security Deep-Dive',
+    price: PRICES.deepDive.en, duration: DELIVERY.assessment.en,
+    role: 'The assessment plus a technical security review of your AI systems.',
+    href: '#service-tiers',
+  },
+  {
+    step: 'Step 3', name: 'Governance Retainer',
+    price: 'On request', duration: 'Ongoing, monthly',
+    role: 'Continuous monitoring, regulatory updates, and support when you are audited.',
+    href: '#retainer',
+  },
+];
+
+// NOTE (founder review): the retainer has no published monthly price yet — see
+// blocker B2 in NOTES.md. It is described here deliberately, ahead of having
+// clients on it, because it is the tier that produces recurring revenue.
+const retainerIncludes = [
+  'Quarterly governance review — progress against your action plan, tracked and documented.',
+  'Regulatory monitoring — we tell you when something changes that affects your systems, rather than you finding out from the news.',
+  'Re-assessment of new AI systems as you adopt them, so the inventory does not go stale.',
+  'Named contact for AI governance questions between reviews.',
+  'Support during audits, customer security reviews, and due diligence requests.',
+];
+
+const addOns = [
+  { name: 'AI Use Policy Drafting',           desc: 'We write your internal AI governance policy based on assessment findings.' },
+  { name: 'Quarterly Governance Review',      desc: 'A lighter-touch quarterly check-in to track progress and flag regulatory changes. Retainer-based.' },
+  { name: 'Vendor Due Diligence',             desc: 'A one-off review of a specific AI product your organisation is considering purchasing.' },
+  { name: 'EU AI Act Technical Documentation', desc: 'Preparation of required technical documentation for high-risk AI systems. Scoped individually.' },
+];
+
+const whoItIsFor = [
+  'You are using AI tools but have no formal policy governing their use.',
+  'You are unsure whether your AI systems trigger obligations under the EU AI Act.',
+  'You process customer, employee, or financial data through AI platforms.',
+  'Legal, compliance, or leadership is asking about AI risk and you need a clear answer.',
+  'You have a customer-facing AI product and want compliance confidence before you scale.',
+  'You want to get ahead of regulatory scrutiny rather than react to it.',
+];
+---
+
+<BaseLayout
+  htmlLang="en"
+  title="AI Readiness Assessment Services & Pricing — Axionly"
+  description={`Fixed-scope AI governance services from ${PRICES.readiness.en}: a ${PRICES.readiness.en} AI Act Readiness Check, a ${PRICES.assessment.en} full AI Risk Assessment covering EU AI Act compliance, GDPR data governance, security and vendor risk, and an ongoing governance retainer.`}
+  canonicalPath="/en/services"
+  hreflangEN="/en/services"
+  hreflangRO="/services"
+>
+  <script type="application/ld+json" slot="head" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "AI Readiness Assessment",
+    "provider": { "@id": "https://axionly.io/#organization" },
+    "description": "A complete audit of your AI systems covering EU AI Act classification, GDPR data governance risks, security vulnerabilities, and vendor exposure. Delivered in five business days with a written report and prioritised action plan.",
+    "areaServed": "Europe",
+    "serviceType": ["AI Readiness Assessment", "EU AI Act Compliance", "AI Governance Consulting", "AI Security Assessment"],
+    "offers": [
+      {
+        "@type": "Offer",
+        "name": "AI Act Readiness Check",
+        "price": PRICES.readiness.raw,
+        "priceCurrency": "EUR",
+        "description": `Entry-level engagement: a 90-minute session plus a five-page document covering the AI system inventory, preliminary EU AI Act risk categorisation, and the first three recommended actions. Credited against a full assessment within ${CREDIT_WINDOW_DAYS} days.`
+      },
+      {
+        "@type": "Offer",
+        "name": "AI Readiness Assessment",
+        "price": PRICES.assessment.raw,
+        "priceCurrency": "EUR",
+        "description": "EU AI Act classification, GDPR data governance review, vendor exposure analysis, and written report with prioritised action plan."
+      },
+      {
+        "@type": "Offer",
+        "name": "AI Readiness Assessment + Security Deep-Dive",
+        "price": PRICES.deepDive.raw,
+        "priceCurrency": "EUR",
+        "description": "Everything in the standard assessment plus a full technical security review covering vulnerabilities, attack surfaces, and AI-specific threats."
+      }
+    ]
+  })} />
+  <Header />
+  <main>
+
+    <PageHeader
+      eyebrow="Services"
+      heading="Our Services"
+      subheading="Three levels, from a 90-minute starting point to ongoing governance support. Fixed scope, fixed price, no surprises."
+    />
+
+    <!-- Pricing ladder -->
+    <section id="ladder">
+      <div class="container">
+        <h2 class="section-heading">Where to start</h2>
+        <p class="section-intro">
+          You do not have to begin with a full assessment. Most organisations start with the
+          Readiness Check, and the fee is credited back if they go further.
+        </p>
+        <PricingLadder rungs={ladder} ariaLabel="Service levels and pricing" />
+      </div>
+    </section>
+
+    <!-- Entry point -->
+    <section id="entry-point">
+      <div class="container entry-inner">
+        <div>
+          <p class="section-label">Step one</p>
+          <h2>Not ready for a full assessment?</h2>
+          <p>
+            The AI Act Readiness Check is {PRICES.readiness.en}: a 90-minute session and a
+            five-page document covering your AI system inventory, a preliminary risk
+            categorisation, and the first three actions to take. Delivered in
+            {' '}{DELIVERY.readiness.en}. If you go on to a full assessment within
+            {' '}{CREDIT_WINDOW_DAYS} days, the fee is deducted in full.
+          </p>
+        </div>
+        <a href="/en/readiness-check" class="btn-primary entry-cta">See the Readiness Check</a>
+      </div>
+    </section>
+
+    <!-- Service tiers -->
+    <section id="service-tiers">
+      <div class="container tiers-grid">
+        <ServiceTier
+          name="AI Readiness Assessment"
+          description="A complete audit of your AI systems, EU AI Act obligations, data governance risks, and vendor exposure — delivered in five business days."
+          price={PRICES.assessment.en}
+          delivery={`${DELIVERY.assessment.en} from scoping call`}
+          includes={standardIncludes}
+        />
+        <ServiceTier
+          name="AI Readiness Assessment + Security Deep-Dive"
+          description="Everything in the standard assessment, plus a technical security review covering vulnerabilities, attack surfaces, and AI-specific threats."
+          price={PRICES.deepDive.en}
+          delivery={`${DELIVERY.assessment.en} from scoping call`}
+          includes={deepDiveIncludes}
+          highlight={true}
+        />
+      </div>
+    </section>
+
+    <!-- Comparison table -->
+    <section id="comparison">
+      <div class="container">
+        <h2 class="section-heading">What's included in each tier</h2>
+        <ComparisonTable />
+      </div>
+    </section>
+
+    <!-- Retainer -->
+    <section id="retainer">
+      <div class="container">
+        <p class="section-label">Step three</p>
+        <h2 class="section-heading">Governance Retainer</h2>
+        <p class="section-intro">
+          An assessment tells you where you stand on one day. Regulation moves, and so does your
+          AI estate — teams adopt new tools, vendors change their terms, guidance is published.
+          The retainer keeps the picture current instead of letting it expire.
+        </p>
+        <div class="retainer-card">
+          <ul class="retainer-list">
+            {retainerIncludes.map(item => (
+              <li><span class="check" aria-hidden="true">✓</span><span>{item}</span></li>
+            ))}
+          </ul>
+          <div class="retainer-aside">
+            <p class="retainer-price">Priced on request</p>
+            <p class="retainer-note">
+              Scoped to the size of your AI estate and billed monthly. Available after an
+              assessment, so the scope is based on findings rather than guesswork.
+            </p>
+            <a href="/en/contact" class="btn-ghost">Ask about the retainer</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Add-ons -->
+    <section id="add-ons">
+      <div class="container">
+        <h2 class="section-heading">Optional follow-up services</h2>
+        <p class="section-intro">
+          After an initial assessment, clients may need further support. These are available
+          separately — not bundled into the primary offer.
+        </p>
+        <ul class="addons-grid">
+          {addOns.map(a => (
+            <li class="addon-card">
+              <h3>{a.name}</h3>
+              <p>{a.desc} Priced on request.</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <!-- Who it's for -->
+    <section id="who-its-for">
+      <div class="container">
+        <h2 class="section-heading">This is right for your organisation if…</h2>
+        <ul class="who-list">
+          {whoItIsFor.map(item => (
+            <li>
+              <span class="who-check" aria-hidden="true">→</span>
+              <span>{item}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <CtaBanner
+      heading="Not sure which tier is right?"
+      subtext="Book a free 20-minute discovery call. We'll confirm what's in scope and which tier fits your situation — at no cost and with no obligation."
+    />
+
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  #service-tiers {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  .tiers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  #comparison {
+    background-color: var(--color-container);
+    padding-block: var(--space-section);
+  }
+
+  #add-ons {
+    background-color: var(--color-bg);
+    padding-block: var(--space-section);
+  }
+
+  #who-its-for {
+    background-color: var(--color-container);
+    padding-block: var(--space-section);
+  }
+
+  .section-heading {
+    font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+    color: var(--color-text);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-intro {
+    color: var(--color-text-muted);
+    margin-bottom: 2rem;
+    max-width: 620px;
+    line-height: 1.7;
+  }
+
+  /* Add-ons grid */
+  .addons-grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .addon-card {
+    background-color: var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 1.5rem;
+  }
+
+  .addon-card h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.4rem;
+  }
+
+  .addon-card p {
+    font-size: 0.9rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  /* Who it's for */
+  .who-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-top: 1.5rem;
+    max-width: 720px;
+  }
+
+  .who-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9rem;
+    font-size: 1rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  .who-check {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.1em;
+  }
+
+  @media (max-width: 768px) {
+    .tiers-grid { grid-template-columns: 1fr; }
+    .addons-grid { grid-template-columns: 1fr; }
+  }
+
+  /* ── Pricing ladder + entry point (Phase 3) ─────────────────────────── */
+  #ladder { background-color: var(--color-bg); }
+
+  #entry-point { background-color: var(--color-container); }
+
+  .entry-inner {
+    display: flex;
+    align-items: center;
+    gap: 2.5rem;
+    justify-content: space-between;
+  }
+
+  .entry-inner h2 {
+    font-size: clamp(1.35rem, 2.2vw, 1.75rem);
+    margin-top: 0.5rem;
+    color: var(--color-text);
+  }
+
+  .entry-inner p {
+    margin-top: 0.75rem;
+    color: var(--color-text-muted);
+    max-width: 62ch;
+  }
+
+  .entry-cta { flex-shrink: 0; }
+
+  /* ── Retainer ────────────────────────────────────────────────────────── */
+  .retainer-card {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2.5rem;
+    background-color: var(--color-white);
+    border: 1.5px solid var(--color-container);
+    border-radius: var(--radius-card);
+    padding: 2rem;
+  }
+
+  .retainer-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.9rem;
+  }
+
+  .retainer-list li {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    color: var(--color-text-muted);
+    line-height: 1.65;
+    font-size: 0.9375rem;
+  }
+
+  .retainer-list .check {
+    color: var(--color-accent);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 0.15em;
+  }
+
+  .retainer-aside {
+    border-left: 1px solid var(--color-container);
+    padding-left: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    align-items: flex-start;
+  }
+
+  .retainer-price {
+    font-family: var(--font-logo);
+    font-size: 1.75rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+  }
+
+  .retainer-note {
+    font-size: 0.875rem;
+    color: var(--color-text-muted);
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .entry-inner { flex-direction: column; align-items: flex-start; }
+    .retainer-card { grid-template-columns: 1fr; gap: 1.75rem; }
+    .retainer-aside { border-left: none; border-top: 1px solid var(--color-container); padding-left: 0; padding-top: 1.75rem; }
+  }
+</style>
